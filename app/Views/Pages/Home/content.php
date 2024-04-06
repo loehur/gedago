@@ -78,7 +78,7 @@
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         <i class="bi bi-calendar-check text-info"></i></i> Daily Check-in <br>
-                        <h6><i class="fa-regular fa-circle-check text-info"></i> <?= date("d-m-Y H:i:s") ?></h6>
+                        <h6><i class="bi bi-check-circle-fill text-info"></i></i> <?= date("d-m-Y H:i:s") ?></h6>
                     </div>
                 </div>
             </section>
