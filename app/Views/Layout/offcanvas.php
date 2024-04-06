@@ -62,8 +62,8 @@
 					"link" => ""
 				],
 				[
-					"label" => "Bank Payment",
-					"active" => "Account | BP",
+					"label" => "Bank Account",
+					"active" => "Account | BA",
 					"link" => ""
 				],
 				[
