@@ -68,16 +68,16 @@
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         Active Investment <br>
-                        <h5>Level <i class="fa-solid fa-circle-3 text-primary"></i></h5>
+                        <h5>Level <i class="bi bi-3-circle-fill text-primary"></i></h5>
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
-                        <i class="fa-solid fa-list-check text-warning"></i> Daily Task (7/10)<br>
+                        <i class="bi bi-list-task text-warning"></i> Daily Task (7/10)<br>
                         <div class="progress">
                             <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
-                        <i class="fa-solid fa-calendar-check text-info"></i> Daily Check-in <br>
+                        <i class="bi bi-calendar-check text-info"></i></i> Daily Check-in <br>
                         <h6><i class="fa-regular fa-circle-check text-info"></i> <?= date("d-m-Y H:i:s") ?></h6>
                     </div>
                 </div>
