@@ -1,0 +1,9 @@
+.htaccess
+.zip
+.ini
+app/Config/
+*copy*
+error_log
+logs/
+files/
+*ENC_PRIVATE*
