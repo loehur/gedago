@@ -86,6 +86,7 @@
 
 <script>
     $(document).ready(function() {
+        $("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance");
         spinner(0);
     });
 </script>
