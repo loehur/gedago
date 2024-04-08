@@ -29,6 +29,6 @@ class Load extends Controller
    {
       $log = $_SESSION['log'];
       $deposit = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $log['user_id'] . "' AND flow = 1 AND tr_status = 1", 0);
-      echo $deposit['amount'] == '' ? 0 : $deposit['amount'];
+      echo $deposit['amount'] == '' ? 0 : number_format($deposit['amount']);
    }
 }

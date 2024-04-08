@@ -43,6 +43,5 @@
 <script>
 	$(document).ready(function() {
 		spinner(0);
-		$("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance");
 	});
 </script>

@@ -25,6 +25,7 @@ if (isset($data['parse'])) {
 		cart_count();
 		user_name();
 		device();
+		$("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance");
 	});
 
 	function content(parse = "") {
