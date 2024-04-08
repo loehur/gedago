@@ -21,6 +21,14 @@ class Deposit extends Controller
 
    function req_dep()
    {
+      $log = $_SESSION['log'];
+      $cek = $this->db(0)->count_where("balance", "user_id = '" . $log['user_id'] . "' AND flow = 1 AND balance_type = 1 AND tr_status = 0");
+      if ($cek <> 0) {
+         $this->model('Log')->write("Deposit sedang berlangsung");
+         header("Location: " . PC::BASE_URL . "Deposit");
+         exit();
+      }
+
       $pos_dep = $_POST['jumlah'];
       $amount = (int) filter_var($pos_dep, FILTER_SANITIZE_NUMBER_INT);
       if ($amount < 10000) {
@@ -29,7 +37,6 @@ class Deposit extends Controller
          exit();
       }
 
-      $log = $_SESSION['log'];
       $ref = date("Ymdhis") . rand(0, 9) . rand(0, 9);
       $token_midtrans = $this->model("Midtrans")->token($ref, $amount, $log['nama'], $log['email'], $log['hp']);
       if (isset($token_midtrans['token'])) {
