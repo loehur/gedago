@@ -21,7 +21,7 @@
                     <a href="<?= PC::BASE_URL ?>Lupa_Password">Lupa Password?</a>
                 </div>
             </div>
-            <div class="row mt-1 border-top pt-2 mb-2">
+            <div class="row mt-3 border-top pt-2 mb-3">
                 <div class="col px-1 mb-1 text-end">
                     <button type="submit" class="w-100 border-0 py-2 shadow-sm">Login</button>
                 </div>
@@ -35,8 +35,6 @@
     </div>
 </form>
 
-
-<script src="<?= PC::ASSETS_URL ?>plugins/openstreet/leaflet.js"></script>
 <script>
     $(document).ready(function() {
         spinner(0);

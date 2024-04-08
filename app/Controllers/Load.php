@@ -2,15 +2,6 @@
 
 class Load extends Controller
 {
-   function cart()
-   {
-      if (isset($_SESSION['cart'])) {
-         $cart = $_SESSION['cart'];
-         $count = count($cart);
-         echo '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">' . $count . '</span>';
-      }
-   }
-
    function account()
    {
       if (isset($_SESSION['log']['hp'])) {
@@ -29,20 +20,15 @@ class Load extends Controller
       }
    }
 
-   function account_admin()
-   {
-      if (isset($_SESSION['log_admin'])) {
-         echo $_SESSION['log_admin']['nama'];
-      }
-   }
-
    function spinner($tipe)
    {
       $this->load("Spinner", $tipe);
    }
 
-   function produk_deskripsi($produk)
+   function balance()
    {
-      $this->load("Produk_Deskripsi", $produk);
+      $log = $_SESSION['log'];
+      $deposit = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $log['user_id'] . "' AND flow = 1 AND tr_status = 1", 0);
+      echo $deposit['amount'] == '' ? 0 : $deposit['amount'];
    }
 }

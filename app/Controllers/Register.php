@@ -31,6 +31,7 @@ class Register extends Controller
       $pw = $_POST['pw'];
       $repw = $_POST['repw'];
       $rc = $_POST['rc'];
+      $mail = $_POST['mail'];
 
       $tgl_lahir = $_POST['tgl_lahir'];
 
@@ -129,8 +130,8 @@ class Register extends Controller
       }
 
       $cust_id = date("Ymdhis") . rand(0, 9);
-      $cols = "user_id, nama, hp, nik, tgl_lahir, pw, up, img_ktp, img_selfi";
-      $vals = "'" . $cust_id . "', '" . $nama . "', '" . $number . "','" . $nik . "','" . $tgl_lahir . "','" . $pass . "','" . $rc . "','" . $imageUploadPath . "','" .  $imageUploadPath2 . "'";
+      $cols = "user_id, nama, hp, nik, tgl_lahir, pw, up, img_ktp, img_selfi, email";
+      $vals = "'" . $cust_id . "', '" . $nama . "', '" . $number . "','" . $nik . "','" . $tgl_lahir . "','" . $pass . "','" . $rc . "','" . $imageUploadPath . "','" .  $imageUploadPath2 . "','" . $mail . "'";
       $in = $this->db(0)->insertCols("user", $cols, $vals);
       echo $in['errno'] == 0 ? 0 : $in['error'];
    }

@@ -11,6 +11,12 @@
                 </div>
                 <div class="col px-1 mb-1" style="min-width: 200px;">
                     <div class="form-floating">
+                        <input type="email" class="form-control shadow-none" name="mail" required id="floatingInput456">
+                        <label for="floatingInput456">Email</label>
+                    </div>
+                </div>
+                <div class="col px-1 mb-1" style="min-width: 200px;">
+                    <div class="form-floating">
                         <input type="text" class="form-control shadow-none" name="nik" required id="floatingInput1654">
                         <label for="floatingInput1654">NIK</label>
                     </div>

@@ -49,14 +49,12 @@
                         <div class="row">
                             <div class="col">
                                 <i class="bi bi-wallet"></i> Main Wallet <br>
-                                <button class="btn shadow-none ps-0">
-                                    <h5 class="fw-bold">Rp99.665</h5>
-                                </button>
+                                <h5 class="fw-bold text-dark">Rp<span class="balance_amount">0</span></h5>
                             </div>
                         </div>
                         <div class="row px-2">
                             <div class="col-auto p-1">
-                                <button class="btn btn-sm btn-success">Topup</button>
+                                <a href="<?= PC::BASE_URL ?>Deposit"><button class="btn btn-sm btn-success">Deposit</button></a>
                             </div>
                             <div class="col-auto p-1">
                                 <button class="btn btn-sm btn-warning">Withdraw</button>
@@ -68,7 +66,7 @@
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         Active Investment <br>
-                        <h5>Level <i class="bi bi-3-circle-fill text-primary"></i></h5>
+                        <h5 class="text-dark">Level <i class="bi bi-3-circle-fill text-primary"></i></h5>
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         <i class="bi bi-list-task text-warning"></i> Daily Task (7/10)<br>
@@ -78,7 +76,7 @@
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         <i class="bi bi-calendar-check text-info"></i></i> Daily Check-in <br>
-                        <h6><i class="bi bi-check-circle-fill text-info"></i></i> <?= date("d-m-Y H:i:s") ?></h6>
+                        <h6 class="text-dark"><i class="bi bi-check-circle-fill text-info"></i></i> <?= date("d-m-Y H:i:s") ?></h6>
                     </div>
                 </div>
             </section>

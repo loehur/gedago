@@ -4,7 +4,7 @@
 			<div class="w-100 text-center">
 				<i class="bi bi-wallet"></i> Main Wallet <br>
 				<button class="btn shadow-none ps-0">
-					<h5 class="fw-bold">Rp99.665</h5>
+					<h5 class="fw-bold">Rp<span class="balance_amount">0</span></h5>
 				</button>
 			</div>
 			<div class="border rounded px-3 py-2 bg-light w-100 text-center">
@@ -13,68 +13,7 @@
 			</div>
 		</div>
 	</div>
-	<?php
-	$menu = [
-		[
-			"label" => "Wallet",
-			"list" =>
-			[
-				[
-					"label" => "Deposit",
-					"active" => "Wallet | Deposit",
-					"link" => ""
-				],
-				[
-					"label" => "Withdraw",
-					"active" => "Wallet | Deposit",
-					"link" => ""
-				]
-			]
-		],
-		[
-			"label" => "Investment Products",
-			"list" =>
-			[
-				[
-					"label" => "Level 1",
-					"active" => "IP | Level 1",
-					"link" => ""
-				],
-				[
-					"label" => "Level 2",
-					"active" => "IP | Level 2",
-					"link" => ""
-				],
-				[
-					"label" => "Level 3",
-					"active" => "IP | Level 3",
-					"link" => ""
-				],
-			]
-		],
-		[
-			"label" => "Account",
-			"list" =>
-			[
-				[
-					"label" => "Profil",
-					"active" => "Account | Profil",
-					"link" => ""
-				],
-				[
-					"label" => "Bank Account",
-					"active" => "Account | BA",
-					"link" => ""
-				],
-				[
-					"label" => "Members",
-					"active" => "Account | Members",
-					"link" => ""
-				]
-			]
-		]
-	]
-	?>
+	<?php include_once("menu.php"); ?>
 
 	<div class="offcanvas-body">
 		<div class="accordion" id="accord_menu">
@@ -90,7 +29,7 @@
 							<?php foreach ($m['list'] as $l) { ?>
 								<div class="row">
 									<div class="col p-0">
-										<button class="text-start btn shadow-none w-100"><?= $l['label'] ?></button>
+										<a href="<?= PC::BASE_URL ?><?= $l['link'] ?>"><button class="text-start btn shadow-none w-100"><?= $l['label'] ?></button></a>
 									</div>
 								</div>
 							<?php } ?>
@@ -104,5 +43,6 @@
 <script>
 	$(document).ready(function() {
 		spinner(0);
+		$("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance");
 	});
 </script>
