@@ -5,15 +5,19 @@ if (isset($data['parse'])) {
 	$parse = null;
 }
 ?>
+
+<html>
 <?php include_once("head.php"); ?>
 
 <body class="bg-light">
 	<?php include_once("fix.php"); ?>
 	<?php include_once("navbar.php"); ?>
-	<div style="margin-top: 80px;padding-bottom:60px" id="content"></div>
+	<div style="margin-top: 80px;padding-bottom:80px" id="content"></div>
 	<?php include_once("footer.php"); ?>
 	<?php include_once("offcanvas.php"); ?>
 </body>
+
+</html>
 
 <!-- JavaScript Libraries -->
 <script src="<?= PC::ASSETS_URL ?>js/jquery-3.7.0.min.js"></script>
@@ -25,7 +29,6 @@ if (isset($data['parse'])) {
 		cart_count();
 		user_name();
 		device();
-		$("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance");
 	});
 
 	function content(parse = "") {

@@ -7,9 +7,9 @@
 					<h5 class="fw-bold">Rp<span class="balance_amount">0</span></h5>
 				</button>
 			</div>
-			<div class="border rounded px-3 py-2 bg-light w-100 text-center">
-				Active Investment <br>
-				<h5>Level <i class="bi bi-3-circle-fill text-primary"></i></h5>
+			<div class="border border-warning rounded px-3 py-2 bg-light w-100 text-center">
+				Invenstment Level<br>
+				<h5 class="text-warning fw-bold">Basic</h5>
 			</div>
 		</div>
 	</div>

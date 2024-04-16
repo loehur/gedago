@@ -21,6 +21,37 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <table class="table table-sm">
+                    <?php
+                    foreach ($data as $d) { ?>
+                        <tr class="<?= $d['tr_status'] == 2 ? 'table-light' : '' ?>">
+                            <td><?= substr($d['insertTime'], 0, 10) ?></td>
+                            <td class="text-end mt-auto text-success"><?= number_format($d['amount']) ?></td>
+                            <td class="text-end">
+                                <?php
+                                switch ($d['tr_status']) {
+                                    case 0: ?>
+                                        <a href="<?= $d['redirect_url'] ?>"><span class='btn btn-sm py-0 text-primary'><u>Bayar</u></span></a>
+                                        <a href="<?= PC::BASE_URL ?>Deposit/batal/<?= $d['balance_id'] ?>"><span class='btn py-0 pe-0 btn-sm'><u>Batal</u></span></a>
+                                <?php break;
+                                    case 1:
+                                        echo '<i class="bi bi-check-circle-fill text-success"></i> Success';
+                                        break;
+                                    default:
+                                        echo '<i class="bi bi-x-circle-fill text-danger"></i> Failed';
+                                        break;
+                                }
+                                ?>
+                            </td>
+                            </td>
+                        </tr>
+                    <?php }
+                    ?>
+                </table>
+            </div>
+        </div>
     </div>
 </form>
 

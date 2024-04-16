@@ -15,7 +15,7 @@ class Deposit extends Controller
 
    public function content()
    {
-      $data = [];
+      $data = $this->db(0)->get_where("balance", "user_id = '" . $_SESSION['log']['user_id'] . "' ORDER BY insertTime DESC LIMIT 5");
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
    }
 
@@ -60,5 +60,14 @@ class Deposit extends Controller
          echo "Error Deposit, hubungi customer service";
          header("Location: " . PC::BASE_URL . "Home");
       }
+   }
+
+   function batal($id)
+   {
+      $log = $_SESSION['log'];
+      $where = $this->db(0)->count_where("balance", "user_id = '" . $log['user_id'] . "' AND flow = 1 AND balance_type = 1 AND tr_status = 0 AND balance_id = " . $id);
+      $set = "tr_status = 2";
+      $this->db(0)->update("balance", $set, $where);
+      header("Location: " . PC::BASE_URL . "Deposit");
    }
 }

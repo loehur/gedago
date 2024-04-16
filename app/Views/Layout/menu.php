@@ -13,28 +13,23 @@ $menu = [
 			[
 				"label" => "Withdraw",
 				"active" => "Wallet | Deposit",
-				"link" => ""
+				"link" => "#"
 			]
 		]
 	],
 	[
-		"label" => "Investment Products",
+		"label" => "Investment",
 		"list" =>
 		[
 			[
-				"label" => "Level 1",
-				"active" => "IP | Level 1",
-				"link" => ""
+				"label" => "Portfolio",
+				"active" => "Portfolio",
+				"link" => "#"
 			],
 			[
-				"label" => "Level 2",
-				"active" => "IP | Level 2",
-				"link" => ""
-			],
-			[
-				"label" => "Level 3",
-				"active" => "IP | Level 3",
-				"link" => ""
+				"label" => "Marketplace",
+				"active" => "Marketplace",
+				"link" => "Marketplace"
 			],
 		]
 	],
@@ -45,17 +40,17 @@ $menu = [
 			[
 				"label" => "Profil",
 				"active" => "Account | Profil",
-				"link" => ""
+				"link" => "#"
 			],
 			[
 				"label" => "Bank Account",
 				"active" => "Account | BA",
-				"link" => ""
+				"link" => "#"
 			],
 			[
 				"label" => "Members",
 				"active" => "Account | Members",
-				"link" => ""
+				"link" => "#"
 			]
 		]
 	]
