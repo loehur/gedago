@@ -37,6 +37,6 @@ class Session extends Controller
 
    function logout_admin() // controller
    {
-      unset($_SESSION['log_admin']);
+      session_destroy();
    }
 }

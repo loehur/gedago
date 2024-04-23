@@ -39,4 +39,10 @@ class Controller extends PC
         require_once "app/Models/" . $file . ".php";
         return new $file($db);
     }
+
+    public function func($file)
+    {
+        require_once "app/Functions/" . $file . ".php";
+        return new $file();
+    }
 }

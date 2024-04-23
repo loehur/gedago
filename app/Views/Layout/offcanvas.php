@@ -9,7 +9,7 @@
 			</div>
 			<div class="border border-warning rounded px-3 py-2 bg-light w-100 text-center">
 				Invenstment Level<br>
-				<h5 class="text-warning fw-bold">Basic</h5>
+				<h5 class="text-warning fw-bold"><span class="level_name"></span></h5>
 			</div>
 		</div>
 	</div>
@@ -43,6 +43,7 @@
 <script>
 	$(document).ready(function() {
 		$("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance");
+		$("span.level_name").load("<?= PC::BASE_URL ?>Load/level_name");
 		spinner(0);
 	});
 </script>

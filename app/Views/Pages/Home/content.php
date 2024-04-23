@@ -66,10 +66,10 @@
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         Active Investment <br>
-                        <h5 class="text-dark">Level <i class="bi bi-3-circle-fill text-primary"></i></h5>
+                        <h5 class="text-dark"><b><span class="level_name text-success"></span></b></h5>
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
-                        <i class="bi bi-list-task text-warning"></i> Daily Task (7/10)<br>
+                        <i class="bi bi-list-task text-warning"></i> Daily Task (0/<span class="daily_task"></span>)<br>
                         <div class="progress">
                             <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
@@ -87,6 +87,8 @@
 <script>
     $(document).ready(function() {
         $("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance");
+        $("span.level_name").load("<?= PC::BASE_URL ?>Load/level_name");
+        $("span.daily_task").load("<?= PC::BASE_URL ?>Load/daily_task");
         spinner(0);
     });
 </script>

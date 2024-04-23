@@ -27,8 +27,43 @@ class Load extends Controller
 
    function balance()
    {
-      $log = $_SESSION['log'];
-      $deposit = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $log['user_id'] . "' AND flow = 1 AND tr_status = 1", 0);
-      echo $deposit['amount'] == '' ? 0 : number_format($deposit['amount']);
+      echo number_format($this->func("Balance")->saldo());
+   }
+
+   function level_name()
+   {
+      if (!isset($_SESSION['portfolio'])) {
+         $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
+      }
+      $data = $_SESSION['portfolio'];
+
+      if (isset($data['level'])) {
+         foreach (PC::LEVEL as $l) {
+            if ($l['level'] == $data['level']) {
+               $_SESSION['portfolio']['name'] = $l['name'];
+               echo $l['name'];
+            }
+         }
+      } else {
+         echo "Basic";
+      }
+   }
+
+   function daily_task()
+   {
+      if (!isset($_SESSION['portfolio'])) {
+         $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
+      }
+      $data = $_SESSION['portfolio'];
+
+      if (isset($data['level'])) {
+         foreach (PC::LEVEL as $l) {
+            if ($l['level'] == $data['level']) {
+               echo $l['benefit'][1]['qty'];
+            }
+         }
+      } else {
+         echo 0;
+      }
    }
 }

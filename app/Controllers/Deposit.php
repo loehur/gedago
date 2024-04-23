@@ -15,7 +15,7 @@ class Deposit extends Controller
 
    public function content()
    {
-      $data = $this->db(0)->get_where("balance", "user_id = '" . $_SESSION['log']['user_id'] . "' ORDER BY insertTime DESC LIMIT 5");
+      $data = $this->db(0)->get_where("balance", "user_id = '" . $_SESSION['log']['user_id'] . "' AND balance_type = 1 ORDER BY insertTime DESC LIMIT 5");
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
    }
 

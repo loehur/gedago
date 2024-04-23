@@ -22,6 +22,11 @@ $menu = [
 		"list" =>
 		[
 			[
+				"label" => "Dashboard",
+				"active" => "Home",
+				"link" => "Home"
+			],
+			[
 				"label" => "Portfolio",
 				"active" => "Portfolio",
 				"link" => "#"
