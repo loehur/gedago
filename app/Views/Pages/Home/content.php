@@ -90,7 +90,7 @@
                                 if (isset($_SESSION['porfolio']['user_id'])) { ?>
                                     <span id="checkin" class="btn btn-outline-info my-2">Check-in Harian</span>
                                 <?php } else { ?>
-                                    <br><br>
+                                    <br>
                                     <small><span>Anda belum memiliki produk investasi aktif</span></small>
                             <?php }
                             }
