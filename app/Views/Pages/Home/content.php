@@ -87,7 +87,7 @@
                                 <i class="bi bi-check-circle-fill text-info"></i></i> <?= $data['checkin']['updateTime'] ?>
                                 <?php
                             } else {
-                                if (isset($_SESSION['porfolio']['user_id'])) { ?>
+                                if (isset($_SESSION['portfolio']['user_id'])) { ?>
                                     <span id="checkin" class="btn btn-outline-info my-2">Check-in Harian</span>
                                 <?php } else { ?>
                                     <br>
