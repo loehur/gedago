@@ -14,7 +14,7 @@
                                 </div>
                             </div>
                             <div class="row py-2">
-                                <div class="col text-center">
+                                <div class="col text-center px-2">
                                     Total Investasi Anda<br>
                                     <span class="text-dark">Rp<?= number_format($_SESSION['portfolio']['saldo'])  ?></span>
                                     <br>
@@ -105,7 +105,7 @@
             type: $(this).attr("method"),
             success: function(res) {
                 if (res == 0) {
-                    alert("Topup investasi sukses!");
+                    alert("Penambahan investasi sukses!");
                     window.location.href = "<?= PC::BASE_URL ?>Home";
                 } else {
                     alert(res);
