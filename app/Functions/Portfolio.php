@@ -50,4 +50,15 @@ class Portfolio extends Controller
          return 0;
       }
    }
+
+   function daily_fee($porto_id)
+   {
+      $daily_cek = $this->db(0)->get_where("daily_checkin", "ref = '" . $porto_id . "'");
+      $data = [];
+      foreach ($daily_cek as $dc) {
+         $get = $this->db(0)->get_where_row("balance", "ref = '" . $dc['dc_id'] . "'");
+         array_push($data, $get);
+      }
+      return $data;
+   }
 }

@@ -40,6 +40,10 @@ class Marketplace extends Controller
 
       //cek portfolio jika ada saldo portfolio
       $port_balance = $this->func("Portfolio")->portfolio();
+
+      if (!isset($port_balance['saldo'])) {
+         $port_balance['saldo'] = "";
+      }
       $port_saldo = $port_balance['saldo'];
       if ($port_saldo <> "") {
          if ($port_saldo > 0) {

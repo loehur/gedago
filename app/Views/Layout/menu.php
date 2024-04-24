@@ -29,7 +29,7 @@ $menu = [
 			[
 				"label" => "Portfolio",
 				"active" => "Portfolio",
-				"link" => "#"
+				"link" => "Portfolio_Main"
 			],
 			[
 				"label" => "Marketplace",

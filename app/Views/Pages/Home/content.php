@@ -72,11 +72,11 @@
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         <i class="bi bi-list-task text-warning"></i> Daily Task (0/<span class="daily_task"></span>)<br>
                         <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: 0%"></div>
                         </div>
                         <?php
                         if (isset($_SESSION['portfolio']['level'])) { ?>
-                            <span id="task" class="btn btn-outline-warning my-2">Kerjakan Tugas Harian</span>
+                            <a href="<?= PC::BASE_URL ?>Portfolio_Main"><span id="task" class="btn btn-outline-warning my-2">Kerjakan Tugas Harian</span></a>
                         <?php } ?>
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">

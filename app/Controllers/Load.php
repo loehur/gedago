@@ -87,16 +87,18 @@ class Load extends Controller
          if ($count < $days) {
             $cek_today = $this->db(0)->count_where("daily_checkin", "ref = '" . $data['port_id'] . "' AND updateTime LIKE '%" . date("Y-m-d") . "%'");
             if ($cek_today == 0) {
-               $in = $this->db(0)->insertCols("daily_checkin", "ref", "'" . $data['port_id'] . "'");
+               $dc_id = "DC" . date("Ymdhis") . rand(0, 9);
+               $in = $this->db(0)->insertCols("daily_checkin", "dc_id, ref", "'" . $dc_id . "','" . $data['port_id'] . "'");
                if ($in['errno'] == 0) {
-                  $cekfeedaily = $this->db(0)->count_where("balance", "balance_type = 20 AND ref = '" . $data['port_id'] . "' AND insertTime LIKE '%" . date("Y-m-d") . "%'");
+                  $cekfeedaily = $this->db(0)->count_where("balance", "balance_type = 20 AND ref = '" . $dc_id . "' AND insertTime LIKE '%" . date("Y-m-d") . "%'");
                   if ($cekfeedaily == 0) {
                      $fee_am = ($fee / 100) * $data['saldo'];
 
                      $cols = "user_id, balance_type, ref, amount, flow";
-                     $vals = "'" . $log['user_id'] . "',20,'" . $data['port_id'] . "'," . $fee_am . ",1";
+                     $vals = "'" . $log['user_id'] . "',20,'" . $dc_id . "'," . $fee_am . ",1";
                      $in2 = $this->db(0)->insertCols("balance", $cols, $vals);
                      if ($in2['errno'] == 0) {
+                        $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
                         echo 0;
                      } else {
                         $this->db(0)->delete_where("daily_checkin", "ref = '" . $data['port_id'] . "'");
