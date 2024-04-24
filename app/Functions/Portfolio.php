@@ -7,8 +7,10 @@ class Portfolio extends Controller
       if (isset($_SESSION['log'])) {
          $log = $_SESSION['log'];
          $active = $this->db(0)->get_where_row("portfolio", "user_id = '" . $log['user_id'] . "' AND port_status = 0");
-         $saldo_portfolio = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $log['user_id'] . "' AND ref = '" . $active['port_id'] . "' AND tr_status <> 2", 0);
+         $saldo_portfolio = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $log['user_id'] . "' AND balance_type = 10 AND flow = 2 AND ref = '" . $active['port_id'] . "' AND tr_status <> 2", 0);
+         $total_portfolio = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $log['user_id'] . "' AND (balance_type BETWEEN 20 AND 23) AND ref = '" . $active['port_id'] . "' AND tr_status <> 2", 0);
          $active['saldo'] = $saldo_portfolio['amount'];
+         $active['fee'] = $total_portfolio['amount'];
          return $active;
       } else {
          return [];
@@ -30,6 +32,18 @@ class Portfolio extends Controller
          return $c;
       } else {
          return [];
+      }
+   }
+
+   function cek_expired($expired_date)
+   {
+      $hari_ini = date("Y-m-d");
+      $start_date = new DateTime($hari_ini);
+      $end_date = $start_date->diff(new DateTime($expired_date));
+      if ($end_date->days > 0) {
+         return 1;
+      } else {
+         return 0;
       }
    }
 }

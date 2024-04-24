@@ -115,6 +115,12 @@ class Load extends Controller
                echo "Anda sudah checkin Hari ini, silahkan reload page";
             }
          } else {
+            $up = $this->db(0)->update("portfolio", "port_status = 1", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $data['port_id'] . "'");
+            if ($up['errno'] == 0) {
+               $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
+            } else {
+               $this->model('Log')->write($up['error'] . " - ketika checkin melebihi batas");
+            }
             echo "Anda telah melebihi batas Checkin";
          }
       } else {
