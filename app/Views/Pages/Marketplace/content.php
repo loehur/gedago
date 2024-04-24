@@ -14,7 +14,7 @@
                                 </div>
                             </div>
                             <div class="row py-2">
-                                <div class="col text-center px-2">
+                                <div class="col text-center px-3">
                                     Total Investasi Anda<br>
                                     <span class="text-dark">Rp<?= number_format($_SESSION['portfolio']['saldo'])  ?></span>
                                     <br>
