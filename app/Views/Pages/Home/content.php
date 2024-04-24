@@ -85,10 +85,14 @@
                             <?php
                             if (is_array($data['checkin']) && isset($data['checkin']['updateTime'])) { ?>
                                 <i class="bi bi-check-circle-fill text-info"></i></i> <?= $data['checkin']['updateTime'] ?>
-                            <?php
-                            } else { ?>
-                                <span id="checkin" class="btn btn-outline-info my-2">Check-in Harian</span>
+                                <?php
+                            } else {
+                                if (isset($_SESSION['porfolio']['user_id'])) { ?>
+                                    <span id="checkin" class="btn btn-outline-info my-2">Check-in Harian</span>
+                                <?php } else { ?>
+                                    <small><span>Anda belum memiliki produk investasi yg aktif</span></small>
                             <?php }
+                            }
                             ?>
                         </h6>
                     </div>
