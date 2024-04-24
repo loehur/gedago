@@ -10,4 +10,20 @@ class Portfolio extends Controller
       $active['saldo'] = $saldo_portfolio['amount'];
       return $active;
    }
+
+   function daily_checkin()
+   {
+      $log = $_SESSION['log'];
+      if (!isset($_SESSION['portfolio']['user_id'])) {
+         $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
+      }
+      $data = $_SESSION['portfolio'];
+
+      $c = [];
+      if (isset($data['port_id'])) {
+         $c = $this->db(0)->get_where_row("daily_checkin", "ref = '" . $data['port_id'] . "'");
+      }
+
+      return $c;
+   }
 }

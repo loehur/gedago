@@ -9,7 +9,8 @@
 			</div>
 			<div class="border border-warning rounded px-3 py-2 bg-light w-100 text-center">
 				Invenstment Level<br>
-				<h5 class="text-warning fw-bold"><span class="level_name"></span></h5>
+				<h5 class="text-success fw-bold"><span class="level_name"></span></h5>
+				<small><span><?= isset($_SESSION['portfolio']['expired_date']) ? "Expired Date: " . $_SESSION['portfolio']['expired_date'] : '' ?></span></small>
 			</div>
 		</div>
 	</div>

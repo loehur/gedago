@@ -19,8 +19,7 @@ class Home extends Controller
    public function content($parse)
    {
       $data = [];
-      $data['banner'] = 3; // File di asset, img/banner
-      $data['product'] = [];
+      $data['checkin'] = $this->func("Portfolio")->daily_checkin();
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
    }
 }

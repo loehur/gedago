@@ -67,16 +67,30 @@
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         Active Investment <br>
                         <h5 class="text-dark"><b><span class="level_name text-success"></span></b></h5>
+                        <small><span><?= isset($_SESSION['portfolio']['expired_date']) ? "Expired Date: " . $_SESSION['portfolio']['expired_date'] : '' ?></span></small>
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         <i class="bi bi-list-task text-warning"></i> Daily Task (0/<span class="daily_task"></span>)<br>
                         <div class="progress">
                             <div class="progress-bar bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
+                        <?php
+                        if (isset($_SESSION['portfolio']['level'])) { ?>
+                            <span id="task" class="btn btn-outline-warning my-2">Kerjakan Tugas Harian</span>
+                        <?php } ?>
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         <i class="bi bi-calendar-check text-info"></i></i> Daily Check-in <br>
-                        <h6 class="text-dark"><i class="bi bi-check-circle-fill text-info"></i></i> <?= date("d-m-Y H:i:s") ?></h6>
+                        <h6 class="text-dark">
+                            <?php
+                            if (is_array($data['checkin'])) { ?>
+                                <i class="bi bi-check-circle-fill text-info"></i></i> <?= $data['checkin']['updateTime'] ?>
+                            <?php
+                            } else { ?>
+                                <span id="checkin" class="btn btn-outline-info my-2">Check-in Harian</span>
+                            <?php }
+                            ?>
+                        </h6>
                     </div>
                 </div>
             </section>
@@ -91,4 +105,14 @@
         $("span.daily_task").load("<?= PC::BASE_URL ?>Load/daily_task");
         spinner(0);
     });
+
+    $("#checkin").click(function() {
+        $.post("<?= PC::BASE_URL ?>Load/checkin", function(res) {
+            if (res == 0) {
+                content();
+            } else {
+                alert(res);
+            }
+        });
+    })
 </script>

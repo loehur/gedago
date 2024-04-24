@@ -39,4 +39,11 @@ class Session extends Controller
    {
       session_destroy();
    }
+
+   function data()
+   {
+      echo "<pre>";
+      print_r($_SESSION);
+      echo "</pre>";
+   }
 }

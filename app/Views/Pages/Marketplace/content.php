@@ -83,6 +83,10 @@
                 <div class="modal-body">
                     <label>Min. Invest <span class="text-danger">Rp</span><span class="text-danger" id="topup"></span></label>
                     <input type="text" style="font-size:17px;" class="form-control shadow-none fw-bold text-success fr_number" name="topup" required>
+                    <?php if (isset($_SESSION['portfolio'])) { ?>
+                        <br>Investasi Anda: Rp<span class="text-success"><?= number_format($_SESSION['portfolio']['saldo']) ?></span><br>
+                        <small>Cukup tambahkan sesuai batas minimal topup, untuk upgrade Investasi Anda.</small>
+                    <?php } ?>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-warning">Invest</button>
