@@ -27,14 +27,14 @@
 
                 <?php foreach ($data as $d) {
 
-                    if (isset($_SESSION['portfolio'])) {
+                    if (isset($_SESSION['portfolio']['user_id'])) {
                         if ($_SESSION['portfolio']['level'] > $d['level']) {
                             continue;
                         }
                     } ?>
 
                     <div class="col p-0" style="min-width:300px">
-                        <div class="border <?= (isset($_SESSION['portfolio']) && $_SESSION['portfolio']['level'] == $d['level']) ? "border-success" : "border-warning" ?> rounded bg-white m-2">
+                        <div class="border <?= (isset($_SESSION['portfolio']['user_id']) && $_SESSION['portfolio']['level'] == $d['level']) ? "border-success" : "border-warning" ?> rounded bg-white m-2">
                             <div class="row bg-light mx-1">
                                 <div class="col text-center pt-3 pb-1">
                                     <h5 class="fw-bold text-dark">
@@ -60,7 +60,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <button class="btn rounded-0 w-100 shadow-sm <?= (isset($_SESSION['portfolio']) && $_SESSION['portfolio']['level'] == $d['level']) ? "btn-success" : "btn-warning" ?> topup" data-topup="<?= $d['topup'] ?>" data-bs-toggle="modal" data-bs-target="#exampleModal"><?= (isset($_SESSION['portfolio'])) ? "Upgrade" : "Invest" ?> <b><?= $d['name'] ?></b></button>
+                                    <button class="btn rounded-0 w-100 shadow-sm <?= (isset($_SESSION['portfolio']['user_id']) && $_SESSION['portfolio']['level'] == $d['level']) ? "btn-success" : "btn-warning" ?> topup" data-topup="<?= $d['topup'] ?>" data-bs-toggle="modal" data-bs-target="#exampleModal"><?= (isset($_SESSION['portfolio'])) ? "Upgrade" : "Invest" ?> <b><?= $d['name'] ?></b></button>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                 <div class="modal-body">
                     <label>Min. Invest <span class="text-danger">Rp</span><span class="text-danger" id="topup"></span></label>
                     <input type="text" style="font-size:17px;" class="form-control shadow-none fw-bold text-success fr_number" name="topup" required>
-                    <?php if (isset($_SESSION['portfolio'])) { ?>
+                    <?php if (isset($_SESSION['portfolio']['user_id'])) { ?>
                         <br>Investasi Anda: Rp<span class="text-success"><?= number_format($_SESSION['portfolio']['saldo']) ?></span><br>
                         <small>Cukup tambahkan sesuai batas minimal topup, untuk upgrade Investasi Anda.</small>
                     <?php } ?>
