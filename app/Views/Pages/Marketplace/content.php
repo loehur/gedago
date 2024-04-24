@@ -2,14 +2,14 @@
     <div class="container">
         <section>
             <div class="row">
-                <?php if (isset($_SESSION['portfolio'])) { ?>
+                <?php if (isset($_SESSION['portfolio']['user_id'])) { ?>
                     <div class="col p-0" style="min-width:300px">
                         <div class="border rounded bg-white m-2">
                             <div class="row bg-light mx-1">
                                 <div class="col text-center pt-3 pb-1">
                                     <h6 class="fw-bold text-dark">
                                         <span class="w-100 fw-bold">Active Investment</span><br>
-                                        <span class="text-success"><?= $_SESSION['portfolio']['name'] ?></span>
+                                        <span class="text-success"><?= isset($_SESSION['portfolio']['name']) ? $_SESSION['portfolio']['name'] : "" ?></span>
                                     </h6>
                                 </div>
                             </div>
