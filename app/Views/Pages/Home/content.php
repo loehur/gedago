@@ -83,7 +83,7 @@
                         <i class="bi bi-calendar-check text-info"></i></i> Daily Check-in <br>
                         <h6 class="text-dark">
                             <?php
-                            if (is_array($data['checkin'])) { ?>
+                            if (is_array($data['checkin']) && isset($data['checkin']['updateTime'])) { ?>
                                 <i class="bi bi-check-circle-fill text-info"></i></i> <?= $data['checkin']['updateTime'] ?>
                             <?php
                             } else { ?>
