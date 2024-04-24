@@ -105,6 +105,7 @@
             type: $(this).attr("method"),
             success: function(res) {
                 if (res == 0) {
+                    alert("Topup investasi sukses!");
                     window.location.href = "<?= PC::BASE_URL ?>Home";
                 } else {
                     alert(res);
