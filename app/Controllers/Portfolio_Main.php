@@ -21,6 +21,7 @@ class Portfolio_Main extends Controller
       $data = [];
       $log = $_SESSION['log'];
       $data['checkin'] = $this->func("Portfolio")->daily_checkin();
+      $data['port_balance'] = $this->func("Portfolio")->portfolio();
       if (isset($_SESSION['portfolio']['port_id'])) {
          $data['fee_dc'] = $this->func("Portfolio")->daily_fee($_SESSION['portfolio']['port_id']);
       } else {
@@ -28,5 +29,11 @@ class Portfolio_Main extends Controller
       }
       $data['porto'] = $this->db(0)->get_where("portfolio", "user_id = '" . $log['user_id'] . "' ORDER BY port_id DESC");
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
+   }
+
+   function load_video()
+   {
+      $data = [];
+      $this->view(__CLASS__, __CLASS__ . "/video", $data);
    }
 }

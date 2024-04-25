@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col">
                                 <i class="bi bi-wallet2"></i> Total Portfolio <br>
-                                <h6 class="fw-bold text-dark">Rp<span class="port_amount">0</span></h6>
+                                <h6 class="fw-bold text-dark">Rp<span class="port_amount"><?= number_format($this->func("Portfolio")->portfolio()['saldo']) ?></span></h6>
                             </div>
                             <div class="col">
                                 <span class="text-dark"><b><span class="level_name text-success"></span></b><br>
@@ -31,9 +31,10 @@
                         </div>
                         <div class="mt-2">
                             <?php
-                            if (isset($_SESSION['portfolio']['level'])) { ?>
-                                <span class="btn btn-sm btn-outline-warning">Watch Video</span>
-                                <span class="float-end">Fee Rp25.000 <i class="bi bi-circle"></i></span>
+                            if (isset($_SESSION['portfolio']['level'])) {
+                                $fee_d = $this->func("Level")->watch_fee($_SESSION['portfolio']['level']); ?>
+                                <span class="btn btn-sm btn-outline-warning" id="btnW" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Watch Video</span>
+                                <span class="float-end">Fee Rp<?= number_format(($fee_d / 100) * $data['port_balance']['saldo']) ?> <i class="bi bi-circle"></i></span>
                             <?php } ?>
                         </div>
                     </div>
@@ -75,12 +76,23 @@
     </div>
 <?php } ?>
 
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" id="video_content"></div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
         $("span.level_name").load("<?= PC::BASE_URL ?>Load/level_name");
         $("span.daily_task").load("<?= PC::BASE_URL ?>Load/daily_task");
         spinner(0);
     });
+
+    $("span#btnW").click(function() {
+        $("div#video_content").load("<?= PC::BASE_URL ?>Portfolio_Main/load_video");
+    })
 
     $("#checkin").click(function() {
         $.post("<?= PC::BASE_URL ?>Load/checkin", function(res) {

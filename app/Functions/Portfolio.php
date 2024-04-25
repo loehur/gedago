@@ -4,6 +4,7 @@ class Portfolio extends Controller
 {
    function portfolio()
    {
+      $active = [];
       if (isset($_SESSION['log'])) {
          $log = $_SESSION['log'];
          $active = $this->db(0)->get_where_row("portfolio", "user_id = '" . $log['user_id'] . "' AND port_status = 0");
@@ -12,13 +13,16 @@ class Portfolio extends Controller
             $total_portfolio = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $log['user_id'] . "' AND (balance_type BETWEEN 20 AND 23) AND ref = '" . $active['port_id'] . "' AND tr_status <> 2", 0);
             $active['saldo'] = $saldo_portfolio['amount'];
             $active['fee'] = $total_portfolio['amount'];
-            return $active;
          } else {
-            return [];
+            $active['saldo'] = 0;
+            $active['fee'] = 0;
          }
       } else {
-         return [];
+         $active['saldo'] = 0;
+         $active['fee'] = 0;
       }
+
+      return $active;
    }
 
    function daily_checkin()
@@ -60,5 +64,22 @@ class Portfolio extends Controller
          array_push($data, $get);
       }
       return $data;
+   }
+
+   function porto_fee($user_id, $port_id)
+   {
+      //fee_daily
+      $daily_fee = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $user_id . "' AND (balance_type BETWEEN 20 AND 23) AND ref = '" . $port_id . "' AND tr_status <> 2", 0);
+      if (isset($daily_fee['amount'])) {
+         if ($daily_fee['amount'] <> "") {
+            $fee = $daily_fee['amount'];
+         } else {
+            $fee = 0;
+         }
+      } else {
+         $fee = 0;
+      }
+
+      return $fee;
    }
 }
