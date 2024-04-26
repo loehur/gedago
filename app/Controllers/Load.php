@@ -32,15 +32,12 @@ class Load extends Controller
 
    function level_name()
    {
-      if (!isset($_SESSION['portfolio']['user_id'])) {
-         $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
-      }
-      $data = $_SESSION['portfolio'];
+      $port_data = $this->func("Portfolio")->portfolio();
+      $data = $port_data['data'];
 
       if (isset($data['level'])) {
          foreach (PC::LEVEL as $l) {
             if ($l['level'] == $data['level']) {
-               $_SESSION['portfolio']['name'] = $l['name'];
                echo $l['name'];
             }
          }
@@ -51,10 +48,8 @@ class Load extends Controller
 
    function daily_task()
    {
-      if (!isset($_SESSION['portfolio']['user_id'])) {
-         $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
-      }
-      $data = $_SESSION['portfolio'];
+      $port_data = $this->func("Portfolio")->portfolio();
+      $data = $port_data['data'];
 
       if (isset($data['level'])) {
          foreach (PC::LEVEL as $l) {
@@ -70,10 +65,8 @@ class Load extends Controller
    function checkin()
    {
       $log = $_SESSION['log'];
-      if (!isset($_SESSION['portfolio']['user_id'])) {
-         $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
-      }
-      $data = $_SESSION['portfolio'];
+      $port_data = $this->func("Portfolio")->portfolio();
+      $data = $port_data['data'];
 
       foreach (PC::LEVEL as $pl) {
          if ($pl['level'] == $data['level']) {
@@ -88,11 +81,11 @@ class Load extends Controller
             $cek_today = $this->db(0)->count_where("daily_checkin", "ref = '" . $data['port_id'] . "' AND updateTime LIKE '%" . date("Y-m-d") . "%'");
             if ($cek_today == 0) {
                $dc_id = "DC" . date("Ymdhis") . rand(0, 9);
-               $in = $this->db(0)->insertCols("daily_checkin", "dc_id, user_id = '" . $log['user_id'] . "' ref", "'" . $dc_id . "','" . $data['port_id'] . "'");
+               $in = $this->db(0)->insertCols("daily_checkin", "dc_id, user_id, ref", "'" . $dc_id . "','" . $log['user_id'] . "','" . $data['port_id'] . "'");
                if ($in['errno'] == 0) {
                   $cekfeedaily = $this->db(0)->count_where("balance", "balance_type = 20 AND ref = '" . $dc_id . "' AND insertTime LIKE '%" . date("Y-m-d") . "%'");
                   if ($cekfeedaily == 0) {
-                     $fee_am = ($fee / 100) * $data['saldo'];
+                     $fee_am = ($fee / 100) * $port_data['saldo'];
 
                      $cols = "user_id, balance_type, ref, amount, flow";
                      $vals = "'" . $log['user_id'] . "',20,'" . $dc_id . "'," . $fee_am . ",1";
@@ -118,9 +111,7 @@ class Load extends Controller
             }
          } else {
             $up = $this->db(0)->update("portfolio", "port_status = 1", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $data['port_id'] . "'");
-            if ($up['errno'] == 0) {
-               $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
-            } else {
+            if ($up['errno'] <> 0) {
                $this->model('Log')->write($up['error'] . " - ketika checkin melebihi batas");
             }
             echo "Anda telah melebihi batas Checkin";
@@ -133,11 +124,8 @@ class Load extends Controller
    function watch($video_id)
    {
       $log = $_SESSION['log'];
-      if (!isset($_SESSION['portfolio']['user_id'])) {
-         $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
-      }
-
-      $data = $_SESSION['portfolio'];
+      $port_data = $this->func("Portfolio")->portfolio();
+      $data = $port_data['data'];
 
       foreach (PC::LEVEL as $pl) {
          if ($pl['level'] == $data['level']) {

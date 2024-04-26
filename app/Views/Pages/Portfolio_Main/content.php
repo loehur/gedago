@@ -12,7 +12,7 @@
                             </div>
                             <div class="col">
                                 <span class="text-dark"><b><span class="level_name text-success"></span></b><br>
-                                </span><small><span><?= isset($_SESSION['portfolio']['expired_date']) ? "Expired: " . $_SESSION['portfolio']['expired_date'] : '' ?></span></small>
+                                </span><small><span><?= isset($porto_bal['data']['expired_date']) ? "Expired: " . $porto_bal['data']['expired_date'] : '' ?></span></small>
                             </div>
                         </div>
                         <hr>
@@ -32,8 +32,8 @@
                         </div>
                         <div class="mt-2">
                             <?php
-                            if (isset($_SESSION['portfolio']['level'])) {
-                                $fee_d = $this->func("Level")->watch_fee($_SESSION['portfolio']['level']); ?>
+                            if (isset($porto_bal['data']['level'])) {
+                                $fee_d = $this->func("Level")->watch_fee($porto_bal['data']['level']); ?>
                                 <span class="btn btn-sm btn-outline-warning" id="btnW" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Watch Video</span>
                                 <span class="float-end">Fee Rp<?= number_format(($fee_d / 100) * $data['port_balance']['saldo']) ?> <i class="bi bi-circle"></i></span>
                             <?php } ?>
@@ -50,7 +50,7 @@
                                 <span class="float-end">Fee Rp<?= number_format($fee) ?> <i class="bi bi-check-circle text-info"></i></span>
                                 <?php
                             } else {
-                                if (isset($_SESSION['portfolio']['user_id'])) { ?>
+                                if (isset($porto_bal['data']['user_id'])) { ?>
                                     <span id="checkin" class="btn btn-outline-info my-2">Check-in Harian</span>
                                 <?php } else { ?>
                                     <br>

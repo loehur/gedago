@@ -27,14 +27,11 @@ class Portfolio extends Controller
    function daily_checkin()
    {
       if (isset($_SESSION['log'])) {
-         if (!isset($_SESSION['portfolio']['user_id'])) {
-            $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
-         }
-         $data = $_SESSION['portfolio'];
+         $data = $this->func("Portfolio")->portfolio();
 
          $c = [];
-         if (isset($data['port_id'])) {
-            $c = $this->db(0)->get_where_row("daily_checkin", "ref = '" . $data['port_id'] . "'");
+         if (isset($data['data']['port_id'])) {
+            $c = $this->db(0)->get_where_row("daily_checkin", "ref = '" . $data['data']['port_id'] . "'");
          }
          return $c;
       } else {

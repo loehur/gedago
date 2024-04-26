@@ -20,6 +20,7 @@ class Home extends Controller
    {
       $data = [];
       $data['checkin'] = $this->func("Portfolio")->daily_checkin();
+      $data['porto'] = $this->func("Portfolio")->portfolio();
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
    }
 }

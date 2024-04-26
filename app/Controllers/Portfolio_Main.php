@@ -18,12 +18,11 @@ class Portfolio_Main extends Controller
 
    public function content($parse)
    {
-      $data = [];
       $log = $_SESSION['log'];
       $data['checkin'] = $this->func("Portfolio")->daily_checkin();
       $data['port_balance'] = $this->func("Portfolio")->portfolio();
-      if (isset($_SESSION['portfolio']['port_id'])) {
-         $data['fee_dc'] = $this->func("Portfolio")->daily_fee($_SESSION['portfolio']['port_id']);
+      if (isset($data['port_balance']['data']['port_id'])) {
+         $data['fee_dc'] = $this->func("Portfolio")->daily_fee($data['port_balance']['data']['port_id']);
       } else {
          $data['fee_dc'] = [];
       }

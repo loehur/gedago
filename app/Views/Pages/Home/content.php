@@ -40,7 +40,8 @@
         </div>
 
     </div>
-<?php } else { ?>
+<?php } else {
+    $porto = $data['porto'] ?>
     <div class="container-fluid border-0">
         <div class="container">
             <section>
@@ -67,7 +68,7 @@
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         Active Investment <br>
                         <h5 class="text-dark"><b><span class="level_name text-success"></span></b></h5>
-                        <small><span><?= isset($_SESSION['portfolio']['expired_date']) ? "Expired Date: " . $_SESSION['portfolio']['expired_date'] : '' ?></span></small>
+                        <small><span><?= isset($port['data']['expired_date']) ? "Expired Date: " . $port['data']['expired_date'] : '' ?></span></small>
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         <i class="bi bi-list-task text-warning"></i> Daily Task (0/<span class="daily_task"></span>)<br>
@@ -75,7 +76,7 @@
                             <div class="progress-bar bg-warning" role="progressbar" style="width: 0%"></div>
                         </div>
                         <?php
-                        if (isset($_SESSION['portfolio']['level'])) { ?>
+                        if (isset($porto['data']['level'])) { ?>
                             <a href="<?= PC::BASE_URL ?>Portfolio_Main"><span id="task" class="btn btn-outline-warning my-2">Kerjakan Tugas Harian</span></a>
                         <?php } ?>
                     </div>
@@ -87,7 +88,7 @@
                                 <i class="bi bi-check-circle-fill text-info"></i></i> <?= $data['checkin']['updateTime'] ?>
                                 <?php
                             } else {
-                                if (isset($_SESSION['portfolio']['user_id'])) { ?>
+                                if (isset($porto['data']['user_id'])) { ?>
                                     <span id="checkin" class="btn btn-outline-info my-2">Check-in Harian</span>
                                 <?php } else { ?>
                                     <br>
