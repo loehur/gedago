@@ -51,7 +51,7 @@ if (isset($_SESSION['log'])) {
                         <i class="bi bi-list-task text-warning"></i> Daily Task (<?= count($data['watch']) ?>/<span class="daily_task"></span>)<br>
                         <div class="progress">
                             <?php
-                            if ($w_qty <= count($data['watch'])) {
+                            if (count($data['watch']) == 0) {
                                 $persen = 0;
                             } else {
                                 $persen = (count($data['watch']) / $w_qty) * 100;
