@@ -26,7 +26,6 @@ class Login extends Controller
       $cust = $this->db(0)->get_where_row("user", $where);
       if (isset($cust['user_id'])) {
          $_SESSION['log'] = $cust;
-         $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
          echo 1;
       } else {
          echo "Login Failed!";

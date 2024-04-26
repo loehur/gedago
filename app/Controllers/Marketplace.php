@@ -45,41 +45,40 @@ class Marketplace extends Controller
          $port_balance['saldo'] = "";
       }
       $port_saldo = $port_balance['saldo'];
-      if ($port_saldo <> "") {
-         if ($port_saldo > 0) {
-            $total_invest = $topup + $port_saldo;
 
-            $cTop = 0;
-            foreach (PC::LEVEL as $l) {
-               if ($cTop <= $l['topup']) {
-                  $cTop = $l['topup'];
-               }
+      if ($port_saldo > 0) {
+         $total_invest = $topup + $port_saldo;
 
-               if ($total_invest >= $cTop) {
-                  $level = $l['level'];
-                  $daily_watch = $l['benefit'][1]['qty'];
-                  $days = $l['days'];
-               }
+         $cTop = 0;
+         foreach (PC::LEVEL as $l) {
+            if ($cTop <= $l['topup']) {
+               $cTop = $l['topup'];
             }
 
-            if ($_SESSION['portfolio']['level'] <> $level) {
-               //tutup investasi lama
-               $up = $this->db(0)->update("portfolio", "port_status = 1", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $_SESSION['portfolio']['port_id'] . "'");
-               if ($up['errno'] == 0) {
-                  $cols = "flow, balance_type, user_id, ref, amount";
-                  $vals = "1,10,'" . $log['user_id'] . "','" . $port_balance['port_id'] . "'," . $port_balance['fee'];
-                  $in = $this->db(0)->insertCols("balance", $cols, $vals);
-                  if ($in['errno'] <> 0) {
-                     $up = $this->db(0)->update("portfolio", "port_status = 0", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $_SESSION['portfolio']['port_id'] . "'");
-                     echo "Upgrade error, hubungi CS";
-                     $this->model('Log')->write($in['error']);
-                     exit();
-                  }
-               } else {
-                  echo "error, hubungi CS";
-                  $this->model('Log')->write($up['error']);
+            if ($total_invest >= $cTop) {
+               $level = $l['level'];
+               $daily_watch = $l['benefit'][1]['qty'];
+               $days = $l['days'];
+            }
+         }
+
+         if ($_SESSION['portfolio']['level'] <> $level) {
+            //tutup investasi lama
+            $up = $this->db(0)->update("portfolio", "port_status = 1", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $_SESSION['portfolio']['port_id'] . "'");
+            if ($up['errno'] == 0) {
+               $cols = "flow, balance_type, user_id, ref, amount";
+               $vals = "1,10,'" . $log['user_id'] . "','" . $port_balance['port_id'] . "'," . $port_balance['fee'];
+               $in = $this->db(0)->insertCols("balance", $cols, $vals);
+               if ($in['errno'] <> 0) {
+                  $up = $this->db(0)->update("portfolio", "port_status = 0", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $_SESSION['portfolio']['port_id'] . "'");
+                  echo "Upgrade error, hubungi CS";
+                  $this->model('Log')->write($in['error']);
                   exit();
                }
+            } else {
+               echo "error, hubungi CS";
+               $this->model('Log')->write($up['error']);
+               exit();
             }
          }
       } else {

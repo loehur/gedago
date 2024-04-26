@@ -60,7 +60,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <button class="btn rounded-0 w-100 shadow-sm <?= (isset($_SESSION['portfolio']['user_id']) && $_SESSION['portfolio']['level'] == $d['level']) ? "btn-success" : "btn-warning" ?> topup" data-topup="<?= $d['topup'] ?>" data-bs-toggle="modal" data-bs-target="#exampleModal"><?= (isset($_SESSION['portfolio'])) ? "Upgrade" : "Invest" ?> <b><?= $d['name'] ?></b></button>
+                                    <button class="btn rounded-0 w-100 shadow-sm <?= (isset($_SESSION['portfolio']['user_id']) && $_SESSION['portfolio']['level'] == $d['level']) ? "btn-success" : "btn-warning" ?> topup" data-topup="<?= $d['topup'] ?>" data-bs-toggle="modal" data-bs-target="#exampleModal"><?= (isset($_SESSION['portfolio']['user_id'])) ? "Upgrade" : "Invest" ?> <b><?= $d['name'] ?></b></button>
                                 </div>
                             </div>
                         </div>
