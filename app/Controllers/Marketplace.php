@@ -67,15 +67,15 @@ class Marketplace extends Controller
             }
          }
 
-         if ($_SESSION['portfolio']['level'] <> $level) {
+         if ($port_balance['data']['level'] <> $level) {
             //tutup investasi lama
-            $up = $this->db(0)->update("portfolio", "port_status = 1", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $_SESSION['portfolio']['port_id'] . "'");
+            $up = $this->db(0)->update("portfolio", "port_status = 1", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $port_balance['data']['level'] . "'");
             if ($up['errno'] == 0) {
                $cols = "flow, balance_type, user_id, ref, amount";
-               $vals = "1,10,'" . $log['user_id'] . "','" . $port_balance['port_id'] . "'," . $port_balance['fee'];
+               $vals = "1,10,'" . $log['user_id'] . "','" . $port_balance['data']['port_id'] . "'," . $port_balance['fee_dc'] + $port_balance['fee_dw'];
                $in = $this->db(0)->insertCols("balance", $cols, $vals);
                if ($in['errno'] <> 0) {
-                  $up = $this->db(0)->update("portfolio", "port_status = 0", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $_SESSION['portfolio']['port_id'] . "'");
+                  $up = $this->db(0)->update("portfolio", "port_status = 0", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $port_balance['data']['level'] . "'");
                   echo "Upgrade error, hubungi CS";
                   $this->model('Log')->write($in['error']);
                   exit();
