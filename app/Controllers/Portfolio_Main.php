@@ -4,6 +4,11 @@ class Portfolio_Main extends Controller
 {
    public function __construct()
    {
+      $cek = $this->func("Log")->cek();
+      if ($cek == 0) {
+         header("Location: " . PC::BASE_URL . "Login");
+         exit();
+      }
    }
 
    public function index()
