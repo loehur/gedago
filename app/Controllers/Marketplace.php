@@ -23,7 +23,7 @@ class Marketplace extends Controller
 
    public function content($parse)
    {
-      $data = PC::LEVEL;
+      $data = $this->func("Portfolio")->portfolio();
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
    }
 
