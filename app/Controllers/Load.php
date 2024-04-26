@@ -91,7 +91,6 @@ class Load extends Controller
                      $vals = "'" . $log['user_id'] . "',20,'" . $dc_id . "'," . $fee_am . ",1";
                      $in2 = $this->db(0)->insertCols("balance", $cols, $vals);
                      if ($in2['errno'] == 0) {
-                        $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
                         echo 0;
                      } else {
                         $this->db(0)->delete_where("daily_checkin", "ref = '" . $data['port_id'] . "'");
@@ -144,13 +143,12 @@ class Load extends Controller
             if ($in['errno'] == 0) {
                $cekfeedaily = $this->db(0)->count_where("balance", "balance_type = 21 AND ref = '" . $dw_id . "' AND insertTime LIKE '%" . $today . "%'");
                if ($cekfeedaily < $qty) {
-                  $fee_am = ($fee / 100) * $data['saldo'];
+                  $fee_am = ($fee / 100) * $port_data['saldo'];
 
                   $cols = "user_id, balance_type, ref, amount, flow";
                   $vals = "'" . $log['user_id'] . "',21,'" . $dw_id . "'," . $fee_am . ",1";
                   $in2 = $this->db(0)->insertCols("balance", $cols, $vals);
                   if ($in2['errno'] == 0) {
-                     $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
                      echo 0;
                   } else {
                      $this->db(0)->delete_where("daily_watch", "ref = '" . $data['port_id'] . "'");

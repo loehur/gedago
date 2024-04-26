@@ -41,7 +41,15 @@
 
     </div>
 <?php } else {
-    $porto = $data['porto'] ?>
+
+    $porto_bal = $this->func("Portfolio")->portfolio();
+    foreach (PC::LEVEL as $pl) {
+        if ($pl['level'] == $porto_bal['data']['level']) {
+            $fee_d = $pl['benefit'][1]['fee'];
+            $w_qty = $pl['benefit'][1]['qty'];
+        }
+    }
+?>
     <div class="container-fluid border-0">
         <div class="container">
             <section>
@@ -70,16 +78,24 @@
                         <h5 class="text-dark"><b><span class="level_name text-success"></span></b></h5>
                         <small><span><?= isset($port['data']['expired_date']) ? "Expired Date: " . $port['data']['expired_date'] : '' ?></span></small>
                     </div>
+
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
-                        <i class="bi bi-list-task text-warning"></i> Daily Task (0/<span class="daily_task"></span>)<br>
+                        <i class="bi bi-list-task text-warning"></i> Daily Task (<?= count($data['watch']) ?>/<span class="daily_task"></span>)<br>
                         <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 0%"></div>
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: <?= count($data['watch']) / $w_qty * 100 ?>%"></div>
                         </div>
-                        <?php
-                        if (isset($porto['data']['level'])) { ?>
-                            <a href="<?= PC::BASE_URL ?>Portfolio_Main"><span id="task" class="btn btn-outline-warning my-2">Kerjakan Tugas Harian</span></a>
-                        <?php } ?>
+                        <div class="mt-2">
+                            <?php
+                            if (isset($porto_bal['data']['level'])) {
+                                if (count($data['watch']) < $w_qty) { ?>
+                                    <span class="btn btn-sm btn-outline-warning" id="btnW" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Watch Video</span>
+                                    <span class="float-end">Fee Rp<?= number_format(($fee_d / 100) * $data['port_balance']['saldo']) ?> <i class="bi bi-circle"></i></span>
+                            <?php }
+                            } ?>
+                            <hr>
+                        </div>
                     </div>
+
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         <i class="bi bi-calendar-check text-info"></i></i> Daily Check-in <br>
                         <h6 class="text-dark">

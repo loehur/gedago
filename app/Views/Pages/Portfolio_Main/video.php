@@ -35,6 +35,7 @@
             if (--timer < 0) {
                 clearInterval(countDown);
                 closeAd();
+                fee();
             }
         }, 1000);
     }
@@ -47,4 +48,12 @@
     $('.closeBTN').click(function() {
         content();
     })
+
+    function fee() {
+        $.post("<?= PC::BASE_URL ?>Load/watch/<?= $data['video_id'] ?>", function(res) {
+            if (res != 0) {
+                alert(res);
+            }
+        });
+    }
 </script>

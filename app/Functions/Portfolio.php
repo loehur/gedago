@@ -18,20 +18,37 @@ class Portfolio extends Controller
             foreach ($dc_data as $dd) {
                $port['fee_dc'] += $this->db(0)->get_where_row("balance", "user_id = '" . $log['user_id'] . "' AND balance_type = 20 AND ref = '" . $dd['dc_id'] . "' AND tr_status <> 2")['amount'];
             }
+
+            $dw_data = $this->db(0)->get_where("daily_watch", "ref = '" . $data['port_id'] . "'");
+            foreach ($dw_data as $dw) {
+               $port['fee_dw'] += $this->db(0)->get_where_row("balance", "user_id = '" . $log['user_id'] . "' AND balance_type = 21 AND ref = '" . $dw['dw_id'] . "' AND tr_status <> 2")['amount'];
+            }
          }
       }
 
       return $port;
    }
 
-   function daily_checkin()
+   function daily_checkin($data) // portfolio data
    {
       if (isset($_SESSION['log'])) {
-         $data = $this->func("Portfolio")->portfolio();
-
          $c = [];
          if (isset($data['data']['port_id'])) {
             $c = $this->db(0)->get_where_row("daily_checkin", "ref = '" . $data['data']['port_id'] . "'");
+         }
+         return $c;
+      } else {
+         return [];
+      }
+   }
+
+   function daily_watch($data) // portfolio data
+   {
+      if (isset($_SESSION['log'])) {
+         $hari_ini = date("Y-m-d");
+         $c = [];
+         if (isset($data['data']['port_id'])) {
+            $c = $this->db(0)->get_where("daily_watch", "ref = '" . $data['data']['port_id'] . "' AND insertTime LIKE '%" . $hari_ini . "%'");
          }
          return $c;
       } else {

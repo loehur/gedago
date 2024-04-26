@@ -1,5 +1,14 @@
-<?php if (isset($_SESSION['log'])) {
-    $porto_bal = $this->func("Portfolio")->portfolio() ?>
+<?php
+
+if (isset($_SESSION['log'])) {
+    $porto_bal = $this->func("Portfolio")->portfolio();
+    foreach (PC::LEVEL as $pl) {
+        if ($pl['level'] == $porto_bal['data']['level']) {
+            $fee_d = $pl['benefit'][1]['fee'];
+            $w_qty = $pl['benefit'][1]['qty'];
+        }
+    }
+?>
     <div class="container-fluid border-0">
         <div class="container">
             <section>
@@ -8,7 +17,7 @@
                         <div class="row">
                             <div class="col">
                                 <i class="bi bi-wallet2"></i> Total Portfolio <br>
-                                <h6 class="fw-bold text-dark">Rp<span class="port_amount"><?= number_format($porto_bal['saldo'] + $porto_bal['fee_dc']) ?></span></h6>
+                                <h6 class="fw-bold text-dark">Rp<span class="port_amount"><?= number_format($porto_bal['saldo'] + $porto_bal['fee_dc'] + $porto_bal['fee_dw']) ?></span></h6>
                             </div>
                             <div class="col">
                                 <span class="text-dark"><b><span class="level_name text-success"></span></b><br>
@@ -25,20 +34,33 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
-                        <i class="bi bi-list-task text-warning"></i> Daily Task (0/<span class="daily_task"></span>)<br>
+                        <i class="bi bi-list-task text-warning"></i> Daily Task (<?= count($data['watch']) ?>/<span class="daily_task"></span>)<br>
                         <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 0%"></div>
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: <?= count($data['watch']) / $w_qty * 100 ?>%"></div>
                         </div>
                         <div class="mt-2">
                             <?php
                             if (isset($porto_bal['data']['level'])) {
-                                $fee_d = $this->func("Level")->watch_fee($porto_bal['data']['level']); ?>
-                                <span class="btn btn-sm btn-outline-warning" id="btnW" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Watch Video</span>
-                                <span class="float-end">Fee Rp<?= number_format(($fee_d / 100) * $data['port_balance']['saldo']) ?> <i class="bi bi-circle"></i></span>
+                                if (count($data['watch']) < $w_qty) { ?>
+                                    <span class="btn btn-sm btn-outline-warning" id="btnW" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Watch Video</span>
+                                    <span class="float-end">Fee Rp<?= number_format(($fee_d / 100) * $data['port_balance']['saldo']) ?> <i class="bi bi-circle"></i></span>
+                            <?php }
+                            } ?>
+                            <hr>
+
+                            <?php
+                            foreach ($data['watch'] as $dw) { ?>
+                                <div class="row">
+                                    <div class="col">
+                                        <span><small><?= $dw['dw_id'] ?></small></span><span class="float-end text-success">+Rp<?= number_format($this->db(0)->get_where_row("balance", "ref = '" . $dw['dw_id'] . "'")['amount']) ?></span><br>
+                                    </div>
+                                </div>
                             <?php } ?>
                         </div>
                     </div>
+
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         <i class="bi bi-calendar-check text-info"></i></i> Daily Check-in <br>
                         <span>
