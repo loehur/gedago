@@ -19,9 +19,9 @@ class Home extends Controller
    public function content($parse)
    {
       $data = [];
-      $log = $_SESSION['log'];
 
-      if (isset($log)) {
+      if (isset($_SESSION['log'])) {
+         $log = $_SESSION['log'];
          $data['port_balance'] = $this->func("Portfolio")->portfolio();
          $data['checkin'] = $this->func("Portfolio")->daily_checkin($data['port_balance']);
          $data['watch'] = $this->func("Portfolio")->daily_watch($data['port_balance']);
