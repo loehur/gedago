@@ -125,8 +125,13 @@ class Marketplace extends Controller
          }
       }
 
+      if ($newPort == true) {
+         $amount_invest = $total_invest;
+      } else {
+         $amount_invest = $topup;
+      }
       $cols = "flow, balance_type, user_id, ref, amount";
-      $vals = "2,10,'" . $_SESSION['log']['user_id'] . "','" . $port_id . "'," . $total_invest;
+      $vals = "2,10,'" . $_SESSION['log']['user_id'] . "','" . $port_id . "'," . $amount_invest;
       $in = $this->db(0)->insertCols("balance", $cols, $vals);
       if ($in['errno'] <> 0) {
          $this->model('Log')->write($in['error']);
