@@ -127,8 +127,8 @@ if (isset($_SESSION['log'])) {
 
 <script>
     $(document).ready(function() {
-        $("span.level_name").load("<?= PC::BASE_URL ?>Load/level_name");
-        $("span.daily_task").load("<?= PC::BASE_URL ?>Load/daily_task");
+        $("span.level_name").load("<?= PC::BASE_URL ?>Load/level_name/<?= $level ?>");
+        $("span.daily_task").load("<?= PC::BASE_URL ?>Load/daily_task/<?= $level ?>");
         spinner(0);
     });
 
