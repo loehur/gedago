@@ -32,6 +32,7 @@ class Marketplace extends Controller
       $log = $_SESSION['log'];
       $level = 0;
       $topup = $_POST['topup'];
+      $total_invest = $topup;
       $topup = (int) filter_var($topup, FILTER_SANITIZE_NUMBER_INT);
 
       //cek saldo
@@ -40,16 +41,17 @@ class Marketplace extends Controller
          echo "Saldo tidak cukup";
          exit();
       }
-
-      $total_invest = $topup;
-
       //cek portfolio jika ada saldo portfolio
       $port_balance = $this->func("Portfolio")->portfolio();
 
       if (!isset($port_balance['saldo'])) {
          $port_balance['saldo'] = "";
       }
+
+      $newPort = true;
+
       $port_saldo = $port_balance['saldo'];
+      $port_id = "P" . date("Ymdhis") . rand(0, 9);
 
       if ($port_saldo > 0) {
          $total_invest = $topup + $port_saldo;
@@ -68,6 +70,7 @@ class Marketplace extends Controller
          }
 
          if ($port_balance['data']['level'] <> $level) {
+            $newPort = true;
             //tutup investasi lama
             $up = $this->db(0)->update("portfolio", "port_status = 1", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $port_balance['data']['level'] . "'");
             if ($up['errno'] == 0) {
@@ -85,6 +88,9 @@ class Marketplace extends Controller
                $this->model('Log')->write($up['error']);
                exit();
             }
+         } else {
+            $port_id = $port_balance['data']['port_id'];
+            $newPort = false;
          }
       } else {
          $cTop = 0;
@@ -106,16 +112,17 @@ class Marketplace extends Controller
          exit();
       }
 
-      $port_id = "P" . date("Ymdhis") . rand(0, 9);
-      $Date = date("Y-m-d");
-      $expired_date = date('Y-m-d', strtotime($Date . ' + ' . $days . ' days'));
 
-      $cols = "port_id, level, expired_date, daily_watch, user_id";
-      $vals = "'" . $port_id . "'," . $level . ", '" . $expired_date . "'," . $daily_watch . ",'" . $_SESSION['log']['user_id'] . "'";
-      $in = $this->db(0)->insertCols("portfolio", $cols, $vals);
-      if ($in['errno'] <> 0) {
-         $this->model('Log')->write($in['error']);
-         exit();
+      if ($newPort == true) {
+         $Date = date("Y-m-d");
+         $expired_date = date('Y-m-d', strtotime($Date . ' + ' . $days . ' days'));
+         $cols = "port_id, level, expired_date, daily_watch, user_id";
+         $vals = "'" . $port_id . "'," . $level . ", '" . $expired_date . "'," . $daily_watch . ",'" . $_SESSION['log']['user_id'] . "'";
+         $in = $this->db(0)->insertCols("portfolio", $cols, $vals);
+         if ($in['errno'] <> 0) {
+            $this->model('Log')->write($in['error']);
+            exit();
+         }
       }
 
       $cols = "flow, balance_type, user_id, ref, amount";
