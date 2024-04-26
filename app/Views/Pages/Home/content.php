@@ -41,13 +41,20 @@
 
     </div>
 <?php } else {
-
-    $porto_bal = $this->func("Portfolio")->portfolio();
-    foreach (PC::LEVEL as $pl) {
-        if ($pl['level'] == $porto_bal['data']['level']) {
-            $fee_d = $pl['benefit'][1]['fee'];
-            $w_qty = $pl['benefit'][1]['qty'];
+    if (count($data['port_balance']) > 0) {
+        $porto_bal = $data['port_balance'];
+        foreach (PC::LEVEL as $pl) {
+            if ($pl['level'] == $porto_bal['data']['level']) {
+                $fee_d = $pl['benefit'][1]['fee'];
+                $w_qty = $pl['benefit'][1]['qty'];
+            }
         }
+        $level = $porto_bal['data']['level'];
+    } else {
+        $porto_bal = [];
+        $level = 0;
+        $fee_d = 0;
+        $w_qty = 0;
     }
 ?>
     <div class="container-fluid border-0">
@@ -82,17 +89,14 @@
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         <i class="bi bi-list-task text-warning"></i> Daily Task (<?= count($data['watch']) ?>/<span class="daily_task"></span>)<br>
                         <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: <?= count($data['watch']) / $w_qty * 100 ?>%"></div>
-                        </div>
-                        <div class="mt-2">
                             <?php
-                            if (isset($porto_bal['data']['level'])) {
-                                if (count($data['watch']) < $w_qty) { ?>
-                                    <span class="btn btn-sm btn-outline-warning" id="btnW" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Watch Video</span>
-                                    <span class="float-end">Fee Rp<?= number_format(($fee_d / 100) * $data['port_balance']['saldo']) ?> <i class="bi bi-circle"></i></span>
-                            <?php }
-                            } ?>
-                            <hr>
+                            if ($w_qty <= count($data['watch'])) {
+                                $persen = 0;
+                            } else {
+                                $persen = (count($data['watch']) / $w_qty) * 100;
+                            }
+                            ?>
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: <?= $persen ?>%"></div>
                         </div>
                     </div>
 
@@ -100,11 +104,11 @@
                         <i class="bi bi-calendar-check text-info"></i></i> Daily Check-in <br>
                         <h6 class="text-dark">
                             <?php
-                            if (is_array($data['checkin']) && isset($data['checkin']['updateTime'])) { ?>
+                            if (count($data['checkin']) > 0 && isset($data['checkin']['updateTime'])) { ?>
                                 <i class="bi bi-check-circle-fill text-info"></i></i> <?= $data['checkin']['updateTime'] ?>
                                 <?php
                             } else {
-                                if (isset($porto['data']['user_id'])) { ?>
+                                if (isset($porto_bal['data']['user_id'])) { ?>
                                     <span id="checkin" class="btn btn-outline-info my-2">Check-in Harian</span>
                                 <?php } else { ?>
                                     <br>
@@ -123,8 +127,8 @@
 <script>
     $(document).ready(function() {
         $("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance");
-        $("span.level_name").load("<?= PC::BASE_URL ?>Load/level_name");
-        $("span.daily_task").load("<?= PC::BASE_URL ?>Load/daily_task");
+        $("span.level_name").load("<?= PC::BASE_URL ?>Load/level_name/<?= $level ?>");
+        $("span.daily_task").load("<?= PC::BASE_URL ?>Load/daily_task/<?= $level ?>");
         spinner(0);
     });
 

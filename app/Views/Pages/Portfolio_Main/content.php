@@ -1,12 +1,22 @@
 <?php
 
+$ada_port = false;
 if (isset($_SESSION['log'])) {
-    $porto_bal = $this->func("Portfolio")->portfolio();
-    foreach (PC::LEVEL as $pl) {
-        if ($pl['level'] == $porto_bal['data']['level']) {
-            $fee_d = $pl['benefit'][1]['fee'];
-            $w_qty = $pl['benefit'][1]['qty'];
+    if (isset($data['port_balance']['data']['user_id'])) {
+        $porto_bal = $data['port_balance'];
+        foreach (PC::LEVEL as $pl) {
+            if ($pl['level'] == $porto_bal['data']['level']) {
+                $fee_d = $pl['benefit'][1]['fee'];
+                $w_qty = $pl['benefit'][1]['qty'];
+            }
         }
+        $level = $porto_bal['data']['level'];
+        $ada_port = true;
+    } else {
+        $porto_bal = [];
+        $level = 0;
+        $fee_d = 0;
+        $w_qty = 0;
     }
 ?>
     <div class="container-fluid border-0">
@@ -17,7 +27,9 @@ if (isset($_SESSION['log'])) {
                         <div class="row">
                             <div class="col">
                                 <i class="bi bi-wallet2"></i> Total Portfolio <br>
-                                <h6 class="fw-bold text-dark">Rp<span class="port_amount"><?= number_format($porto_bal['saldo'] + $porto_bal['fee_dc'] + $porto_bal['fee_dw']) ?></span></h6>
+                                <h6 class="fw-bold text-dark">Rp<span class="port_amount">
+                                        <?= $ada_port == true ? number_format($porto_bal['saldo'] + $porto_bal['fee_dc'] + $porto_bal['fee_dw']) : 0 ?></span>
+                                </h6>
                             </div>
                             <div class="col">
                                 <span class="text-dark"><b><span class="level_name text-success"></span></b><br>
@@ -38,7 +50,14 @@ if (isset($_SESSION['log'])) {
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         <i class="bi bi-list-task text-warning"></i> Daily Task (<?= count($data['watch']) ?>/<span class="daily_task"></span>)<br>
                         <div class="progress">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: <?= count($data['watch']) / $w_qty * 100 ?>%"></div>
+                            <?php
+                            if ($w_qty <= count($data['watch'])) {
+                                $persen = 0;
+                            } else {
+                                $persen = (count($data['watch']) / $w_qty) * 100;
+                            }
+                            ?>
+                            <div class="progress-bar bg-warning" role="progressbar" style="width: <?= $persen ?>%"></div>
                         </div>
                         <div class="mt-2">
                             <?php

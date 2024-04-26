@@ -114,9 +114,13 @@ class DB extends DBC
         $result = $this->mysqli->query($query);
         $reply = $result->fetch_assoc();
         if ($result) {
-            return $reply;
+            if (is_array($reply)) {
+                return $reply;
+            } else {
+                return [];
+            }
         } else {
-            return false;
+            return [];
         }
     }
 

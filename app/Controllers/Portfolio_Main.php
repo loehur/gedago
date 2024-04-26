@@ -19,15 +19,24 @@ class Portfolio_Main extends Controller
    public function content($parse = "")
    {
       $log = $_SESSION['log'];
+
       $data['port_balance'] = $this->func("Portfolio")->portfolio();
-      $data['checkin'] = $this->func("Portfolio")->daily_checkin($data['port_balance']);
-      $data['watch'] = $this->func("Portfolio")->daily_watch($data['port_balance']);
-      if (isset($data['port_balance']['data']['port_id'])) {
-         $data['fee_dc'] = $this->func("Portfolio")->daily_fee($data['port_balance']['data']['port_id']);
+      if (isset($data['port_balance']['data']['user_id'])) {
+         $data['checkin'] = $this->func("Portfolio")->daily_checkin($data['port_balance']);
+         $data['watch'] = $this->func("Portfolio")->daily_watch($data['port_balance']);
+         if (isset($data['port_balance']['data']['port_id'])) {
+            $data['fee_dc'] = $this->func("Portfolio")->daily_fee($data['port_balance']['data']['port_id']);
+         } else {
+            $data['fee_dc'] = [];
+         }
+         $data['porto'] = $this->db(0)->get_where("portfolio", "user_id = '" . $log['user_id'] . "' ORDER BY port_id DESC");
       } else {
+         $data['porto'] = [];
+         $data['checkin'] = [];
+         $data['watch'] = [];
          $data['fee_dc'] = [];
       }
-      $data['porto'] = $this->db(0)->get_where("portfolio", "user_id = '" . $log['user_id'] . "' ORDER BY port_id DESC");
+
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
    }
 

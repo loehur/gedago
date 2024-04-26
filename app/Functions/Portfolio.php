@@ -31,15 +31,11 @@ class Portfolio extends Controller
 
    function daily_checkin($data) // portfolio data
    {
-      if (isset($_SESSION['log'])) {
-         $c = [];
-         if (isset($data['data']['port_id'])) {
-            $c = $this->db(0)->get_where_row("daily_checkin", "ref = '" . $data['data']['port_id'] . "'");
-         }
-         return $c;
-      } else {
-         return [];
+      $c = [];
+      if (isset($data['data']['port_id'])) {
+         $c = $this->db(0)->get_where_row("daily_checkin", "ref = '" . $data['data']['port_id'] . "'");
       }
+      return $c;
    }
 
    function daily_watch($data) // portfolio data

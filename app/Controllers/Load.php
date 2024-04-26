@@ -30,14 +30,11 @@ class Load extends Controller
       echo number_format($this->func("Balance")->saldo());
    }
 
-   function level_name()
+   function level_name($level = 0)
    {
-      $port_data = $this->func("Portfolio")->portfolio();
-      $data = $port_data['data'];
-
-      if (isset($data['level'])) {
+      if ($level <> 0) {
          foreach (PC::LEVEL as $l) {
-            if ($l['level'] == $data['level']) {
+            if ($l['level'] == $level) {
                echo $l['name'];
             }
          }
@@ -46,14 +43,11 @@ class Load extends Controller
       }
    }
 
-   function daily_task()
+   function daily_task($level = 0)
    {
-      $port_data = $this->func("Portfolio")->portfolio();
-      $data = $port_data['data'];
-
-      if (isset($data['level'])) {
+      if ($level <> 0) {
          foreach (PC::LEVEL as $l) {
-            if ($l['level'] == $data['level']) {
+            if ($l['level'] == $level) {
                echo $l['benefit'][1]['qty'];
             }
          }
