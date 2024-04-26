@@ -33,7 +33,7 @@ class Portfolio_Main extends Controller
 
    function load_video()
    {
-      $data = [];
+      $data = $this->db(0)->get_where_row("video", "video_id > 0 ORDER BY RAND() LIMIT 1");
       $this->view(__CLASS__, __CLASS__ . "/video", $data);
    }
 }

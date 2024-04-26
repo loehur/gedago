@@ -4,25 +4,24 @@ class Portfolio extends Controller
 {
    function portfolio()
    {
-      $active = [];
+      $port['saldo'] = 0;
+      $port['fee_dc'] = 0;
+      $port['fee_dw'] = 0;
       if (isset($_SESSION['log'])) {
          $log = $_SESSION['log'];
-         $active = $this->db(0)->get_where_row("portfolio", "user_id = '" . $log['user_id'] . "' AND port_status = 0");
-         if (isset($active['port_id'])) {
-            $saldo_portfolio = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $log['user_id'] . "' AND balance_type = 10 AND flow = 2 AND ref = '" . $active['port_id'] . "' AND tr_status <> 2", 0);
-            $total_portfolio = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $log['user_id'] . "' AND (balance_type BETWEEN 20 AND 23) AND ref = '" . $active['port_id'] . "' AND tr_status <> 2", 0);
-            $active['saldo'] = $saldo_portfolio['amount'];
-            $active['fee'] = $total_portfolio['amount'];
-         } else {
-            $active['saldo'] = 0;
-            $active['fee'] = 0;
+         $port['data'] = $this->db(0)->get_where_row("portfolio", "user_id = '" . $log['user_id'] . "' AND port_status = 0");
+         $data = $port['data'];
+         if (isset($data['port_id'])) {
+            $port['saldo'] = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $log['user_id'] . "' AND balance_type = 10 AND flow = 2 AND ref = '" . $data['port_id'] . "' AND tr_status <> 2", 0)['amount'];
+
+            $dc_data = $this->db(0)->get_where("daily_checkin", "ref = '" . $data['port_id'] . "'");
+            foreach ($dc_data as $dd) {
+               $port['fee_dc'] += $this->db(0)->get_where_row("balance", "user_id = '" . $log['user_id'] . "' AND balance_type = 20 AND ref = '" . $dd['dc_id'] . "' AND tr_status <> 2")['amount'];
+            }
          }
-      } else {
-         $active['saldo'] = 0;
-         $active['fee'] = 0;
       }
 
-      return $active;
+      return $port;
    }
 
    function daily_checkin()

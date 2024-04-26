@@ -1,4 +1,5 @@
-<?php if (isset($_SESSION['log'])) { ?>
+<?php if (isset($_SESSION['log'])) {
+    $porto_bal = $this->func("Portfolio")->portfolio() ?>
     <div class="container-fluid border-0">
         <div class="container">
             <section>
@@ -7,7 +8,7 @@
                         <div class="row">
                             <div class="col">
                                 <i class="bi bi-wallet2"></i> Total Portfolio <br>
-                                <h6 class="fw-bold text-dark">Rp<span class="port_amount"><?= number_format($this->func("Portfolio")->portfolio()['saldo']) ?></span></h6>
+                                <h6 class="fw-bold text-dark">Rp<span class="port_amount"><?= number_format($porto_bal['saldo'] + $porto_bal['fee_dc']) ?></span></h6>
                             </div>
                             <div class="col">
                                 <span class="text-dark"><b><span class="level_name text-success"></span></b><br>

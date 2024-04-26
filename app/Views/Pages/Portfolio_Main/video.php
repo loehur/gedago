@@ -2,7 +2,7 @@
     <button type="button" class="btn-close d-none closeBTN" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
 <div class="modal-body">
-    <iframe width="100%" height="315" src="https://www.youtube.com/embed/kBlcWM3SWjE?si=y0Qdj0mHS6hMHXOS&controls=0&start=1&autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/<?= $data['yt'] ?>?si=y0Qdj0mHS6hMHXOS&controls=0&start=1&autoplay=1&mute=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     <div class="row mt-2 divAD">
         <div class="col text-center">
             Video dapat ditutup setelah <span class="text-danger fw-bold" id="time">00:10</span>
@@ -43,4 +43,8 @@
         $('.closeBTN').removeClass("d-none");
         $('.divAD').addClass("d-none");
     }
+
+    $('.closeBTN').click(function() {
+        content();
+    })
 </script>
