@@ -32,8 +32,8 @@ class Marketplace extends Controller
       $log = $_SESSION['log'];
       $level = 0;
       $topup = $_POST['topup'];
-      $total_invest = $topup;
       $topup = (int) filter_var($topup, FILTER_SANITIZE_NUMBER_INT);
+      $total_invest = $topup;
 
       //cek saldo
       $saldo = $this->func("Balance")->saldo();
@@ -45,12 +45,13 @@ class Marketplace extends Controller
       $port_balance = $this->func("Portfolio")->portfolio();
 
       if (!isset($port_balance['saldo'])) {
-         $port_balance['saldo'] = "";
+         $port_saldo = 0;
+      } else {
+         $port_saldo = $port_balance['saldo'];
       }
 
       $newPort = true;
 
-      $port_saldo = $port_balance['saldo'];
       $port_id = "P" . date("Ymdhis") . rand(0, 9);
 
       if ($port_saldo > 0) {
@@ -72,10 +73,10 @@ class Marketplace extends Controller
          if ($port_balance['data']['level'] <> $level) {
             $newPort = true;
             //tutup investasi lama
-            $up = $this->db(0)->update("portfolio", "port_status = 1", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $port_balance['data']['level'] . "'");
+            $up = $this->db(0)->update("portfolio", "port_status = 1", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $port_balance['data']['port_id'] . "'");
             if ($up['errno'] == 0) {
                $cols = "flow, balance_type, user_id, ref, amount";
-               $vals = "1,10,'" . $log['user_id'] . "','" . $port_balance['data']['port_id'] . "'," . $port_balance['fee_dc'] + $port_balance['fee_dw'];
+               $vals = "1,10,'" . $log['user_id'] . "','" . $port_balance['data']['port_id'] . "'," . $port_balance['saldo'] + $port_balance['fee_dc'] + $port_balance['fee_dw'];
                $in = $this->db(0)->insertCols("balance", $cols, $vals);
                if ($in['errno'] <> 0) {
                   $up = $this->db(0)->update("portfolio", "port_status = 0", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $port_balance['data']['level'] . "'");
@@ -130,6 +131,7 @@ class Marketplace extends Controller
       } else {
          $amount_invest = $topup;
       }
+
       $cols = "flow, balance_type, user_id, ref, amount";
       $vals = "2,10,'" . $_SESSION['log']['user_id'] . "','" . $port_id . "'," . $amount_invest;
       $in = $this->db(0)->insertCols("balance", $cols, $vals);
