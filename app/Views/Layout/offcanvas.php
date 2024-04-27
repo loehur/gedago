@@ -1,3 +1,11 @@
+<?php
+
+if (isset($_SESSION['log'])) {
+	$d = $this->db(0)->get_where_row("portfolio", "user_id = '" . $_SESSION['log']['user_id'] . "' AND port_status = 0");
+	$level = $d['level'] ?? 0;
+}
+?>
+
 <div class="offcanvas offcanvas-start" tabindex="-1" id="menu_page" style="max-width: 300px;">
 	<div class="offcanvas-header w-100">
 		<div class="w-100">
@@ -43,8 +51,8 @@
 </div>
 <script>
 	$(document).ready(function() {
-		$("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance");
-		$("span.level_name").load("<?= PC::BASE_URL ?>Load/level_name");
+		$("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance/<?= $level ?>");
+		$("span.level_name").load("<?= PC::BASE_URL ?>Load/level_name/<?= $level ?>");
 		spinner(0);
 	});
 </script>

@@ -4,7 +4,7 @@ class Portfolio_Main extends Controller
 {
    public function __construct()
    {
-      $cek = $this->func("Log")->cek();
+      $cek = $this->func("Session")->cek();
       if ($cek == 0) {
          header("Location: " . PC::BASE_URL . "Login");
          exit();
@@ -24,24 +24,17 @@ class Portfolio_Main extends Controller
    public function content($parse = "")
    {
       $log = $_SESSION['log'];
+      $d = $this->db(0)->get_where_row("portfolio", "user_id = '" . $log['user_id'] . "' AND port_status = 0");
+      $data['porto_history'] = $this->db(0)->get_where("portfolio", "user_id = '" . $log['user_id'] . "' ORDER BY port_id DESC");
 
-      $data['port_balance'] = $this->func("Portfolio")->portfolio();
+      $data['port_balance'] = $this->func("Portfolio")->portfolio($d);
       if (isset($data['port_balance']['data']['user_id'])) {
-         $data['checkin'] = $this->func("Portfolio")->daily_checkin($data['port_balance']);
-         $data['watch'] = $this->func("Portfolio")->daily_watch($data['port_balance']);
-         if (isset($data['port_balance']['data']['port_id'])) {
-            $data['fee_dc'] = $this->func("Portfolio")->daily_fee($data['port_balance']['data']['port_id']);
-         } else {
-            $data['fee_dc'] = [];
-         }
-         $data['porto'] = $this->db(0)->get_where("portfolio", "user_id = '" . $log['user_id'] . "' ORDER BY port_id DESC");
+         $data['checkin'] = $this->func("Portfolio")->daily_checkin_today($data['port_balance']);
+         $data['watch'] = $this->func("Portfolio")->daily_watch_today($data['port_balance']);
       } else {
-         $data['porto'] = [];
          $data['checkin'] = [];
          $data['watch'] = [];
-         $data['fee_dc'] = [];
       }
-
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
    }
 

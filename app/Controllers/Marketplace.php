@@ -4,7 +4,7 @@ class Marketplace extends Controller
 {
    public function __construct()
    {
-      $cek = $this->func("Log")->cek();
+      $cek = $this->func("Session")->cek();
       if ($cek == 0) {
          header("Location: " . PC::BASE_URL . "Login");
          exit();
@@ -23,13 +23,16 @@ class Marketplace extends Controller
 
    public function content($parse)
    {
-      $data = $this->func("Portfolio")->portfolio();
+      $log = $_SESSION['log'];
+      $d = $this->db(0)->get_where_row("portfolio", "user_id = '" . $log['user_id'] . "' AND port_status = 0");
+      $data = $this->func("Portfolio")->portfolio($d);
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
    }
 
    function invest()
    {
       $log = $_SESSION['log'];
+
       $level = 0;
       $topup = $_POST['topup'];
       $topup = (int) filter_var($topup, FILTER_SANITIZE_NUMBER_INT);
@@ -42,7 +45,8 @@ class Marketplace extends Controller
          exit();
       }
       //cek portfolio jika ada saldo portfolio
-      $port_balance = $this->func("Portfolio")->portfolio();
+      $d = $this->db(0)->get_where_row("portfolio", "user_id = '" . $log['user_id'] . "' AND port_status = 0");
+      $port_balance = $this->func("Portfolio")->portfolio($d);
 
       if (!isset($port_balance['saldo'])) {
          $port_saldo = 0;
@@ -65,28 +69,17 @@ class Marketplace extends Controller
 
             if ($total_invest >= $cTop) {
                $level = $l['level'];
-               $daily_watch = $l['benefit'][1]['qty'];
                $days = $l['days'];
             }
          }
 
          if ($port_balance['data']['level'] <> $level) {
             $newPort = true;
+
             //tutup investasi lama
-            $up = $this->db(0)->update("portfolio", "port_status = 1", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $port_balance['data']['port_id'] . "'");
-            if ($up['errno'] == 0) {
-               $cols = "flow, balance_type, user_id, ref, amount";
-               $vals = "1,10,'" . $log['user_id'] . "','" . $port_balance['data']['port_id'] . "'," . $port_balance['saldo'] + $port_balance['fee_dc'] + $port_balance['fee_dw'];
-               $in = $this->db(0)->insertCols("balance", $cols, $vals);
-               if ($in['errno'] <> 0) {
-                  $up = $this->db(0)->update("portfolio", "port_status = 0", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $port_balance['data']['level'] . "'");
-                  echo "Upgrade error, hubungi CS";
-                  $this->model('Log')->write($in['error']);
-                  exit();
-               }
-            } else {
-               echo "error, hubungi CS";
-               $this->model('Log')->write($up['error']);
+            $close = $this->func("Portfolio")->close($port_balance);
+            if ($close <> "") {
+               echo $close;
                exit();
             }
          } else {
@@ -102,7 +95,6 @@ class Marketplace extends Controller
 
             if ($topup >= $cTop) {
                $level = $l['level'];
-               $daily_watch = $l['benefit'][1]['qty'];
                $days = $l['days'];
             }
          }
@@ -117,8 +109,8 @@ class Marketplace extends Controller
       if ($newPort == true) {
          $Date = date("Y-m-d");
          $expired_date = date('Y-m-d', strtotime($Date . ' + ' . $days . ' days'));
-         $cols = "port_id, level, expired_date, daily_watch, user_id";
-         $vals = "'" . $port_id . "'," . $level . ", '" . $expired_date . "'," . $daily_watch . ",'" . $_SESSION['log']['user_id'] . "'";
+         $cols = "port_id, level, expired_date, user_id";
+         $vals = "'" . $port_id . "'," . $level . ", '" . $expired_date . "','" . $_SESSION['log']['user_id'] . "'";
          $in = $this->db(0)->insertCols("portfolio", $cols, $vals);
          if ($in['errno'] <> 0) {
             $this->model('Log')->write($in['error']);
@@ -132,8 +124,8 @@ class Marketplace extends Controller
          $amount_invest = $topup;
       }
 
-      $cols = "flow, balance_type, user_id, ref, amount";
-      $vals = "2,10,'" . $_SESSION['log']['user_id'] . "','" . $port_id . "'," . $amount_invest;
+      $cols = "flow, balance_type, user_id, ref, amount, tr_status";
+      $vals = "2,10,'" . $_SESSION['log']['user_id'] . "','" . $port_id . "'," . $amount_invest . ",1";
       $in = $this->db(0)->insertCols("balance", $cols, $vals);
       if ($in['errno'] <> 0) {
          $this->model('Log')->write($in['error']);
@@ -143,8 +135,8 @@ class Marketplace extends Controller
 
       $up = $this->db(0)->get_where_row("user", "user_id = '" . $_SESSION['log']['up'] . "'");
       if (isset($up['user_id'])) {
-         $cols = "flow, balance_type, user_id, ref, amount";
-         $vals = "1,22,'" . $up['user_id'] . "','" . $port_id . "'," . $topup * (PC::SETTING['up1_fee'] / 100);
+         $cols = "flow, balance_type, user_id, ref, amount, tr_status";
+         $vals = "1,22,'" . $up['user_id'] . "','" . $port_id . "'," . $topup * (PC::SETTING['up1_fee'] / 100) . ",1";
          $in = $this->db(0)->insertCols("balance", $cols, $vals);
          if ($in['errno'] <> 0) {
             $this->model('Log')->write($in['error']);
@@ -154,8 +146,8 @@ class Marketplace extends Controller
 
          $up2 = $this->db(0)->get_where_row("user", "user_id = '" . $up['up'] . "'");
          if (isset($up2['user_id'])) {
-            $cols = "flow, balance_type, user_id, ref, amount";
-            $vals = "1,23,'" . $up2['user_id'] . "','" . $port_id . "'," . $topup * (PC::SETTING['up2_fee'] / 100);
+            $cols = "flow, balance_type, user_id, ref, amount, tr_status";
+            $vals = "1,23,'" . $up2['user_id'] . "','" . $port_id . "'," . $topup * (PC::SETTING['up2_fee'] / 100) . ",1";
             $in2 = $this->db(0)->insertCols("balance", $cols, $vals);
             if ($in2['errno'] <> 0) {
                $this->model('Log')->write($in2['error']);
@@ -164,8 +156,6 @@ class Marketplace extends Controller
             }
          }
       }
-
-      $_SESSION['portfolio'] = $this->func("Portfolio")->portfolio();
    }
 
    function reset_error($port_id)

@@ -57,13 +57,17 @@ class DB extends DBC
             switch ($row) {
                 case "0":
                     $reply = $result->fetch_assoc();
-                    return $reply;
                     break;
                 case "1";
                     while ($data = $result->fetch_assoc())
                         $reply[] = $data;
-                    return $reply;
                     break;
+            }
+
+            if (is_array($reply)) {
+                return $reply;
+            } else {
+                return [];
             }
         } else {
             return array('query' => $query, 'error' => $this->mysqli->error, 'errno' => $this->mysqli->errno);

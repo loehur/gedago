@@ -1,23 +1,6 @@
 <?php
 $menu = [
 	[
-		"label" => "Wallet",
-		"list" =>
-		[
-			[
-				"label" => "Deposit",
-				"group" => "Wallet",
-				"active" => "Deposit",
-				"link" => "Deposit"
-			],
-			[
-				"label" => "Withdraw",
-				"active" => "Wallet | Deposit",
-				"link" => "#"
-			]
-		]
-	],
-	[
 		"label" => "Investment",
 		"list" =>
 		[
@@ -39,18 +22,34 @@ $menu = [
 		]
 	],
 	[
+		"label" => "Wallet",
+		"list" =>
+		[
+			[
+				"label" => "Deposit",
+				"active" => "Deposit",
+				"link" => "Deposit"
+			],
+			[
+				"label" => "Withdraw",
+				"active" => "Withdraw",
+				"link" => "Withdraw"
+			]
+		]
+	],
+	[
 		"label" => "Account",
 		"list" =>
 		[
 			[
 				"label" => "Profil",
-				"active" => "Account | Profil",
-				"link" => "#"
+				"active" => "Profil",
+				"link" => "Profil"
 			],
 			[
 				"label" => "Bank Account",
-				"active" => "Account | BA",
-				"link" => "#"
+				"active" => "Bank",
+				"link" => "Bank"
 			],
 			[
 				"label" => "Members",

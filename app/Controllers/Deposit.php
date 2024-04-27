@@ -3,14 +3,17 @@
 class Deposit extends Controller
 {
 
-   public function index()
+   public function __construct()
    {
-      $cek = $this->func("Log")->cek();
+      $cek = $this->func("Session")->cek();
       if ($cek == 0) {
          header("Location: " . PC::BASE_URL . "Login");
          exit();
       }
+   }
 
+   public function index()
+   {
       $data = [
          'title' => "Deposit",
          'content' => __CLASS__
@@ -21,7 +24,7 @@ class Deposit extends Controller
 
    public function content()
    {
-      $data = $this->db(0)->get_where("balance", "user_id = '" . $_SESSION['log']['user_id'] . "' AND balance_type = 1 ORDER BY insertTime DESC LIMIT 5");
+      $data = $this->db(0)->get_where("balance", "user_id = '" . $_SESSION['log']['user_id'] . "' AND balance_type = 1 AND flow = 1 ORDER BY insertTime DESC LIMIT 5");
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
    }
 
@@ -37,8 +40,8 @@ class Deposit extends Controller
 
       $pos_dep = $_POST['jumlah'];
       $amount = (int) filter_var($pos_dep, FILTER_SANITIZE_NUMBER_INT);
-      if ($amount < 10000) {
-         $this->model('Log')->write("Deposit Minimal 10.000");
+      if ($amount < PC::SETTING['min_deposit']) {
+         $this->model('Log')->write("Deposit Minimal " . number_format(PC::SETTING['min_deposit']));
          header("Location: " . PC::BASE_URL . "Deposit");
          exit();
       }
@@ -49,8 +52,8 @@ class Deposit extends Controller
          $token = $token_midtrans['token'];
          $redirect_url = $token_midtrans['redirect_url'];
 
-         $cols = "flow, balance_type, user_id, user_up, ref, amount, token, redirect_url";
-         $vals = "1,1,'" . $log['user_id'] . "','" . $log['up'] . "','" . $ref . "','" . $amount . "','" . $token . "','" . $redirect_url . "'";
+         $cols = "flow, balance_type, user_id, ref, amount, token, redirect_url";
+         $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "','" . $token . "','" . $redirect_url . "'";
          $in = $this->db(0)->insertCols("balance", $cols, $vals);
 
          if ($in['errno'] <> 0) {

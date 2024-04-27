@@ -85,3 +85,5 @@ input::-webkit-inner-spin-button {
 .mobile{
   display: none;
 }
+
+.ytplayer {pointer-events: none;}

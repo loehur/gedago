@@ -43,12 +43,12 @@ $t = $data['title'];
 					<?php if (isset($_SESSION['log'])) { ?>
 						<div class="col-auto px-1">
 							<div class="btn-group">
-								<a href="#" class="btn btn-sm pt-2 me-1 bg-white shadow-sm" data-bs-toggle="dropdown">
-									Logged in: <b class="text-primary"><?= ucfirst(strtok($_SESSION['log']['nama'], " ")); ?></b>
+								<a href="#" class="btn btn-sm shadow-none pt-2 me-1 bg-white" data-bs-toggle="dropdown">
+									<i class="bi bi-person-circle"></i> <b class=""><?= ucfirst(strtok($_SESSION['log']['nama'], " ")); ?></b>
 								</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="<?= PC::BASE_URL ?>Login/logout">Logout</a></li>
-								</ul>
+								<div class="dropdown-menu p-1 dropdown-menu-end">
+									<a class="dropdown-item text-center" href="<?= PC::BASE_URL ?>Login/logout">Logout</a>
+								</div>
 							</div>
 
 						</div>

@@ -7,42 +7,24 @@
 					<h6 class="text-uppercase fw-bold mb-2">
 						<?= PC::APP_NAME ?>
 					</h6>
-					<p>
-						Here you can use rows and columns to organize your footer content. Lorem ipsum
-						dolor sit amet, consectetur adipisicing elit.
-					</p>
+					<p>Successful investing enhances your lifestyle, affording you opportunities for travel, leisure, and personal fulfillment.</p>
 				</div>
 
 				<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-2">
 					<h6 class="text-uppercase fw-bold mb-2">
-						Products
+						Growth
 					</h6>
-					<p>
-						<a href="#!" class="text-reset">Angular</a><br>
-						<a href="#!" class="text-reset">React</a><br>
-						<a href="#!" class="text-reset">Vue</a><br>
-						<a href="#!" class="text-reset">Laravel</a><br>
-					</p>
+					<p>The potential to increase the value of your investment over time</p>
 				</div>
 				<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-2">
 					<h6 class="text-uppercase fw-bold mb-2">
-						Useful links
+						Wealth accumulation
 					</h6>
-					<p>
-						<a href="#!" class="text-reset">Pricing</a><br>
-						<a href="#!" class="text-reset">Settings</a><br>
-						<a href="#!" class="text-reset">Orders</a><br>
-						<a href="#!" class="text-reset">Help</a><br>
-					</p>
+					<p>Accumulate long-term wealth through wise investments.</p>
 				</div>
 				<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-2">
-					<h6 class="text-uppercase fw-bold mb-2">Contact</h6>
-					<p><i class="fas fa-home me-3"></i> New York, NY 10012, US<br>
-						<i class="fas fa-envelope me-3"></i>
-						info@example.com<br>
-						<i class="fas fa-phone me-3"></i> + 01 234 567 88<br>
-						<i class="fas fa-print me-3"></i> + 01 234 567 89
-					</p>
+					<h6 class="text-uppercase fw-bold mb-2">Financial security</h6>
+					<p>Financial security for your and your family's future.</p>
 				</div>
 			</div>
 		</div>

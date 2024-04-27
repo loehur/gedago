@@ -2,54 +2,45 @@
 
 class Portfolio extends Controller
 {
-   function portfolio()
+   function portfolio($data)
    {
       $port['saldo'] = 0;
       $port['fee_dc'] = 0;
       $port['fee_dw'] = 0;
       if (isset($_SESSION['log'])) {
-         $log = $_SESSION['log'];
-         $port['data'] = $this->db(0)->get_where_row("portfolio", "user_id = '" . $log['user_id'] . "' AND port_status = 0");
-         $data = $port['data'];
          if (isset($data['port_id'])) {
-            $port['saldo'] = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $log['user_id'] . "' AND balance_type = 10 AND flow = 2 AND ref = '" . $data['port_id'] . "' AND tr_status <> 2", 0)['amount'];
-
-            $dc_data = $this->db(0)->get_where("daily_checkin", "ref = '" . $data['port_id'] . "'");
-            foreach ($dc_data as $dd) {
-               $port['fee_dc'] += $this->db(0)->get_where_row("balance", "user_id = '" . $log['user_id'] . "' AND balance_type = 20 AND ref = '" . $dd['dc_id'] . "' AND tr_status <> 2")['amount'];
-            }
-
-            $dw_data = $this->db(0)->get_where("daily_watch", "ref = '" . $data['port_id'] . "'");
-            foreach ($dw_data as $dw) {
-               $port['fee_dw'] += $this->db(0)->get_where_row("balance", "user_id = '" . $log['user_id'] . "' AND balance_type = 21 AND ref = '" . $dw['dw_id'] . "' AND tr_status <> 2")['amount'];
-            }
+            $port['saldo'] = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $data['user_id'] . "' AND balance_type = 10 AND flow = 2 AND ref = '" . $data['port_id'] . "' AND tr_status <> 2", 0)['amount'];
+            $port['fee_dc'] = $this->db(0)->get_cols_where("daily_checkin", "SUM(fee) as amount", "user_id = '" . $data['user_id'] . "' AND ref = '" . $data['port_id'] . "'", 0)['amount'];
+            $port['fee_dw'] = $this->db(0)->get_cols_where("daily_watch", "SUM(fee) as amount", "user_id = '" . $data['user_id'] . "' AND ref = '" . $data['port_id'] . "'", 0)['amount'];
          }
       }
-
+      $port['data'] = $data;
       return $port;
    }
 
-   function daily_checkin($data) // portfolio data
+
+   function daily_checkin_today($data) // portfolio data
    {
       $c = [];
+
+      $hari_ini = date("Y-m-d");
       if (isset($data['data']['port_id'])) {
-         $c = $this->db(0)->get_where_row("daily_checkin", "ref = '" . $data['data']['port_id'] . "'");
+         $c = $this->db(0)->get_where_row("daily_checkin", "ref = '" . $data['data']['port_id'] . "' AND insertTime LIKE '%" . $hari_ini . "%'");
       }
       return $c;
    }
 
-   function daily_watch($data) // portfolio data
+   function daily_watch_today($data) // portfolio data
    {
+      $c = [];
       if (isset($_SESSION['log'])) {
          $hari_ini = date("Y-m-d");
          $c = [];
          if (isset($data['data']['port_id'])) {
             $c = $this->db(0)->get_where("daily_watch", "ref = '" . $data['data']['port_id'] . "' AND insertTime LIKE '%" . $hari_ini . "%'");
          }
-         return $c;
-      } else {
-         return [];
       }
+      return $c;
    }
 
    function cek_expired($expired_date)
@@ -64,31 +55,24 @@ class Portfolio extends Controller
       }
    }
 
-   function daily_fee($porto_id)
+   function close($data)
    {
-      $daily_cek = $this->db(0)->get_where("daily_checkin", "ref = '" . $porto_id . "'");
-      $data = [];
-      foreach ($daily_cek as $dc) {
-         $get = $this->db(0)->get_where_row("balance", "ref = '" . $dc['dc_id'] . "'");
-         array_push($data, $get);
-      }
-      return $data;
-   }
-
-   function porto_fee($user_id, $port_id)
-   {
-      //fee_daily
-      $daily_fee = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $user_id . "' AND (balance_type BETWEEN 20 AND 23) AND ref = '" . $port_id . "' AND tr_status <> 2", 0);
-      if (isset($daily_fee['amount'])) {
-         if ($daily_fee['amount'] <> "") {
-            $fee = $daily_fee['amount'];
-         } else {
-            $fee = 0;
+      $msg = "";
+      $up = $this->db(0)->update("portfolio", "port_status = 1", "user_id = '" . $data['data']['user_id'] . "' AND port_id = '" . $data['data']['port_id'] . "'");
+      if ($up['errno'] == 0) {
+         $cols = "flow, balance_type, user_id, ref, amount, tr_status";
+         $vals = "1,10,'" . $data['data']['user_id'] . "','" . $data['data']['port_id'] . "'," . $data['saldo'] + $data['fee_dc'] + $data['fee_dw'] . ",1";
+         $in = $this->db(0)->insertCols("balance", $cols, $vals);
+         if ($in['errno'] <> 0) {
+            $up = $this->db(0)->update("portfolio", "port_status = 0", "user_id = '" . $data['data']['user_id'] . "' AND port_id = '" . $data['data']['level'] . "'");
+            $this->model('Log')->write($in['error']);
+            $msg = "Error transfer portfolio to main balance";
          }
       } else {
-         $fee = 0;
+         $this->model('Log')->write($up['error']);
+         $msg = "Error portfolio update to closed";
       }
 
-      return $fee;
+      return $msg;
    }
 }

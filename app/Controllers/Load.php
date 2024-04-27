@@ -59,7 +59,20 @@ class Load extends Controller
    function checkin()
    {
       $log = $_SESSION['log'];
-      $port_data = $this->func("Portfolio")->portfolio();
+      $d = $this->db(0)->get_where_row("portfolio", "user_id = '" . $log['user_id'] . "' AND port_status = 0");
+      $port_data = $this->func("Portfolio")->portfolio($d);
+
+      //cek_expired
+      $expired_date = $d['expired_date'];
+      $expired = $this->func("Portfolio")->cek_expired($expired_date);
+      if ($expired <= 0) {
+         $close = $this->func("Portfolio")->close($port_data);
+         if ($close <> "") {
+            echo $close;
+            exit();
+         }
+      }
+
       $data = $port_data['data'];
 
       foreach (PC::LEVEL as $pl) {
@@ -72,30 +85,12 @@ class Load extends Controller
       if (isset($data['port_id'])) {
          $count = $this->db(0)->count_where("daily_checkin", "ref = '" . $data['port_id'] . "'");
          if ($count < $days) {
-            $cek_today = $this->db(0)->count_where("daily_checkin", "ref = '" . $data['port_id'] . "' AND updateTime LIKE '%" . date("Y-m-d") . "%'");
+            $cek_today = $this->db(0)->count_where("daily_checkin", "ref = '" . $data['port_id'] . "' AND insertTime LIKE '%" . date("Y-m-d") . "%'");
             if ($cek_today == 0) {
                $dc_id = "DC" . date("Ymdhis") . rand(0, 9);
-               $in = $this->db(0)->insertCols("daily_checkin", "dc_id, user_id, ref", "'" . $dc_id . "','" . $log['user_id'] . "','" . $data['port_id'] . "'");
-               if ($in['errno'] == 0) {
-                  $cekfeedaily = $this->db(0)->count_where("balance", "balance_type = 20 AND ref = '" . $dc_id . "' AND insertTime LIKE '%" . date("Y-m-d") . "%'");
-                  if ($cekfeedaily == 0) {
-                     $fee_am = ($fee / 100) * $port_data['saldo'];
-
-                     $cols = "user_id, balance_type, ref, amount, flow";
-                     $vals = "'" . $log['user_id'] . "',20,'" . $dc_id . "'," . $fee_am . ",1";
-                     $in2 = $this->db(0)->insertCols("balance", $cols, $vals);
-                     if ($in2['errno'] == 0) {
-                        echo 0;
-                     } else {
-                        $this->db(0)->delete_where("daily_checkin", "ref = '" . $data['port_id'] . "'");
-                        $this->model('Log')->write($in2['error']);
-                        echo "Error, hubungi CS";
-                        exit();
-                     }
-                  }
-               } else {
-                  $this->db(0)->delete_where("daily_checkin", "ref = '" . $data['port_id'] . "'");
-                  $this->db(0)->delete_where("balance", "ref = '" . $dc_id . "'");
+               $fee_am = ($fee / 100) * $port_data['saldo'];
+               $in = $this->db(0)->insertCols("daily_checkin", "dc_id, user_id, ref, fee", "'" . $dc_id . "','" . $log['user_id'] . "','" . $data['port_id'] . "'," . $fee_am);
+               if ($in['errno'] <> 0) {
                   $this->model('Log')->write($in['error']);
                   echo "Error, hubungi CS";
                }
@@ -103,21 +98,21 @@ class Load extends Controller
                echo "Anda sudah checkin Hari ini, silahkan reload page";
             }
          } else {
-            $up = $this->db(0)->update("portfolio", "port_status = 1", "user_id = '" . $log['user_id'] . "' AND port_id = '" . $data['port_id'] . "'");
-            if ($up['errno'] <> 0) {
-               $this->model('Log')->write($up['error'] . " - ketika checkin melebihi batas");
-            }
             echo "Anda telah melebihi batas Checkin";
+            exit();
          }
       } else {
+         $this->model('Log')->write("Error Checkin Function");
          echo "Session Error, Hubungi CS";
+         exit();
       }
    }
 
    function watch($video_id)
    {
       $log = $_SESSION['log'];
-      $port_data = $this->func("Portfolio")->portfolio();
+      $d = $this->db(0)->get_where_row("portfolio", "user_id = '" . $log['user_id'] . "' AND port_status = 0");
+      $port_data = $this->func("Portfolio")->portfolio($d);
       $data = $port_data['data'];
 
       foreach (PC::LEVEL as $pl) {
@@ -133,27 +128,9 @@ class Load extends Controller
          $count = $this->db(0)->count_where("daily_watch", "ref = '" . $data['port_id'] . "' AND insertTime LIKE '%" . $today . "%'");
          if ($count < $qty) {
             $dw_id = "DW" . date("Ymdhis") . rand(0, 9);
-            $in = $this->db(0)->insertCols("daily_watch", "dw_id, user_id, ref, video_id", "'" . $dw_id . "','" . $log['user_id'] . "','" . $data['port_id'] . "'," . $video_id);
-            if ($in['errno'] == 0) {
-               $cekfeedaily = $this->db(0)->count_where("balance", "balance_type = 21 AND ref = '" . $dw_id . "' AND insertTime LIKE '%" . $today . "%'");
-               if ($cekfeedaily < $qty) {
-                  $fee_am = ($fee / 100) * $port_data['saldo'];
-
-                  $cols = "user_id, balance_type, ref, amount, flow";
-                  $vals = "'" . $log['user_id'] . "',21,'" . $dw_id . "'," . $fee_am . ",1";
-                  $in2 = $this->db(0)->insertCols("balance", $cols, $vals);
-                  if ($in2['errno'] == 0) {
-                     echo 0;
-                  } else {
-                     $this->db(0)->delete_where("daily_watch", "ref = '" . $data['port_id'] . "'");
-                     $this->model('Log')->write($in2['error']);
-                     echo "Error, hubungi CS";
-                     exit();
-                  }
-               }
-            } else {
-               $this->db(0)->delete_where("daily_watch", "ref = '" . $data['port_id'] . "'");
-               $this->db(0)->delete_where("balance", "ref = '" . $dw_id . "'");
+            $fee_am = ($fee / 100) * $port_data['saldo'];
+            $in = $this->db(0)->insertCols("daily_watch", "dw_id, user_id, ref, video_id, fee", "'" . $dw_id . "','" . $log['user_id'] . "','" . $data['port_id'] . "'," . $video_id . "," . $fee_am);
+            if ($in['errno'] <> 0) {
                $this->model('Log')->write($in['error']);
                echo "Error, hubungi CS";
                exit();
@@ -163,6 +140,7 @@ class Load extends Controller
             exit();
          }
       } else {
+         $this->model('Log')->write("Error watch function");
          echo "Session Error, Hubungi CS";
          exit();
       }

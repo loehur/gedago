@@ -16,7 +16,7 @@
  		</div>
  		<?php if (isset($_SESSION['log'])) { ?>
  			<div class="col text-center">
- 				<a href="#" class="btn btn-sm shadow-none">
+ 				<a href="<?= PC::BASE_URL ?>Portfolio_Main" class="btn btn-sm shadow-none">
  					<i class="bi bi-briefcase"></i><br>
  					Portfolio
  				</a>
@@ -29,13 +29,15 @@
  				</span>
  			</div>
  		<?php } ?>
- 		<div class="col text-center">
- 			<span class="btn btn-sm shadow-none">
- 				<a class="text-dark" data-bs-toggle="offcanvas" href="#menu_page">
- 					<i class="bi bi-list"></i><br>Menu
- 				</a>
- 			</span>
- 		</div>
+ 		<?php if (isset($_SESSION['log'])) { ?>
+ 			<div class="col text-center">
+ 				<span class="btn btn-sm shadow-none">
+ 					<a class="text-dark" data-bs-toggle="offcanvas" href="#menu_page">
+ 						<i class="bi bi-list"></i><br>Menu
+ 					</a>
+ 				</span>
+ 			</div>
+ 		<?php } ?>
 
  	</div>
  </div>

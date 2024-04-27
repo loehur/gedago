@@ -1,6 +1,6 @@
 <?php
 
-class Log extends Controller
+class Session extends Controller
 {
    function cek()
    {

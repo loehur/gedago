@@ -40,9 +40,11 @@ if (isset($_SESSION['log'])) {
                         <h6>Daily Checkin Fee</h6>
                         <div class="row">
                             <div class="col">
-                                <?php foreach ($data['fee_dc'] as $df) {
-                                    echo substr($df['insertTime'], 0, 10)  . " <span class='text-success float-end'>+Rp" . number_format($df['amount']) . "</span><br>";
-                                } ?>
+                                <?php $df = $data['checkin'];
+                                if (isset($df['insertTime'])) {
+                                    echo substr($df['insertTime'], 0, 10)  . " <span class='text-success float-end'>+Rp" . number_format($df['fee']) . "</span><br>";
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -73,7 +75,7 @@ if (isset($_SESSION['log'])) {
                             foreach ($data['watch'] as $dw) { ?>
                                 <div class="row">
                                     <div class="col">
-                                        <span><small><?= $dw['dw_id'] ?></small></span><span class="float-end text-success">+Rp<?= number_format($this->db(0)->get_where_row("balance", "ref = '" . $dw['dw_id'] . "'")['amount']) ?></span><br>
+                                        <span><small><?= $dw['dw_id'] ?></small></span><span class="float-end text-success">+Rp<?= number_format($dw['fee']) ?></span><br>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -84,11 +86,9 @@ if (isset($_SESSION['log'])) {
                         <i class="bi bi-calendar-check text-info"></i></i> Daily Check-in <br>
                         <span>
                             <?php
-                            if (is_array($data['checkin']) && isset($data['checkin']['updateTime'])) {
-                                $fee = $this->db(0)->get_where_row("balance", "ref = '" . $data['checkin']['dc_id'] . "'")['amount'];
+                            if (isset($data['checkin']['insertTime'])) {
                             ?>
-                                <i class="bi bi-check-circle-fill text-info"></i></i> <?= $data['checkin']['updateTime'] ?>
-                                <span class="float-end">Fee Rp<?= number_format($fee) ?> <i class="bi bi-check-circle text-info"></i></span>
+                                <i class="bi bi-check-circle-fill text-info"></i></i> <?= $data['checkin']['insertTime'] ?>
                                 <?php
                             } else {
                                 if (isset($porto_bal['data']['user_id'])) { ?>
@@ -103,14 +103,17 @@ if (isset($_SESSION['log'])) {
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                         <h6>Portfolio History</h6>
-                        <?php foreach ($data['porto'] as $pr) { ?>
-                            <div class="row border-top">
-                                <div class="col">
-                                    <small><?= $pr['insertTime'] ?></small><br>
-                                    Level <?= $this->func("Level")->level_nm($pr['level']) ?> <?= $pr['port_status'] == 0 ? "Active" : "Expired" ?>
+                        <?php foreach ($data['porto_history'] as $pr) {
+                            if ($pr['port_status'] == 1) {
+                        ?>
+                                <div class="row border-top pt-2">
+                                    <div class="col">
+                                        <small><span class="fw-bold"><?= $this->func("Level")->level_nm($pr['level']) ?></span></small><br>
+                                        <small><span><?= substr($pr['insertTime'], 0, 10) ?></span> &#8594; <span><?= substr($pr['doneDate'], 0, 10)  ?></span></small></small>
+                                    </div>
                                 </div>
-                            </div>
-                        <?php } ?>
+                        <?php }
+                        } ?>
                     </div>
                 </div>
             </section>
