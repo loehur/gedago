@@ -26,6 +26,11 @@ class Register extends Controller
    function daftar()
    {
       $number =   $_POST['hp'];
+      $number = preg_replace('/[^0-9]/', '', $number);
+      if (substr($number, 0, 2) == "62") {
+         $number = "0" . substr($number, 2);
+      }
+
       $nama = $_POST['nama'];
       $nik = $_POST['nik'];
       $pw = $_POST['pw'];
@@ -139,6 +144,12 @@ class Register extends Controller
    function req_otp()
    {
       $number = $_POST['number'];
+      $number = preg_replace('/[^0-9]/', '', $number);
+
+      if (substr($number, 0, 2) <> "08") {
+         echo "Nomor HP harus diawali 08";
+         exit();
+      }
       if (isset($_COOKIE[$number])) {
          echo "OTP sudah di kirimkan, timeout 5 menit";
       } else {

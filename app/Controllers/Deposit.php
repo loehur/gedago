@@ -74,7 +74,7 @@ class Deposit extends Controller
    function batal($id)
    {
       $log = $_SESSION['log'];
-      $where = $this->db(0)->count_where("balance", "user_id = '" . $log['user_id'] . "' AND flow = 1 AND balance_type = 1 AND tr_status = 0 AND balance_id = " . $id);
+      $where = "user_id = '" . $log['user_id'] . "' AND flow = 1 AND balance_type = 1 AND tr_status = 0 AND balance_id = " . $id;
       $set = "tr_status = 2";
       $this->db(0)->update("balance", $set, $where);
       header("Location: " . PC::BASE_URL . "Deposit");
