@@ -1,6 +1,6 @@
 <form action="<?= PC::BASE_URL_ADMIN . $con ?>/login" method="POST">
     <div class="container">
-        <div style="max-width: 500px;" class="m-auto px-2">
+        <div style="max-width: 500px;" class="m-auto px-3">
             <h5 class="fw-bold mb-2">Admin Login</h5>
             <div class="row mb-1">
                 <div class="col px-1 mb-2" style="min-width: 200px;">
