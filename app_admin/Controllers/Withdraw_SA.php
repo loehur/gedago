@@ -1,6 +1,6 @@
 <?php
 
-class Withdraw_SV extends Controller
+class Withdraw_SA extends Controller
 {
 
    public function __construct()
