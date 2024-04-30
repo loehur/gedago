@@ -1,8 +1,8 @@
 <?php $log = $_SESSION['log']; ?>
 
-<form action="<?= PC::BASE_URL . $con ?>/update" class="upload" method="POST">
-    <div class="container">
-        <div style="max-width: 500px;" class="m-auto px-x">
+<div class="container">
+    <div style="max-width: 500px;" class="m-auto px-3">
+        <form action="<?= PC::BASE_URL . $con ?>/update" class="upload" method="POST">
             <h5 class="fw-bold">Bank Account</h5>
             <div class="row">
                 <div class="col px-1" style="min-width: 200px;">
@@ -35,9 +35,9 @@
                     <button type="submit" class="w-100 border-0 py-2 btn-success rounded shadow-sm">Simpan</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-</form>
+</div>
 
 <script>
     $(document).ready(function() {
