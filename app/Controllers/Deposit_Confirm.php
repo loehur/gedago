@@ -4,11 +4,6 @@ class Deposit_Confirm extends Controller
 {
    public function __construct()
    {
-      $cek = $this->func("Session")->cek();
-      if ($cek == 0) {
-         header("Location: " . PC::BASE_URL . "Login");
-         exit();
-      }
    }
 
    public function index()
