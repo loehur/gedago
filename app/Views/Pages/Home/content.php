@@ -4,7 +4,7 @@ $ada_port = false;
 if (!isset($_SESSION['log'])) { ?>
     <div class="container">
         <section class="py-2 my-2 mt-4 text-center bg-dark">
-            <video controls autoplay muted width="100%" style="max-width: 500px;" id="video_play" class="rounded">
+            <video controls autoplay muted width="100%" style="max-width: 500px;" id="video_play">
                 <source src="<?= PC::ASSETS_URL ?>video/gedago.mp4" type="video/mp4">
                 <source src="movie.ogg" type="video/ogg">
                 Your browser does not support the video tag.
