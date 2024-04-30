@@ -1,8 +1,8 @@
 <?php if (!isset($_SESSION['log_admin'])) { ?>
     <div class="container">
         <section class="py-1">
-            <div class="row">
-                <div class="col" style="min-width: 200px;">
+            <div class="row px-3">
+                <div class="col p-3 bg-white rounded border" style="min-width: 200px;">
                     <h4 class="fw-bold">Admin Panel</h4>
                     <p align="justify">
                         All Admin Operation Here
