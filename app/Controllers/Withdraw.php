@@ -24,7 +24,7 @@ class Withdraw extends Controller
 
    public function content()
    {
-      $data['wd'] = $this->db(0)->get_where("balance", "user_id = '" . $_SESSION['log']['user_id'] . "' AND balance_type = 1 AND flow = 2 ORDER BY insertTime DESC LIMIT 5");
+      $data['wd'] = $this->db(0)->get_where("balance", "user_id = '" . $_SESSION['log']['user_id'] . "' AND balance_type = 1 AND flow = 2 ORDER BY insertTime DESC LIMIT 10");
       $data['saldo'] = $this->func("Balance")->saldo();
 
       $this->view(__CLASS__, __CLASS__ . "/content", $data);

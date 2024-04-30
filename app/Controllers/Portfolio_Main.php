@@ -25,7 +25,7 @@ class Portfolio_Main extends Controller
    {
       $log = $_SESSION['log'];
       $d = $this->db(0)->get_where_row("portfolio", "user_id = '" . $log['user_id'] . "' AND port_status = 0");
-      $data['porto_history'] = $this->db(0)->get_where("portfolio", "user_id = '" . $log['user_id'] . "' ORDER BY port_id DESC");
+      $data['porto_history'] = $this->db(0)->get_where("portfolio", "user_id = '" . $log['user_id'] . "' ORDER BY port_id DESC LIMIT 3");
 
       $data['port_balance'] = $this->func("Portfolio")->portfolio($d);
       if (isset($data['port_balance']['data']['user_id'])) {

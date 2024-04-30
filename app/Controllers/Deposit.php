@@ -26,7 +26,7 @@ class Deposit extends Controller
 
    public function content($parse)
    {
-      $data['dep'] = $this->db(0)->get_where("balance", "user_id = '" . $_SESSION['log']['user_id'] . "' AND balance_type = 1 AND flow = 1 ORDER BY insertTime DESC LIMIT 5");
+      $data['dep'] = $this->db(0)->get_where("balance", "user_id = '" . $_SESSION['log']['user_id'] . "' AND balance_type = 1 AND flow = 1 ORDER BY insertTime DESC LIMIT 10");
       $data['msg'] = $parse;
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
    }
