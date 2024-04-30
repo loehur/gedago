@@ -21,6 +21,12 @@
  					Portfolio
  				</a>
  			</div>
+ 			<div class="col text-center">
+ 				<a href="<?= PC::BASE_URL ?>Marketplace" class="btn btn-sm shadow-none">
+ 					<i class="bi bi-shop-window"></i><br>
+ 					Marketplace
+ 				</a>
+ 			</div>
  		<?php } else { ?>
  			<div class="col text-center">
  				<span class="btn btn-sm shadow-none">
@@ -29,15 +35,5 @@
  				</span>
  			</div>
  		<?php } ?>
- 		<?php if (isset($_SESSION['log'])) { ?>
- 			<div class="col text-center">
- 				<span class="btn btn-sm shadow-none">
- 					<a class="text-dark" data-bs-toggle="offcanvas" href="#menu_page">
- 						<i class="bi bi-list"></i><br>Menu
- 					</a>
- 				</span>
- 			</div>
- 		<?php } ?>
-
  	</div>
  </div>

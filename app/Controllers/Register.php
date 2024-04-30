@@ -25,7 +25,7 @@ class Register extends Controller
 
    function daftar()
    {
-      $number =   $_POST['hp'];
+      $number = $_POST['hp'];
       $number = preg_replace('/[^0-9]/', '', $number);
       if (substr($number, 0, 2) == "62") {
          $number = "0" . substr($number, 2);

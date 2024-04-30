@@ -1,6 +1,11 @@
-<form action="<?= PC::BASE_URL . $con ?>/req_dep" method="POST">
-    <div class="container">
-        <div style="max-width: 500px;" class="m-auto px-1">
+<div class="container">
+    <div style="max-width: 500px;" class="m-auto px-1">
+        <?php if ($data['msg'] == 1) { ?>
+            <div class="alert alert-danger" role="alert">
+                Masih ada deposit yang sedang berlangsung
+            </div>
+        <?php } ?>
+        <form action="<?= PC::BASE_URL . $con ?>/req_dep" method="POST">
             <h5 class="fw-bold mb-2">Deposit</h5>
             <div class="row mb-0">
                 <div class="col px-2 mb-0" style="min-width: 200px;">
@@ -17,26 +22,28 @@
             </div>
             <div class="row mt-3 border-top pt-2 mb-3">
                 <div class="col px-1 mb-1 text-end">
-                    <button type="submit" class="w-100 border-0 py-2 shadow-sm">Deposit</button>
+                    <button type="submit" class="w-100 border-0 py-2 shadow-sm btn-success rounded">Deposit</button>
                 </div>
             </div>
-        </div>
-        <div style="max-width: 500px;" class="m-auto px-1">
-            <div class="row">
-                <div class="col">
-                    <table class="table table-sm">
-                        <?php
-                        foreach ($data as $d) { ?>
-                            <tr class="<?= $d['tr_status'] == 2 ? 'table-light' : '' ?>">
-                                <td><?= substr($d['insertTime'], 0, 10) ?></td>
-                                <td class="text-end mt-auto text-success"><?= number_format($d['amount']) ?></td>
-                                <td class="text-end">
-                                    <?php
+        </form>
+    </div>
+    <div style="max-width: 500px;" class="m-auto px-1">
+        <div class="row">
+            <div class="col">
+                <table class="table table-sm">
+                    <?php
+                    foreach ($data['dep'] as $d) { ?>
+                        <tr class="<?= $d['tr_status'] == 2 ? 'table-light' : '' ?>">
+                            <td><?= substr($d['insertTime'], 0, 10) ?></td>
+                            <td class="text-end mt-auto text-success"><?= number_format($d['amount']) ?></td>
+                            <td class="text-end">
+                                <?php
+                                if ($d['dep_mode'] == 1) {
                                     switch ($d['tr_status']) {
                                         case 0: ?>
                                             <a href="<?= $d['redirect_url'] ?>"><span class='btn btn-sm py-0 text-primary'><u>Bayar</u></span></a>
                                             <a href="<?= PC::BASE_URL ?>Deposit/batal/<?= $d['balance_id'] ?>"><span class='btn py-0 pe-0 btn-sm'><u>Batal</u></span></a>
-                                    <?php break;
+                                            <?php break;
                                         case 1:
                                             echo 'Success <i class="bi bi-check-circle-fill text-success"></i>';
                                             break;
@@ -44,20 +51,35 @@
                                             echo 'Failed <i class="bi bi-x-circle-fill text-danger"></i>';
                                             break;
                                     }
-                                    ?>
-                                </td>
-                                </td>
-                            </tr>
-                        <?php }
-                        ?>
-                    </table>
-                </div>
+                                } else {
+                                    switch ($d['tr_status']) {
+                                        case 0:
+                                            if ($d['user_confirm'] == 0) { ?>
+                                                <a href="<?= PC::BASE_URL ?>Deposit_Confirm"><span class='btn btn-sm py-0 text-primary'><u>Konfirmasi</u></span></a>
+                                            <?php } else {
+                                                echo 'Checking <i class="bi bi-circle-fill text-warning"></i>';
+                                            } ?>
+                                <?php break;
+                                        case 1:
+                                            echo 'Success <i class="bi bi-check-circle-fill text-success"></i>';
+                                            break;
+                                        default:
+                                            echo 'Failed <i class="bi bi-x-circle-fill text-danger"></i>';
+                                            break;
+                                    }
+                                }
+                                ?>
+                            </td>
+                            </td>
+                        </tr>
+                    <?php }
+                    ?>
+                </table>
             </div>
         </div>
     </div>
-</form>
+</div>
 
-<script src="<?= PC::ASSETS_URL ?>js/fr_number.js"></script>
 <script>
     $(document).ready(function() {
         spinner(0);

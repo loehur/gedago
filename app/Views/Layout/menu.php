@@ -34,6 +34,11 @@ $menu = [
 				"label" => "Withdraw",
 				"active" => "Withdraw",
 				"link" => "Withdraw"
+			],
+			[
+				"label" => "History",
+				"active" => "History",
+				"link" => "History"
 			]
 		]
 	],
@@ -53,8 +58,8 @@ $menu = [
 			],
 			[
 				"label" => "Members",
-				"active" => "Account | Members",
-				"link" => "#"
+				"active" => "Members",
+				"link" => "Members"
 			]
 		]
 	]

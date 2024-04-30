@@ -4,12 +4,19 @@ $ada_port = false;
 if (!isset($_SESSION['log'])) { ?>
     <div class="container">
         <section class="py-1">
+            <video controls autoplay muted width="100%" id="video_play">
+                <source src="<?= PC::ASSETS_URL ?>video/gedago.mp4" type="video/mp4">
+                <source src="movie.ogg" type="video/ogg">
+                Your browser does not support the video tag.
+            </video>
+        </section>
+        <section class="py-2">
             <div class="row">
-                <div class="col-auto mb-2" style="min-width: 200px;">
-                    <img src="<?= PC::ASSETS_URL ?>img/banner/banner_en2.png" class="img-fluid" alt="">
-                </div>
+                <!-- <div class="col-auto mb-2" style="min-width: 200px;">
+                    <img src="assst/img/banner/banner_en2.png" class="img-fluid" alt="">
+                </div> -->
                 <div class="col" style="min-width: 200px;">
-                    <h4 class="fw-bold">Your Journey to Financial Freedom Begins Here</h4>
+                    <h4 class="fw-bold">Financial Freedom Begins Here</h4>
                     <p align="justify">
                         Welcome to our investment platform that revolutionizes the way you approach finance. Here, we understand that each individual has unique financial goals. With our inclusive vision, we present investment opportunities accessible to anyone, from beginners to seasoned investors. We offer a diverse range of investment instruments designed to optimize your potential returns, from the stock market to bonds, and beyond.
                     </p>
@@ -19,12 +26,7 @@ if (!isset($_SESSION['log'])) { ?>
                 </div>
             </div>
         </section>
-
-        <section class="py-1">
-            <iframe width="100%" class="ytplayer" height="315" src="https://www.youtube.com/embed/kBlcWM3SWjE?si=y0Qdj0mHS6hMHXOS&controls=0&start=1&autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </section>
-
-        <section class="py-3">
+        <section class="py-2">
             <div class="row px-2">
                 <div class="col bg-white rounded text-center shadow-sm p-3 mx-1 my-2" style="min-width: 200px;">
                     <h5 class="fw-bold"><i class="bi bi-safe"></i></h5>

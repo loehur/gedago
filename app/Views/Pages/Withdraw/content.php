@@ -6,11 +6,13 @@
                     <span>Withdraw</span>
                 </div>
             </div>
-            <div class="row mb-4">
-                <div class="col">
-                    <small><span>Biaya penarikan sebesar <?= PC::SETTING['wd_fee'] ?>% dipotong langsung dari Total Penarikan</span></small>
+            <?php if (PC::SETTING['wd_fee'] > 0) { ?>
+                <div class="row mb-4">
+                    <div class="col">
+                        <small><span>Biaya penarikan sebesar <?= PC::SETTING['wd_fee'] ?>% dipotong langsung dari Total Penarikan</span></small>
+                    </div>
                 </div>
-            </div>
+            <?php } ?>
             <div class="row mb-2">
                 <div class="col text-center">
                     <span class="">Saldo tersedia <span class="text-success">Rp<?= number_format($data['saldo']) ?></span></span>
@@ -31,7 +33,7 @@
             </div>
             <div class="row mt-3 border-top pt-2 mb-3">
                 <div class="col px-1 mb-1 text-end">
-                    <button type="submit" class="w-100 border-0 py-2 shadow-sm">Withdraw</button>
+                    <button type="submit" class="w-100 border-0 py-2 shadow-sm btn-success rounded">Withdraw</button>
                 </div>
             </div>
         </div>

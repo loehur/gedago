@@ -14,17 +14,20 @@ class Deposit extends Controller
 
    public function index()
    {
+      $msg = $_GET['msg'] ??  0;
       $data = [
          'title' => "Deposit",
-         'content' => __CLASS__
+         'content' => __CLASS__,
+         'parse' => $msg,
       ];
 
       $this->view_layout(__CLASS__, $data);
    }
 
-   public function content()
+   public function content($parse)
    {
-      $data = $this->db(0)->get_where("balance", "user_id = '" . $_SESSION['log']['user_id'] . "' AND balance_type = 1 AND flow = 1 ORDER BY insertTime DESC LIMIT 5");
+      $data['dep'] = $this->db(0)->get_where("balance", "user_id = '" . $_SESSION['log']['user_id'] . "' AND balance_type = 1 AND flow = 1 ORDER BY insertTime DESC LIMIT 5");
+      $data['msg'] = $parse;
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
    }
 
@@ -33,8 +36,7 @@ class Deposit extends Controller
       $log = $_SESSION['log'];
       $cek = $this->db(0)->count_where("balance", "user_id = '" . $log['user_id'] . "' AND flow = 1 AND balance_type = 1 AND tr_status = 0");
       if ($cek <> 0) {
-         $this->model('Log')->write("Deposit sedang berlangsung");
-         header("Location: " . PC::BASE_URL . "Deposit");
+         header("Location: " . PC::BASE_URL . "Deposit?msg=1");
          exit();
       }
 
@@ -47,27 +49,37 @@ class Deposit extends Controller
       }
 
       $ref = date("Ymdhis") . rand(0, 9) . rand(0, 9);
-      $token_midtrans = $this->model("Midtrans")->token($ref, $amount, $log['nama'], $log['email'], $log['hp']);
-      if (isset($token_midtrans['token'])) {
-         $token = $token_midtrans['token'];
-         $redirect_url = $token_midtrans['redirect_url'];
 
-         $cols = "flow, balance_type, user_id, ref, amount, token, redirect_url";
-         $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "','" . $token . "','" . $redirect_url . "'";
-         $in = $this->db(0)->insertCols("balance", $cols, $vals);
+      if (PC::SETTING['dep_mode'] == 1) {
+         $token_midtrans = $this->model("Midtrans")->token($ref, $amount, $log['nama'], $log['email'], $log['hp']);
+         if (isset($token_midtrans['token'])) {
+            $token = $token_midtrans['token'];
+            $redirect_url = $token_midtrans['redirect_url'];
 
-         if ($in['errno'] <> 0) {
-            $this->model('Log')->write("Insert deposit Error, " . $in['error']);
+            $cols = "flow, balance_type, user_id, ref, amount, token, redirect_url, dep_mode, sender_name";
+            $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "','" . $token . "','" . $redirect_url . "'," . PC::SETTING['dep_mode'] . ",'" . $log['nama'] . "'";
+            $in = $this->db(0)->insertCols("balance", $cols, $vals);
+
+            if ($in['errno'] <> 0) {
+               $this->model('Log')->write("Insert deposit Error, " . $in['error']);
+               echo "Error Deposit, hubungi customer service";
+               header("Location: " . PC::BASE_URL . "Home");
+               exit();
+            } else {
+               header("Location: " . $redirect_url);
+               exit();
+            }
+         } else {
+            $this->model('Log')->write("Error get token payment midtrans");
             echo "Error Deposit, hubungi customer service";
             header("Location: " . PC::BASE_URL . "Home");
             exit();
-         } else {
-            header("Location: " . $redirect_url);
          }
       } else {
-         $this->model('Log')->write("Error get token payment midtrans");
-         echo "Error Deposit, hubungi customer service";
-         header("Location: " . PC::BASE_URL . "Home");
+         $cols = "flow, balance_type, user_id, ref, amount, dep_mode, sender_name";
+         $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "'," . PC::SETTING['dep_mode'] . ",'" . $log['nama'] . "'";
+         $in = $this->db(0)->insertCols("balance", $cols, $vals);
+         header("Location: " . PC::BASE_URL . "Deposit_Confirm");
       }
    }
 

@@ -60,9 +60,12 @@ class Withdraw extends Controller
       $in = $this->db(0)->insertCols("balance", $cols, $vals);
       if ($in['errno'] <> 0) {
          $this->model('Log')->write("Insert Withdraw Error, " . $in['error']);
+         $this->model('WA')->send(PC::NOTIF['finance'][PC::SETTING['production']], "WD Request Error\n" . $in['error']);
          echo "Error Withdraw, hubungi customer service";
          exit();
       } else {
+         $text = "Withdraw Requested\n" . $log['nama'];
+         $this->model('WA')->send(PC::NOTIF['finance'][PC::SETTING['production']], $text);
          echo 0;
       }
    }
