@@ -1,6 +1,6 @@
 <div class="container">
     <div style="max-width: 500px;" class="m-auto px-1">
-        <h5>Withdraw - <span class="text-danger">SuperVisor Approval</span></h5>
+        <h5>Withdraw - <span class="text-danger">SuperAdmin Approval</span></h5>
         <?php
         foreach ($data as $d) { ?>
             <div class="row px-2 my-1">
