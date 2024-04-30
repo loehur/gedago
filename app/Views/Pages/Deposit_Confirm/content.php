@@ -46,7 +46,7 @@
         </div>
     </div>
 </div>
-<script src="<?= PC::ASSETS_URL ?>plugins/clipboard.js-master/dist/clipboard.min.js"></script>
+<script src="<?= PC::ASSETS_URL ?>plugins/clipboard/clipboard.min.js"></script>
 <script>
     var clipboard = new ClipboardJS('.btn');
     clipboard.on('success', function(e) {
