@@ -1,7 +1,7 @@
 <?php $log = $_SESSION['log']; ?>
 
 <div class="container">
-    <div style="max-width: 500px;" class="m-auto px-2">
+    <div style="max-width: 500px;" class="m-auto px-3">
         <h5 class="fw-bold">Profil</h5>
         <div class="row">
             <div class="col px-1 mb-1" style="min-width: 200px;">

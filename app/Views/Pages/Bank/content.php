@@ -2,7 +2,7 @@
 
 <form action="<?= PC::BASE_URL . $con ?>/update" class="upload" method="POST">
     <div class="container">
-        <div style="max-width: 500px;" class="m-auto px-2">
+        <div style="max-width: 500px;" class="m-auto px-x">
             <h5 class="fw-bold">Bank Account</h5>
             <div class="row">
                 <div class="col px-1" style="min-width: 200px;">
