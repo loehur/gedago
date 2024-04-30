@@ -22,7 +22,7 @@ class Deposit_Confirm extends Controller
       if (isset($data['dep']['user_id'])) {
          $this->view(__CLASS__, __CLASS__ . "/content", $data);
       } else {
-         echo "Data already updated!";
+         header("Location: " . PC::BASE_URL . "Deposit");
       }
    }
 
