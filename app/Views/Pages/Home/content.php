@@ -4,18 +4,18 @@ $ada_port = false;
 if (!isset($_SESSION['log'])) { ?>
     <div class="container">
         <section class="py-1">
-            <video controls autoplay muted width="100%" id="video_play">
+            <video controls autoplay muted width="100%" id="video_play" class="rounded">
                 <source src="<?= PC::ASSETS_URL ?>video/gedago.mp4" type="video/mp4">
                 <source src="movie.ogg" type="video/ogg">
                 Your browser does not support the video tag.
             </video>
         </section>
         <section class="py-2">
-            <div class="row">
+            <div class="row px-2">
                 <!-- <div class="col-auto mb-2" style="min-width: 200px;">
                     <img src="assst/img/banner/banner_en2.png" class="img-fluid" alt="">
                 </div> -->
-                <div class="col" style="min-width: 200px;">
+                <div class="col rounded mx-1 bg-white shadow-sm p-3" style="min-width: 200px;">
                     <h4 class="fw-bold">Financial Freedom Begins Here</h4>
                     <p align="justify">
                         Welcome to our investment platform that revolutionizes the way you approach finance. Here, we understand that each individual has unique financial goals. With our inclusive vision, we present investment opportunities accessible to anyone, from beginners to seasoned investors. We offer a diverse range of investment instruments designed to optimize your potential returns, from the stock market to bonds, and beyond.
