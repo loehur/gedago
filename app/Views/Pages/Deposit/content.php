@@ -1,5 +1,5 @@
 <div class="container">
-    <div style="max-width: 500px;" class="m-auto px-1">
+    <div style="max-width: 500px;" class="m-auto px-3">
         <?php if ($data['msg'] == 1) { ?>
             <div class="alert alert-danger" role="alert">
                 Masih ada deposit yang sedang berlangsung
@@ -8,7 +8,7 @@
         <form action="<?= PC::BASE_URL . $con ?>/req_dep" method="POST">
             <h5 class="fw-bold mb-2">Deposit</h5>
             <div class="row mb-0">
-                <div class="col px-2 mb-0" style="min-width: 200px;">
+                <div class="col px-1 mb-0" style="min-width: 200px;">
                     <div class="form-floating">
                         <input type="text" style="font-size:17px;" class="form-control shadow-none fw-bold text-success fr_number" name="jumlah" required id="floatingInput1654a">
                         <label for="floatingInput1654a">Jumlah</label>

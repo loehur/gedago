@@ -1,5 +1,5 @@
 <div class="container">
-    <div style="max-width: 500px;" class="m-auto px-1">
+    <div style="max-width: 500px;" class="m-auto px-3">
         <h5>Main Wallet History</h5>
         <?php
         foreach ($data as $d) { ?>

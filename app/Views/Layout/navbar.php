@@ -29,7 +29,7 @@ $t = $data['title'];
 		<nav class="navbar navbar-light navbar-expand-sm">
 			<div class="container-fluid pt-2">
 				<div class="row">
-					<div class="col">
+					<div class="col ps-4">
 						<?php if (!isset($_SESSION['log'])) { ?>
 							<a href="<?= PC::BASE_URL ?>Home">
 								<h3 class="fw-bold text-dark"><?= PC::APP_NAME ?></h3>

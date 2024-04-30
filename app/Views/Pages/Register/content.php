@@ -1,6 +1,6 @@
 <form action="<?= PC::BASE_URL ?>Register/daftar" class="upload" method="POST">
     <div class="container">
-        <div style="max-width: 500px;" class="m-auto px-1">
+        <div style="max-width: 500px;" class="m-auto px-3">
             <h5 class="fw-bold mb-2">Register New Account</h5>
             <div class="row mb-1">
                 <div class="col px-1 mb-1" style="min-width: 200px;">
