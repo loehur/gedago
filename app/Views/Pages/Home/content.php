@@ -82,6 +82,9 @@ if (!isset($_SESSION['log'])) { ?>
                             <div class="col-auto p-1">
                                 <a href="<?= PC::BASE_URL ?>Withdraw"><button class="btn btn-sm btn-warning">Withdraw</button></a>
                             </div>
+                            <div class="col-auto p-1">
+                                <a href="<?= PC::BASE_URL ?>History"><button class="btn btn-sm btn-info">History</button></a>
+                            </div>
                         </div>
                     </div>
                     <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
