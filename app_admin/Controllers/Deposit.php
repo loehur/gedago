@@ -26,7 +26,7 @@ class Deposit extends Controller
    function confirm($id, $val)
    {
       $where = "flow = 1 AND balance_type = 1 AND tr_status = 0 AND balance_id = " . $id;
-      $set = "tr_status = " . $val;
+      $set = "tr_status = " . $val . ", cs = '" . $_SESSION['log_admin']['nama'] . "'";
       $up = $this->db(0)->update("balance", $set, $where);
       if ($up['errno'] <> 0) {
          $this->model('Log')->write($up['error']);
