@@ -23,10 +23,11 @@ class Deposit_Confirm extends Controller
 
    public function content()
    {
-      $data['dep'] = $this->db(0)->get_where_row("balance", "user_id = '" . $_SESSION['log']['user_id'] . "' AND user_confirm = 0 AND balance_type = 1 AND flow = 1 AND tr_status = 0 ORDER BY insertTime DESC LIMIT 5");
+      $data['dep'] = $this->db(0)->get_where_row("balance", "user_id = '" . $_SESSION['log']['user_id'] . "' AND user_confirm = 0 AND balance_type = 1 AND flow = 1 AND tr_status = 0 ORDER BY insertTime DESC");
 
       if (count($data['dep']) == 0) {
          header("Location: " . PC::BASE_URL . "Deposit");
+         exit();
       } else {
          $this->view(__CLASS__, __CLASS__ . "/content", $data);
       }
