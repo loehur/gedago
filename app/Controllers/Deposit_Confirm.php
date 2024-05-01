@@ -35,12 +35,10 @@ class Deposit_Confirm extends Controller
 
       if ($up['errno'] == 0) {
          $text = "Deposit Requested\n" . $log['nama'];
-         $wa = $this->model('WA')->send(PC::NOTIF['finance'][PC::SETTING['production']], $text);
+         $this->model('WA')->send(PC::NOTIF['finance'][PC::SETTING['production']], $text);
       } else {
-         $wa = $this->model('WA')->send(PC::NOTIF['finance'][PC::SETTING['production']], "Deposit Request Error\n" . $up['error']);
+         $this->model('WA')->send(PC::NOTIF['finance'][PC::SETTING['production']], "Deposit Request Error\n" . $up['error']);
       }
-
-      $this->model('Log')->write($wa);
       header("Location: " . PC::BASE_URL . "Deposit");
    }
 }
