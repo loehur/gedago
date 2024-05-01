@@ -21,6 +21,6 @@ class Cron extends Controller
 
    function tes()
    {
-      $this->model('WA')->send("081268098300", "cron tes");
+      $this->model('WA')->send(PC::NOTIF['finance'][PC::SETTING['production']], "TES");
    }
 }
