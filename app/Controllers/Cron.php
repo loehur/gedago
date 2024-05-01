@@ -21,6 +21,8 @@ class Cron extends Controller
 
    function tes()
    {
+      print_r(PC::NOTIF['finance'][PC::SETTING['production']]);
+      echo "<br>";
       print_r($this->model('WA')->send(PC::NOTIF['finance'][PC::SETTING['production']], "TES"));
    }
 }
