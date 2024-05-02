@@ -30,7 +30,7 @@
                                 <small>Privileges</small><br>
 
                                 <span class="text-danger">
-                                    <?php foreach (PC::ACCESS as $key => $acc) {
+                                    <?php foreach ($_SESSION['config']['access'] as $key => $acc) {
                                         if (in_array($key, $_SESSION['log_admin']['access']) == true) {
                                             echo $acc . ", ";
                                         }

@@ -13,10 +13,10 @@
                 <div class="row mb-3">
                     <div class="col text-center">
                         Lakukan Transfer ke Rekening berikut:<br>
-                        <strong><?= PC::DEP_REK['bank'] ?></strong><br>
-                        <strong><?= PC::DEP_REK['name'] ?></strong><br>
+                        <strong><?= $_SESSION['config']['dep_rek']['bank'] ?></strong><br>
+                        <strong><?= $_SESSION['config']['dep_rek']['name'] ?></strong><br>
                         <div id="val_rek" class="fw-bold text-success">
-                            <?= PC::DEP_REK['no'] ?>
+                            <?= $_SESSION['config']['dep_rek']['no'] ?>
                             <button class="btn p-0 shadow-none" data-clipboard-action="copy" data-clipboard-target="#val_rek"><i class="bi bi-clipboard"></i></button>
                         </div>
                     </div>

@@ -5,6 +5,17 @@ class Withdraw_SA extends Controller
 
    public function __construct()
    {
+      $cek = $this->func("Session")->cek_admin();
+      if ($cek == 0) {
+         header("Location: " . PC::BASE_URL_ADMIN . "Login");
+         exit();
+      }
+
+      if (in_array(0, $_SESSION['log_admin']['access']) == false) {
+         session_destroy();
+         header("Location: " . PC::BASE_URL_ADMIN . "Login");
+         exit();
+      }
    }
 
    public function index()

@@ -42,22 +42,22 @@ class Deposit extends Controller
 
       $pos_dep = $_POST['jumlah'];
       $amount = (int) filter_var($pos_dep, FILTER_SANITIZE_NUMBER_INT);
-      if ($amount < PC::SETTING['min_deposit']) {
-         $this->model('Log')->write("Deposit Minimal " . number_format(PC::SETTING['min_deposit']));
+      if ($amount < $_SESSION['config']['setting']['min_deposit']) {
+         $this->model('Log')->write("Deposit Minimal " . number_format($_SESSION['config']['setting']['min_deposit']));
          header("Location: " . PC::BASE_URL . "Deposit");
          exit();
       }
 
       $ref = date("Ymdhis") . rand(0, 9) . rand(0, 9);
 
-      if (PC::SETTING['dep_mode'] == 1) {
+      if ($_SESSION['config']['setting']['dep_mode'] == 1) {
          $token_midtrans = $this->model("Midtrans")->token($ref, $amount, $log['nama'], $log['email'], $log['hp']);
          if (isset($token_midtrans['token'])) {
             $token = $token_midtrans['token'];
             $redirect_url = $token_midtrans['redirect_url'];
 
             $cols = "flow, balance_type, user_id, ref, amount, token, redirect_url, dep_mode, sender_name";
-            $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "','" . $token . "','" . $redirect_url . "'," . PC::SETTING['dep_mode'] . ",'" . $log['nama'] . "'";
+            $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "','" . $token . "','" . $redirect_url . "'," . $_SESSION['config']['setting']['dep_mode'] . ",'" . $log['nama'] . "'";
             $in = $this->db(0)->insertCols("balance", $cols, $vals);
 
             if ($in['errno'] <> 0) {
@@ -77,7 +77,7 @@ class Deposit extends Controller
          }
       } else {
          $cols = "flow, balance_type, user_id, ref, amount, dep_mode, sender_name";
-         $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "'," . PC::SETTING['dep_mode'] . ",'" . $log['nama'] . "'";
+         $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "'," . $_SESSION['config']['setting']['dep_mode'] . ",'" . $log['nama'] . "'";
          $in = $this->db(0)->insertCols("balance", $cols, $vals);
          header("Location: " . PC::BASE_URL . "Deposit_Confirm");
       }

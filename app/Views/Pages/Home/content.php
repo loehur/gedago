@@ -49,7 +49,7 @@ if (!isset($_SESSION['log'])) { ?>
 <?php } else {
     if (count($data['port_balance']) > 0) {
         $porto_bal = $data['port_balance'];
-        foreach (PC::LEVEL as $pl) {
+        foreach ($_SESSION['config']['level'] as $pl) {
             if ($pl['level'] == $porto_bal['data']['level']) {
                 $fee_d = $pl['benefit'][1]['fee'];
                 $w_qty = $pl['benefit'][1]['qty'];

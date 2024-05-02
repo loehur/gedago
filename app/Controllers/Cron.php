@@ -19,10 +19,23 @@ class Cron extends Controller
       }
    }
 
-   function tes()
+   function create()
    {
-      print_r(PC::NOTIF['finance'][PC::SETTING['production']]);
-      echo "<br>";
-      print_r($this->model('WA')->send(PC::NOTIF['finance'][PC::SETTING['production']], "TES"));
+      $data = [];
+
+      $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
+      file_put_contents('app/config/JSON/blank.json', $jsonfile);
+   }
+
+   function sess_clear()
+   {
+      session_destroy();
+   }
+
+   function cek_sess()
+   {
+      echo "<pre>";
+      print_r($_SESSION);
+      echo "</pre>";
    }
 }

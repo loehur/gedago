@@ -25,7 +25,7 @@
                     </div>
                 <?php } ?>
 
-                <?php foreach (PC::LEVEL as $d) {
+                <?php foreach ($_SESSION['config']['level'] as $d) {
 
                     if (isset($data['data']['user_id'])) {
                         if ($data['data']['level'] > $d['level']) {

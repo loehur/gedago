@@ -62,7 +62,7 @@ class Marketplace extends Controller
          $total_invest = $topup + $port_saldo;
 
          $cTop = 0;
-         foreach (PC::LEVEL as $l) {
+         foreach ($_SESSION['config']['level'] as $l) {
             if ($cTop <= $l['topup']) {
                $cTop = $l['topup'];
             }
@@ -88,7 +88,7 @@ class Marketplace extends Controller
          }
       } else {
          $cTop = 0;
-         foreach (PC::LEVEL as $l) {
+         foreach ($_SESSION['config']['level'] as $l) {
             if ($cTop <= $l['topup']) {
                $cTop = $l['topup'];
             }
@@ -136,7 +136,7 @@ class Marketplace extends Controller
       $up = $this->db(0)->get_where_row("user", "user_id = '" . $_SESSION['log']['up'] . "'");
       if (isset($up['user_id'])) {
          $cols = "flow, balance_type, user_id, ref, amount, tr_status";
-         $vals = "1,22,'" . $up['user_id'] . "','" . $port_id . "'," . $topup * (PC::SETTING['up1_fee'] / 100) . ",1";
+         $vals = "1,22,'" . $up['user_id'] . "','" . $port_id . "'," . $topup * ($_SESSION['config']['setting']['up1_fee'] / 100) . ",1";
          $in = $this->db(0)->insertCols("balance", $cols, $vals);
          if ($in['errno'] <> 0) {
             $this->model('Log')->write($in['error']);
@@ -147,7 +147,7 @@ class Marketplace extends Controller
          $up2 = $this->db(0)->get_where_row("user", "user_id = '" . $up['up'] . "'");
          if (isset($up2['user_id'])) {
             $cols = "flow, balance_type, user_id, ref, amount, tr_status";
-            $vals = "1,23,'" . $up2['user_id'] . "','" . $port_id . "'," . $topup * (PC::SETTING['up2_fee'] / 100) . ",1";
+            $vals = "1,23,'" . $up2['user_id'] . "','" . $port_id . "'," . $topup * ($_SESSION['config']['setting']['up2_fee'] / 100) . ",1";
             $in2 = $this->db(0)->insertCols("balance", $cols, $vals);
             if ($in2['errno'] <> 0) {
                $this->model('Log')->write($in2['error']);

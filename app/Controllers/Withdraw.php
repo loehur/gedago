@@ -50,8 +50,8 @@ class Withdraw extends Controller
          exit();
       }
 
-      if ($amount < PC::SETTING['min_wd']) {
-         echo "Withdraw Minimal " . number_format(PC::SETTING['min_wd']);
+      if ($amount < $_SESSION['config']['setting']['min_wd']) {
+         echo "Withdraw Minimal " . number_format($_SESSION['config']['setting']['min_wd']);
          exit();
       }
 
@@ -60,12 +60,12 @@ class Withdraw extends Controller
       $in = $this->db(0)->insertCols("balance", $cols, $vals);
       if ($in['errno'] <> 0) {
          $this->model('Log')->write("Insert Withdraw Error, " . $in['error']);
-         $this->model('WA')->send(PC::NOTIF['finance'][PC::SETTING['production']], "WD Request Error\n" . $in['error']);
+         $this->model('WA')->send($_SESSION['config']['notif']['finance'][PC::APP_MODE], "WD Request Error\n" . $in['error']);
          echo "Error Withdraw, hubungi customer service";
          exit();
       } else {
          $text = "Withdraw Requested\n" . $log['nama'];
-         $this->model('WA')->send(PC::NOTIF['finance'][PC::SETTING['production']], $text);
+         $this->model('WA')->send($_SESSION['config']['notif']['finance'][PC::APP_MODE], $text);
          echo 0;
       }
    }

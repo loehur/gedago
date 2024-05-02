@@ -4,7 +4,7 @@ $ada_port = false;
 if (isset($_SESSION['log'])) {
     if (isset($data['port_balance']['data']['user_id'])) {
         $porto_bal = $data['port_balance'];
-        foreach (PC::LEVEL as $pl) {
+        foreach ($_SESSION['config']['level'] as $pl) {
             if ($pl['level'] == $porto_bal['data']['level']) {
                 $fee_d = $pl['benefit'][1]['fee'];
                 $w_qty = $pl['benefit'][1]['qty'];

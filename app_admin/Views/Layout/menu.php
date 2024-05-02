@@ -24,4 +24,16 @@ $menu = [
 			],
 		]
 	],
+	[
+		"label" => "Setting",
+		"list" =>
+		[
+			[
+				"label" => "Admin User",
+				"active" => "Admin User",
+				"link" => "Admin_User",
+				"access" => 0,
+			],
+		]
+	],
 ];

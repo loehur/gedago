@@ -10,4 +10,13 @@ class Session extends Controller
          return 0;
       }
    }
+
+   function cek_admin()
+   {
+      if (isset($_SESSION['log_admin'])) {
+         return 1;
+      } else {
+         return 0;
+      }
+   }
 }

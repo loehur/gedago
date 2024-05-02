@@ -33,7 +33,7 @@ class Load extends Controller
    function level_name($level = 0)
    {
       if ($level <> 0) {
-         foreach (PC::LEVEL as $l) {
+         foreach ($_SESSION['config']['level'] as $l) {
             if ($l['level'] == $level) {
                echo $l['name'];
             }
@@ -46,7 +46,7 @@ class Load extends Controller
    function daily_task($level = 0)
    {
       if ($level <> 0) {
-         foreach (PC::LEVEL as $l) {
+         foreach ($_SESSION['config']['level'] as $l) {
             if ($l['level'] == $level) {
                echo $l['benefit'][1]['qty'];
             }
@@ -75,7 +75,7 @@ class Load extends Controller
 
       $data = $port_data['data'];
 
-      foreach (PC::LEVEL as $pl) {
+      foreach ($_SESSION['config']['level'] as $pl) {
          if ($pl['level'] == $data['level']) {
             $fee = $pl['benefit'][0]['fee'];
             $days = $pl['days'];
@@ -115,7 +115,7 @@ class Load extends Controller
       $port_data = $this->func("Portfolio")->portfolio($d);
       $data = $port_data['data'];
 
-      foreach (PC::LEVEL as $pl) {
+      foreach ($_SESSION['config']['level'] as $pl) {
          if ($pl['level'] == $data['level']) {
             $fee = $pl['benefit'][1]['fee'];
             $qty = $pl['benefit'][1]['qty'];

@@ -6,7 +6,7 @@ class WA extends PC
 
     public function __construct()
     {
-        $this->key = PC::API_KEY['fonnte'][PC::SETTING['production']];
+        $this->key = $_SESSION['config']['api_key']['fonnte'][PC::APP_MODE];
     }
 
     function send($target, $text)

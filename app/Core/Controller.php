@@ -4,8 +4,19 @@ require 'app/Config/PC.php';
 
 class Controller extends PC
 {
-
     public $v_viewer, $v_content, $v_load;
+    public function __construct()
+    {
+        if (!isset($_SESSION['config'])) {
+            $_SESSION['config']['setting'] = $this->get_json("setting");
+            $_SESSION['config']['api_key'] = $this->get_json("api_key");
+            $_SESSION['config']['level'] = $this->get_json("level");
+            $_SESSION['config']['notif'] = $this->get_json("notif");
+            $_SESSION['config']['dep_rek'] = $this->get_json("dep_rek");
+            $_SESSION['config']['user_admin'] = $this->get_json("user_admin");
+            $_SESSION['config']['access'] = $this->get_json("access");
+        }
+    }
 
     public function view_layout($con, $data = [])
     {
@@ -44,5 +55,12 @@ class Controller extends PC
     {
         require_once "app/Functions/" . $file . ".php";
         return new $file();
+    }
+
+    function get_json($file)
+    {
+        $get = file_get_contents("app/Config/JSON/" . $file . ".json");
+        $data = json_decode($get, true);
+        return ($data);
     }
 }

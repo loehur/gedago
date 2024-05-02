@@ -4,7 +4,7 @@ class Level extends Controller
 {
    function level_nm($level)
    {
-      foreach (PC::LEVEL as $l) {
+      foreach ($_SESSION['config']['level'] as $l) {
          if ($l['level'] == $level) {
             return $l['name'];
          }
@@ -13,7 +13,7 @@ class Level extends Controller
 
    function watch_fee($level)
    {
-      foreach (PC::LEVEL as $l) {
+      foreach ($_SESSION['config']['level'] as $l) {
          if ($l['level'] == $level) {
             return $l['benefit'][1]['fee'];
          }

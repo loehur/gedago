@@ -9,10 +9,10 @@ class Midtrans extends PC
 
     public function __construct()
     {
-        $this->merchant_id = PC::API_KEY['midtrans'][PC::SETTING['production']]['merchant_id'];
-        $this->key_client = PC::API_KEY['midtrans'][PC::SETTING['production']]['key_client'];
-        $this->key_server = PC::API_KEY['midtrans'][PC::SETTING['production']]['key_server'];
-        $this->host = PC::API_KEY['midtrans'][PC::SETTING['production']]['host'];
+        $this->merchant_id = $_SESSION['config']['api_key']['midtrans'][PC::APP_MODE]['merchant_id'];
+        $this->key_client = $_SESSION['config']['api_key']['midtrans'][PC::APP_MODE]['key_client'];
+        $this->key_server = $_SESSION['config']['api_key']['midtrans'][PC::APP_MODE]['key_server'];
+        $this->host = $_SESSION['config']['api_key']['midtrans'][PC::APP_MODE]['host'];
     }
 
     function token($id, $amount, $name, $email, $hp)

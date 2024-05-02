@@ -38,7 +38,7 @@ class Login extends Controller
          exit();
       }
 
-      foreach (PC::USER_ADMIN as $ua) {
+      foreach ($_SESSION['config']['user_admin'] as $ua) {
          if ($ua['no'] == $number) {
             $_SESSION['log_admin'] = $ua;
             echo 1;
@@ -63,7 +63,7 @@ class Login extends Controller
          $number = "0" . substr($number, 2);
       }
 
-      foreach (PC::USER_ADMIN as $ua) {
+      foreach ($_SESSION['config']['user_admin'] as $ua) {
          if ($ua['no'] == $number) {
             if (isset($_COOKIE[$number])) {
                echo "OTP sudah di kirimkan, timeout 5 menit";

@@ -6,7 +6,7 @@ class WH_midtrans extends Controller
 
    public function __construct()
    {
-      $this->target_notif = PC::NOTIF[PC::SETTING['production']];
+      $this->target_notif = $_SESSION['config']['notif'][PC::APP_MODE];
    }
 
    function notification()
