@@ -1,6 +1,6 @@
 <?php
 
-class Admin_User extends Controller
+class Level extends Controller
 {
 
    public function __construct()
@@ -39,28 +39,20 @@ class Admin_User extends Controller
       $val = $_POST['value'];
       $col = $_POST['col'];
 
-      $_SESSION['config']['user_admin'][$id][$col] = $val;
-      $data = $_SESSION['config']['user_admin'];
-
-      $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
-      file_put_contents('../app/config/JSON/user_admin.json', $jsonfile);
-   }
-
-   function updateJSON_SEL()
-   {
-      $id = $_POST['id'];
-      $val = $_POST['value'];
-
-      foreach ($_SESSION['config']['access'] as $ca) {
-         if ($ca['code'] == $val) {
-            $_SESSION['config']['user_admin'][$id]["access"] = $ca['code'];
-            $_SESSION['config']['user_admin'][$id]["privilege"] = $ca['privilege'];
-         }
+      if ($col == "dc") {
+         $_SESSION['config']['level'][$id]["benefit"][0]['fee'] = floatval($val);
+      } elseif ($col == "dwf") {
+         $_SESSION['config']['level'][$id]["benefit"][1]['fee'] = floatval($val);
+      } elseif ($col == "dwq") {
+         $_SESSION['config']['level'][$id]["benefit"][1]['qty'] = intval($val);
+      } elseif ($col == "topup" || $col == "days") {
+         $_SESSION['config']['level'][$id][$col] = intval($val);
+      } else {
+         $_SESSION['config']['level'][$id][$col] = $val;
       }
 
-      $data = $_SESSION['config']['user_admin'];
-
+      $data = $_SESSION['config']['level'];
       $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
-      file_put_contents('../app/config/JSON/user_admin.json', $jsonfile);
+      file_put_contents('../app/config/JSON/level.json', $jsonfile);
    }
 }

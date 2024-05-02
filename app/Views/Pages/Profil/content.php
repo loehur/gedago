@@ -54,7 +54,7 @@
         </div>
         <div class="row px-1">
             <div class="col text-center bg-white rounded border p-2 mb-1" style="min-width: 200px;">
-                <small><span>Setiap nasabah yang terdaftar melalui Referral Link anda, akan mendapatkan <?= $_SESSION['config']['setting']['up1_fee'] ?>% setiap kali nasabah melakukan investasi, dan <?= $_SESSION['config']['setting']['up2_fee'] ?>% dari downline nasabah Anda.</span></small>
+                <small><span>Setiap nasabah yang terdaftar melalui Referral Link anda, akan mendapatkan <?= $_SESSION['config']['setting']['up1_fee']['value'] ?>% setiap kali nasabah melakukan investasi, dan <?= $_SESSION['config']['setting']['up2_fee']['value'] ?>% dari downline nasabah Anda.</span></small>
             </div>
         </div>
     </div>

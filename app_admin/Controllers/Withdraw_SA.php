@@ -11,7 +11,7 @@ class Withdraw_SA extends Controller
          exit();
       }
 
-      if (in_array(0, $_SESSION['log_admin']['access']) == false) {
+      if (in_array("wd_f", $_SESSION['log_admin']['privilege']) == false) {
          session_destroy();
          header("Location: " . PC::BASE_URL_ADMIN . "Login");
          exit();

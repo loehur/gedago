@@ -42,8 +42,8 @@ class Deposit extends Controller
 
       $pos_dep = $_POST['jumlah'];
       $amount = (int) filter_var($pos_dep, FILTER_SANITIZE_NUMBER_INT);
-      if ($amount < $_SESSION['config']['setting']['min_deposit']) {
-         $this->model('Log')->write("Deposit Minimal " . number_format($_SESSION['config']['setting']['min_deposit']));
+      if ($amount < $_SESSION['config']['setting']['min_deposit']['value']) {
+         $this->model('Log')->write("Deposit Minimal " . number_format($_SESSION['config']['setting']['min_deposit']['value']));
          header("Location: " . PC::BASE_URL . "Deposit");
          exit();
       }

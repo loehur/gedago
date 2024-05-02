@@ -6,10 +6,10 @@
                     <span>Withdraw</span>
                 </div>
             </div>
-            <?php if ($_SESSION['config']['setting']['wd_fee'] > 0) { ?>
+            <?php if ($_SESSION['config']['setting']['wd_fee']['value'] > 0) { ?>
                 <div class="row mb-4">
                     <div class="col">
-                        <small><span>Biaya penarikan sebesar <?= $_SESSION['config']['setting']['wd_fee'] ?>% dipotong langsung dari Total Penarikan</span></small>
+                        <small><span>Biaya penarikan sebesar <?= $_SESSION['config']['setting']['wd_fee']['value'] ?>% dipotong langsung dari Total Penarikan</span></small>
                     </div>
                 </div>
             <?php } ?>
@@ -28,7 +28,7 @@
             </div>
             <div class="row mb-1 mt-0">
                 <div class="col text-danger mb-1">
-                    <small id="alert_min" class="d-none">Minimal Penarikan <?= number_format($_SESSION['config']['setting']['min_wd']) ?></small>
+                    <small id="alert_min" class="d-none">Minimal Penarikan <?= number_format($_SESSION['config']['setting']['min_wd']['value']) ?></small>
                 </div>
             </div>
             <div class="row mt-3 border-top pt-2 mb-3">
@@ -81,7 +81,7 @@
     $(".fr_number").keyup(function() {
         var valu = $(this).val();
         var inte = parseInt(valu.replace(/[^,\d]/g, ''));
-        if (inte < <?= $_SESSION['config']['setting']['min_wd'] ?>) {
+        if (inte < <?= $_SESSION['config']['setting']['min_wd']['value'] ?>) {
             $("#alert_min").removeClass("d-none");
         } else {
             $("#alert_min").addClass("d-none");

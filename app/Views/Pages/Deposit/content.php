@@ -17,7 +17,7 @@
             </div>
             <div class="row mb-1 mt-0">
                 <div class="col text-danger mb-1">
-                    <small id="alert_min" class="d-none">Minimal Deposit <?= number_format($_SESSION['config']['setting']['min_deposit']) ?></small>
+                    <small id="alert_min" class="d-none">Minimal Deposit <?= number_format($_SESSION['config']['setting']['min_deposit']['value']) ?></small>
                 </div>
             </div>
             <div class="row mt-3 border-top pt-2 mb-3">
@@ -88,7 +88,7 @@
     $(".fr_number").keyup(function() {
         var valu = $(this).val();
         var inte = parseInt(valu.replace(/[^,\d]/g, ''));
-        if (inte < <?= $_SESSION['config']['setting']['min_deposit'] ?>) {
+        if (inte < <?= $_SESSION['config']['setting']['min_deposit']['value'] ?>) {
             $("#alert_min").removeClass("d-none");
         } else {
             $("#alert_min").addClass("d-none");

@@ -1,6 +1,6 @@
 <?php
 
-class Admin_User extends Controller
+class Operation extends Controller
 {
 
    public function __construct()
@@ -37,30 +37,11 @@ class Admin_User extends Controller
    {
       $id = $_POST['id'];
       $val = $_POST['value'];
-      $col = $_POST['col'];
 
-      $_SESSION['config']['user_admin'][$id][$col] = $val;
-      $data = $_SESSION['config']['user_admin'];
-
-      $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
-      file_put_contents('../app/config/JSON/user_admin.json', $jsonfile);
-   }
-
-   function updateJSON_SEL()
-   {
-      $id = $_POST['id'];
-      $val = $_POST['value'];
-
-      foreach ($_SESSION['config']['access'] as $ca) {
-         if ($ca['code'] == $val) {
-            $_SESSION['config']['user_admin'][$id]["access"] = $ca['code'];
-            $_SESSION['config']['user_admin'][$id]["privilege"] = $ca['privilege'];
-         }
-      }
-
-      $data = $_SESSION['config']['user_admin'];
+      $_SESSION['config']['setting'][$id]["value"] = $val + 0;
+      $data = $_SESSION['config']['setting'];
 
       $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
-      file_put_contents('../app/config/JSON/user_admin.json', $jsonfile);
+      file_put_contents('../app/config/JSON/setting.json', $jsonfile);
    }
 }

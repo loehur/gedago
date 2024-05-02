@@ -50,8 +50,8 @@ class Withdraw extends Controller
          exit();
       }
 
-      if ($amount < $_SESSION['config']['setting']['min_wd']) {
-         echo "Withdraw Minimal " . number_format($_SESSION['config']['setting']['min_wd']);
+      if ($amount < $_SESSION['config']['setting']['min_wd']['value']) {
+         echo "Withdraw Minimal " . number_format($_SESSION['config']['setting']['min_wd']['value']);
          exit();
       }
 

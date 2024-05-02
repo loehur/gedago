@@ -21,10 +21,38 @@ class Cron extends Controller
 
    function create()
    {
-      $data = [];
+
+
+      $data = [
+         [
+            "no" => "081268098300",
+            "nama" => "Rangga_2",
+            "access" => [0, 10, 20]
+         ],
+         [
+            "no" => "089693451283",
+            "nama" => "Rangga",
+            "access" => [0, 10, 20]
+         ],
+         [
+            "no" => "081388866999",
+            "nama" => "Sultan Gedago",
+            "access" => [0, 10, 20]
+         ],
+         [
+            "no" => "087877077933",
+            "nama" => "Annisa AzZahrah",
+            "access" => [10, 20]
+         ],
+         [
+            "no" => "085150971008",
+            "nama" => "Sultan Gedago",
+            "access" => [10, 20]
+         ],
+      ];
 
       $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
-      file_put_contents('app/config/JSON/blank.json', $jsonfile);
+      file_put_contents('app/config/JSON/user_admin.json', $jsonfile);
    }
 
    function sess_clear()

@@ -31,8 +31,8 @@
 
                                 <span class="text-danger">
                                     <?php foreach ($_SESSION['config']['access'] as $key => $acc) {
-                                        if (in_array($key, $_SESSION['log_admin']['access']) == true) {
-                                            echo $acc . ", ";
+                                        if ($acc['code'] == $_SESSION['log_admin']['access']) {
+                                            echo $acc['name'] . "";
                                         }
                                     } ?>
                                 </span>

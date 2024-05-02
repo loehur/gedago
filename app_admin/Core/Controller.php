@@ -16,6 +16,7 @@ class Controller extends PC
             $_SESSION['config']['dep_rek'] = $this->get_json("dep_rek");
             $_SESSION['config']['user_admin'] = $this->get_json("user_admin");
             $_SESSION['config']['access'] = $this->get_json("access");
+            $_SESSION['config']['privilege'] = $this->get_json("privilege");
         }
     }
 

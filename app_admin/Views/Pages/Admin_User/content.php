@@ -3,21 +3,23 @@
         <h5>User Admin</h5>
         <?php
         foreach ($_SESSION['config']['user_admin'] as $key => $d) {
-            if (in_array(0, $d['access']) == false) {
+            if ($d['access'] <> "sa") {
         ?>
                 <div class="row px-2 my-1">
                     <div class="col bg-white border rounded py-2">
                         <div class="row py-1">
                             <div class="col">
-                                <span class="cell_edit" data-tipe="text" data-id="<?= $key ?>" data-col="nama"><?= $d['nama'] ?></span><br>
-                                <span class="cell_edit" data-tipe="text" data-id="<?= $key ?>" data-col="no"><?= $d['no'] ?></span><br>
-                                <span class="text-danger">
-                                    <?php foreach ($_SESSION['config']['access'] as $key => $acc) {
-                                        if (in_array($key, $d['access']) == true) {
-                                            echo $acc . ", ";
-                                        }
+                                <span class="cell_edit" data-id="<?= $key ?>" data-col="nama"><?= $d['nama'] ?></span><br>
+                                <span class="cell_edit" data-id="<?= $key ?>" data-col="no"><?= $d['no'] ?></span><br>
+                            </div>
+                            <div class="col-auto">
+                                <select data-col="access" data-id="<?= $key ?>" class="form-select form-select-sm sel_edit" aria-label="Default select example">
+                                    <?php foreach ($_SESSION['config']['access'] as $acc) {
+                                        if ($acc['code'] <> "sa") { ?>
+                                            <option value="<?= $acc['code'] ?>" <?= $d['access'] == $acc['code'] ? "selected" : "" ?>><?= $acc['name'] ?></option>
+                                    <?php }
                                     } ?>
-                                </span>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -42,19 +44,14 @@
 
         var id = $(this).attr('data-id');
         var col = $(this).attr('data-col');
-        var tipe = $(this).attr('data-tipe');
         var value = $(this).html();
         var value_before = value;
         var el = $(this);
         var width = el.parent().width();
-        if (tipe == "number") {
-            align = "right";
-        } else {
-            align = "left";
-        }
+        align = "right";
 
         el.parent().css("width", width);
-        el.html("<input required type=" + tipe + " style='outline:none;border:none;width:" + width + ";text-align:" + align + "' id='value_' value='" + value + "'>");
+        el.html("<input required type='text' style='outline:none;border:none;width:" + width + ";text-align:" + align + "' id='value_' value='" + value + "'>");
 
         $("#value_").focus();
         $("#value_").focusout(function() {
@@ -78,6 +75,25 @@
                     },
                 });
             }
+        });
+    });
+
+    $(".sel_edit").on('change', function() {
+        var id = $(this).attr('data-id');
+        var col = $(this).attr('data-col');
+        var value = $(this).val();
+
+        $.ajax({
+            url: '<?= PC::BASE_URL_ADMIN . $con ?>/updateJSON_SEL',
+            data: {
+                'id': id,
+                'value': value,
+            },
+            type: 'POST',
+            dataType: 'html',
+            success: function(res) {
+                content();
+            },
         });
     });
 </script>

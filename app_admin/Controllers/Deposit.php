@@ -11,7 +11,7 @@ class Deposit extends Controller
          exit();
       }
 
-      if (in_array(10, $_SESSION['log_admin']['access']) == false || in_array(20, $_SESSION['log_admin']['access']) == false) {
+      if (in_array("dp", $_SESSION['log_admin']['privilege']) == false) {
          session_destroy();
          header("Location: " . PC::BASE_URL_ADMIN . "Login");
          exit();
