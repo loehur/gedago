@@ -31,7 +31,7 @@
                                     <small><span>Pastikan nama Pengirim atas nama Anda.<br><strong class="text-danger">[<?= $_SESSION['log']['nama'] ?>]</strong></span></small>
                                 </li>
                                 <li>
-                                    <small>Tekan tombol [Sudah sudah Transfer], untuk mempercepat proses pengecekan.</small>
+                                    <small>Tekan tombol [Saya sudah Transfer], untuk mempercepat proses pengecekan.</small>
                                 </li>
                             </ul>
                         </div>
