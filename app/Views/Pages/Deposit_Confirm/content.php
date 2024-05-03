@@ -1,7 +1,7 @@
 <?php $d = $data['dep'] ?>
 
 <div class="container">
-    <div style="max-width: 500px;" class="m-auto px-1">
+    <div style="max-width: 650px;" class="m-auto px-3">
         <div class="row">
             <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
                 <div class="row mb-3">
@@ -10,35 +10,38 @@
                         <h4 class="text-success fw-bold"><?= number_format($d['amount']) ?> <button class="btn p-0 shadow-none" data-clipboard-text="<?= $d['amount'] ?>"><i class="bi bi-clipboard"></i></button></h4>
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <div class="col text-center">
-                        Lakukan Transfer ke Rekening berikut:<br>
-                        <strong><?= $_SESSION['config']['dep_rek']['bank'] ?></strong><br>
-                        <strong><?= $_SESSION['config']['dep_rek']['name'] ?></strong><br>
-                        <div id="val_rek" class="fw-bold text-success">
-                            <?= $_SESSION['config']['dep_rek']['no'] ?>
-                            <button class="btn p-0 shadow-none" data-clipboard-action="copy" data-clipboard-target="#val_rek"><i class="bi bi-clipboard"></i></button>
+                <div class="row mb-2">
+                    <div class="col text-center mb-3" style="min-width: 300px;">
+                        <span class="text-warning fw-bold">Via QRIS:</span><br>
+                        <img src="<?= PC::BASE_URL ?>files/qr_bank/<?= $_SESSION['config']['dep_rek']['qris'] ?>" class="img-fluid" alt="...">
+                    </div>
+                    <div class="col" style="min-width: 300px;">
+                        <div class="text-center">
+                            <span class="text-warning fw-bold">Via Bank Transfer:</span><br>
+                            <strong><?= $_SESSION['config']['dep_rek']['bank'] ?></strong><br>
+                            <strong><?= $_SESSION['config']['dep_rek']['name'] ?></strong><br>
+                            <div id="val_rek" class="fw-bold text-success">
+                                <?= $_SESSION['config']['dep_rek']['no'] ?>
+                                <button class="btn p-0 shadow-none" data-clipboard-action="copy" data-clipboard-target="#val_rek"><i class="bi bi-clipboard"></i></button>
+                            </div>
+                        </div>
+                        <div class="mt-3">
+                            <ul>
+                                <li>
+                                    <small><span>Pastikan nama Pengirim atas nama Anda.<br><strong class="text-danger">[<?= $_SESSION['log']['nama'] ?>]</strong></span></small>
+                                </li>
+                                <li>
+                                    <small>Tekan tombol [Sudah sudah Transfer], untuk mempercepat proses pengecekan.</small>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col px-2">
-                        <ul>
-                            <li>
-                                <small><span>Pastikan nama Pengirim (pemilik rekening/e-wallet) atas nama Anda. [<?= $_SESSION['log']['nama'] ?>]</span></small>
-                            </li>
-                            <li>
-                                Tekan tombol [Sudah sudah Transfer], untuk mempercepat proses pengecekan.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <hr>
-                <div class="row mb-5">
-                    <div class="col pb-3">
+                    <div class="col text-end">
                         <a href="<?= PC::BASE_URL . $con ?>/confirm/<?= $d['balance_id'] ?>"><button class="btn btn-success">Saya sudah Transfer</button></a>
                     </div>
-                    <div class="col-auto text-center pb-3">
+                    <div class="col-auto text-center">
                         <a href="<?= PC::BASE_URL ?>Deposit/batal/<?= $d['balance_id'] ?>"><button class="btn btn-outline-secondary">Batalkan</button></a>
                     </div>
                 </div>
