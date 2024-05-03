@@ -25,7 +25,7 @@
                     <div class="col px-2">
                         <ul>
                             <li>
-                                <small><span>Jika pengirim bukan atas nama Anda, cantumkan nama Anda pada catatan transfer. [<?= $_SESSION['log']['nama'] ?>]</span></small>
+                                <small><span>Pastikan nama Pengirim (pemilik rekening/e-wallet) atas nama Anda. [<?= $_SESSION['log']['nama'] ?>]</span></small>
                             </li>
                             <li>
                                 Tekan tombol [Sudah sudah Transfer], untuk mempercepat proses pengecekan.
