@@ -20,7 +20,7 @@ class Route
             date_default_timezone_set("Asia/Jakarta");
             $this->controller = $url[0];
         } else {
-            require_once "../app_admin/Views/InfoPage/404.php";
+            header("Location: " . PC::BASE_URL . "Info_404");
             exit();
         }
 

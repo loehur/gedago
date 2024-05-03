@@ -42,7 +42,7 @@
 		}
 	}
 </style>
-<link rel="icon" href="<?= PC::ASSETS_URL ?>icon/logo.png">
+<link rel="icon" type="image/x-icon" href="<?= PC::ASSETS_URL ?>img/favicon.png" />
 <title>404 | MDL</title>
 
 <div id="main">

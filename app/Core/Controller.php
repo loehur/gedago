@@ -34,6 +34,11 @@ class Controller extends PC
         require_once "app/Views/Pages/" . $file . ".php";
     }
 
+    public function view_info($file)
+    {
+        require_once "app/Views/InfoPage/" . $file . ".php";
+    }
+
     public function load($dir, $file)
     {
         require_once "app/Views/Load/" . $dir . "/" . $file . ".php";

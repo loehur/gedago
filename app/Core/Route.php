@@ -1,6 +1,6 @@
 <?php
 
-class Route
+class Route extends Controller
 {
     protected $method       = 'index';
     protected $param        = [];
@@ -20,7 +20,7 @@ class Route
             date_default_timezone_set("Asia/Jakarta");
             $this->controller = $url[0];
         } else {
-            require_once "app/Views/InfoPage/404.php";
+            header("Location: " . PC::BASE_URL . "Info_404");
             exit();
         }
 
