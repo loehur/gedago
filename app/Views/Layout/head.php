@@ -8,7 +8,6 @@
 	<!-- Main -->
 	<link rel="stylesheet" type="text/css" href="<?= PC::ASSETS_URL ?>css/styles.css" />
 	<link rel="stylesheet" type="text/css" href="<?= PC::ASSETS_URL ?>plugins/bootstrap-5.1/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="<?= PC::ASSETS_URL ?>plugins/fontawesome-free-6.4.0-web/css/all.css">
 	<link rel="stylesheet" type="text/css" href="<?= PC::ASSETS_URL ?>css/main.css">
 	<link href="<?= PC::ASSETS_URL ?>plugins/bootstrap_icon_1.11.3/bootstrap-icons.css" rel="stylesheet">
 
