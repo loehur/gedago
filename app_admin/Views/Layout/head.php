@@ -10,9 +10,8 @@
 	<link rel="stylesheet" type="text/css" href="<?= PC::ASSETS_URL ?>plugins/bootstrap-5.1/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="<?= PC::ASSETS_URL ?>plugins/fontawesome-free-6.4.0-web/css/all.css">
 	<link rel="stylesheet" type="text/css" href="<?= PC::ASSETS_URL ?>css/main.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link href="<?= PC::ASSETS_URL ?>plugins/bootstrap_icon_1.11.3/bootstrap-icons.css" rel="stylesheet">
 
 	<!-- Icon -->
 	<script src="<?= PC::ASSETS_URL ?>js/feather.min.js"></script>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 </head>

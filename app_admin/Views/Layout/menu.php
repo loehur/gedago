@@ -58,6 +58,12 @@ $menu = [
 				"link" => "Level",
 				"access" => "lv",
 			],
+			[
+				"label" => "Video List",
+				"active" => "Video",
+				"link" => "Video",
+				"access" => "vd",
+			],
 		]
 	],
 ];
