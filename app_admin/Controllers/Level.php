@@ -21,7 +21,7 @@ class Level extends Controller
    public function index()
    {
       $data = [
-         'title' => "Deposit",
+         'title' => "Setting, " . __CLASS__,
          'content' => __CLASS__
       ];
 

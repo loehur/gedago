@@ -21,7 +21,7 @@ class Withdraw_SA extends Controller
    public function index()
    {
       $data = [
-         'title' => "Withdraw (SV)",
+         'title' => "Finance, " . __CLASS__,
          'content' => __CLASS__
       ];
 

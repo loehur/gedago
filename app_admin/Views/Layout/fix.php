@@ -8,7 +8,7 @@
  	<div class="row px-2">
  		<div class="col text-center">
  			<a href="<?= PC::BASE_URL_ADMIN ?>Home">
- 				<span class="btn btn-sm shadow-none">
+ 				<span class="btn btn-sm shadow-none <?= "Home" == $data['title'] ? "fw-bold text-primary" : "" ?>">
  					<i class="bi bi-house"></i><br>
  					<?= isset($_SESSION['log_admin']) ? "Dashboard" : "Home" ?>
  				</span>

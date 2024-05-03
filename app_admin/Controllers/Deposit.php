@@ -21,7 +21,7 @@ class Deposit extends Controller
    public function index()
    {
       $data = [
-         'title' => "Deposit",
+         'title' => "Finance, " . __CLASS__,
          'content' => __CLASS__
       ];
 
