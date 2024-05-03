@@ -14,7 +14,7 @@ class Members extends Controller
    public function index()
    {
       $data = [
-         'title' => __CLASS__,
+         'title' => "Account, " . __CLASS__,
          'content' => __CLASS__
       ];
 

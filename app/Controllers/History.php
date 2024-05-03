@@ -15,7 +15,7 @@ class History extends Controller
    public function index()
    {
       $data = [
-         'title' => "History",
+         'title' => "Wallet, " . __CLASS__,
          'content' => __CLASS__
       ];
 

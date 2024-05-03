@@ -16,7 +16,7 @@ class Deposit extends Controller
    {
       $msg = $_GET['msg'] ??  0;
       $data = [
-         'title' => "Deposit",
+         'title' => "Wallet, " . __CLASS__,
          'content' => __CLASS__,
          'parse' => $msg,
       ];

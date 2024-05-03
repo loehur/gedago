@@ -29,16 +29,16 @@ if (isset($_SESSION['log'])) {
 			<?php foreach ($menu as $k => $m) { ?>
 				<div class="accordion-item">
 					<h2 class="accordion-header" id="heading<?= $k ?>">
-						<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $k ?>">
+						<button class="accordion-button <?= str_contains($data['title'], $m['active']) ? "" : "collapsed" ?>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $k ?>" aria-expanded="<?= str_contains($data['title'], $m['active']) ? "true" : "false" ?>">
 							<?= $m['label'] ?>
 						</button>
 					</h2>
-					<div id="collapse<?= $k ?>" class="accordion-collapse collapse" data-bs-parent="#accord_menu">
+					<div id="collapse<?= $k ?>" class="accordion-collapse collapse <?= str_contains($data['title'], $m['active']) ? "show" : "" ?>" data-bs-parent="#accord_menu">
 						<div class="accordion-body">
 							<?php foreach ($m['list'] as $l) { ?>
 								<div class="row">
 									<div class="col p-0">
-										<a href="<?= PC::BASE_URL ?><?= $l['link'] ?>"><button class="text-start btn shadow-none w-100"><?= $l['label'] ?></button></a>
+										<a href="<?= PC::BASE_URL ?><?= $l['link'] ?>"><button class="text-start <?= $m['active'] . $l['link'] == $data['title'] ? "fw-bold text-primary" : "" ?> btn shadow-none w-100"><?= $l['label'] ?></button></a>
 									</div>
 								</div>
 							<?php } ?>

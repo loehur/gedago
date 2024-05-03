@@ -15,7 +15,7 @@ class Profil extends Controller
    public function index()
    {
       $data = [
-         'title' => "Profil",
+         'title' => "Account, " . __CLASS__,
          'content' => __CLASS__
       ];
 

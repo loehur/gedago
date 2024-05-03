@@ -15,7 +15,7 @@ class Bank extends Controller
    public function index()
    {
       $data = [
-         'title' => "Bank",
+         'title' => "Account, " . __CLASS__,
          'content' => __CLASS__
       ];
 

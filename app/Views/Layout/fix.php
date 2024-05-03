@@ -8,7 +8,7 @@
  	<div class="row px-2">
  		<div class="col text-center">
  			<a href="<?= PC::BASE_URL ?>Home">
- 				<span class="btn btn-sm shadow-none">
+ 				<span class="btn btn-sm shadow-none <?= "Invest, Home" == $data['title'] ? "fw-bold text-primary" : "" ?>">
  					<i class="bi bi-house"></i><br>
  					<?= isset($_SESSION['log']) ? "Dashboard" : "Home" ?>
  				</span>
@@ -16,13 +16,13 @@
  		</div>
  		<?php if (isset($_SESSION['log'])) { ?>
  			<div class="col text-center">
- 				<a href="<?= PC::BASE_URL ?>Portfolio_Main" class="btn btn-sm shadow-none">
+ 				<a href="<?= PC::BASE_URL ?>Portfolio_Main" class="btn btn-sm shadow-none <?= "Invest, Portfolio_Main" == $data['title'] ? "fw-bold text-primary" : "" ?>">
  					<i class="bi bi-briefcase"></i><br>
  					Portfolio
  				</a>
  			</div>
  			<div class="col text-center">
- 				<a href="<?= PC::BASE_URL ?>Marketplace" class="btn btn-sm shadow-none">
+ 				<a href="<?= PC::BASE_URL ?>Marketplace" class="btn btn-sm shadow-none <?= "Invest, Marketplace" == $data['title'] ? "fw-bold text-primary" : "" ?>">
  					<i class="bi bi-shop-window"></i><br>
  					Marketplace
  				</a>

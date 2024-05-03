@@ -15,7 +15,7 @@ class Withdraw extends Controller
    public function index()
    {
       $data = [
-         'title' => "Withdraw",
+         'title' => "Wallet, " . __CLASS__,
          'content' => __CLASS__
       ];
 
@@ -36,7 +36,7 @@ class Withdraw extends Controller
 
       //cek dulu profil bank
       if ($log['no_rek'] == '') {
-         echo "Atur rekening Penarikan terlebih dahulu, di menu Profil - Bank Account";
+         echo "Atur rekening Penarikan terlebih dahulu, di menu Account - Bank Account";
          exit();
       }
 
