@@ -6,6 +6,7 @@ if (isset($data['parse'])) {
 }
 ?>
 
+<!DOCTYPE html>
 <html>
 <?php include_once("head.php"); ?>
 
