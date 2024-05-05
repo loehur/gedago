@@ -62,6 +62,15 @@ if (isset($data['parse'])) {
 			$(".mobile").css("display", "inline");
 		} else {
 			$(".desktop").css("display", "inline");
+			$("div#menu_page").removeClass();
+			$("div#menu_page").removeAttr('style');
+			$("div#menu_page").css({
+				'top': '0',
+				'width': '300px',
+				'z-index': '3',
+				'height': '100vh'
+			});
+			$("div#menu_page").addClass("position-fixed pe-3");
 		}
 	}
 </script>
