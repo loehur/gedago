@@ -25,24 +25,24 @@
                                 <button class="btn p-0 shadow-none" data-clipboard-action="copy" data-clipboard-target="#val_rek"><i class="bi bi-clipboard"></i></button>
                             </div>
                         </div>
-                        <div class="mt-3">
+                        <div class="mt-3 mb-3 border-top pt-2">
                             <ul>
                                 <li>
-                                    <small><span>Pastikan nama Pengirim atas nama Anda.<br><strong class="text-danger">[<?= $_SESSION['log']['nama'] ?>]</strong></span></small>
+                                    <small><span>Via QRIS/Bank Transfer, pastikan nama pengirim atas nama Anda.<br><strong class="text-danger">[<?= $_SESSION['log']['nama'] ?>]</strong></span></small>
                                 </li>
                                 <li>
                                     <small>Tekan tombol [Saya sudah Transfer], untuk mempercepat proses pengecekan.</small>
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col text-end">
-                        <a href="<?= PC::BASE_URL . $con ?>/confirm/<?= $d['balance_id'] ?>"><button class="btn btn-success">Saya sudah Transfer</button></a>
-                    </div>
-                    <div class="col-auto text-center">
-                        <a href="<?= PC::BASE_URL ?>Deposit/batal/<?= $d['balance_id'] ?>"><button class="btn btn-outline-secondary">Batalkan</button></a>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <a href="<?= PC::BASE_URL . $con ?>/confirm/<?= $d['balance_id'] ?>"><button class="btn btn-success">Saya sudah Transfer</button></a>
+                            </div>
+                            <div class="col-auto text-end">
+                                <a href="<?= PC::BASE_URL ?>Deposit/batal/<?= $d['balance_id'] ?>"><button class="btn btn-sm border-0 btn-outline-secondary">Batalkan</button></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
