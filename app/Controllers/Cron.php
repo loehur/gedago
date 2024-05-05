@@ -71,5 +71,7 @@ class Cron extends Controller
    {
       date_default_timezone_set("Asia/Jakarta");
       echo date("Y-m-d H:i:s");
+      echo "<br>";
+      print_r($this->db(0)->query("SET time_zone = 'Asia/Jakarta'"));
    }
 }
