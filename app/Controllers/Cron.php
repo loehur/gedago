@@ -66,4 +66,10 @@ class Cron extends Controller
       print_r($_SESSION);
       echo "</pre>";
    }
+
+   function cek_zone()
+   {
+      date_default_timezone_set("Asia/Jakarta");
+      echo date("Y-m-d H:i:s");
+   }
 }

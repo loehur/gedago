@@ -93,9 +93,11 @@ class Load extends Controller
                if ($in['errno'] <> 0) {
                   $this->model('Log')->write($in['error']);
                   echo "Error, hubungi CS";
+                  exit();
                }
             } else {
                echo "Anda sudah checkin Hari ini, silahkan reload page";
+               exit();
             }
          } else {
             echo "Anda telah melebihi batas Checkin";

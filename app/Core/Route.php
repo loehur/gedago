@@ -9,6 +9,7 @@ class Route extends Controller
     public function __construct()
     {
         session_start();
+        date_default_timezone_set("Asia/Jakarta");
 
         if (isset($_GET['url'])) {
             $url = explode('/', filter_var(trim($_GET['url']), FILTER_SANITIZE_URL));
@@ -17,7 +18,6 @@ class Route extends Controller
         }
 
         if (file_exists('app/Controllers/' . $url[0] . '.php')) {
-            date_default_timezone_set("Asia/Jakarta");
             $this->controller = $url[0];
         } else {
             header("Location: " . PC::BASE_URL . "Info_404");

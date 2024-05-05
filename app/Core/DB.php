@@ -13,6 +13,7 @@ class DB extends DBC
         $this->db_user = DBC::dbm[$db]['user'];
         $this->db_pass = DBC::dbm[$db]['pass'];
         $this->mysqli = new mysqli(DBC::db_host, $this->db_user, $this->db_pass, $this->db_name) or die('DB Error');
+        $this->mysqli->query("SET time_zone = 'Asia/Jakarta'");
     }
 
     public static function getInstance($db = 0)
