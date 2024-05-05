@@ -3,6 +3,15 @@
 class Login extends Controller
 {
 
+   public function __construct()
+   {
+      $cek = $this->func("Session")->cek_admin();
+      if ($cek == 1) {
+         header("Location: " . PC::BASE_URL_ADMIN . "Home");
+         exit();
+      }
+   }
+
    public function index()
    {
       $data = [

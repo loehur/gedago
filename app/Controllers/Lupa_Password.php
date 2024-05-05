@@ -4,6 +4,11 @@ class Lupa_Password extends Controller
 {
    public function __construct()
    {
+      $cek = $this->func("Session")->cek();
+      if ($cek == 1) {
+         header("Location: " . PC::BASE_URL . "Home");
+         exit();
+      }
    }
 
    public function index()
