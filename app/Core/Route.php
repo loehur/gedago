@@ -11,6 +11,12 @@ class Route extends Controller
         session_start();
         date_default_timezone_set("Asia/Jakarta");
 
+        if (!isset($_SESSION['db_timezone'])) {
+            $tz = "+07:00";
+            $_SESSION['db_timezone'] = $tz;
+            $this->db(0)->query("SET time_zone = '" . $tz . "'");
+        }
+
         if (isset($_GET['url'])) {
             $url = explode('/', filter_var(trim($_GET['url']), FILTER_SANITIZE_URL));
         } else {
