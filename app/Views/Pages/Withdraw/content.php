@@ -1,6 +1,6 @@
 <form action="<?= PC::BASE_URL . $con ?>/req_dep" method="POST">
     <div class="container">
-        <div style="max-width: 500px;" class="m-auto px-3">
+        <div style="max-width: 500px;" class="m-auto px-3 rounded border pt-2">
             <div class="row">
                 <div class="col">
                     <span>Withdraw</span>
@@ -18,7 +18,7 @@
                     <span class="">Saldo tersedia <span class="text-success">Rp<?= number_format($data['saldo']) ?></span></span>
                 </div>
             </div>
-            <div class="row mb-0">
+            <div class="row">
                 <div class="col px-1 mb-0" style="min-width: 200px;">
                     <div class="form-floating">
                         <input type="text" style="font-size:17px;" class="form-control shadow-none fw-bold text-success fr_number" name="jumlah" required id="floatingInput1654a">
@@ -31,13 +31,13 @@
                     <small id="alert_min" class="d-none">Minimal Penarikan <?= number_format($_SESSION['config']['setting']['min_wd']['value']) ?></small>
                 </div>
             </div>
-            <div class="row mt-3 border-top pt-2 mb-3">
+            <div class="row mt-2 border-top pt-2 mb-3">
                 <div class="col px-1 mb-1 text-end">
                     <button type="submit" class="w-100 border-0 py-2 shadow-sm btn-success rounded">Withdraw</button>
                 </div>
             </div>
         </div>
-        <div style="max-width: 500px;" class="m-auto px-1">
+        <div style="max-width: 500px;" class="m-auto px-1 bg-white mt-2 rounded pt-2 border">
             <div class="row">
                 <div class="col">
                     <table class="table table-sm">

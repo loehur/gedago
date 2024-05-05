@@ -24,7 +24,7 @@ $t = $data['title'];
 </style>
 
 <!-- Navbar start -->
-<div class="fixed-top shadow-sm bg-white" style="max-height: 80px;">
+<div class="fixed-top shadow-sm bg-white" style="max-height: 80px; z-index:2">
 	<div class="container px-0">
 		<nav class="navbar navbar-light navbar-expand-sm">
 			<div class="container-fluid pt-2">
@@ -35,7 +35,7 @@ $t = $data['title'];
 								<h3 class="fw-bold text-dark"><?= PC::APP_NAME ?></h3>
 							</a>
 						<?php } else { ?>
-							<button class="btn shadow-none ps-0" data-bs-toggle="offcanvas" href="#menu_page"><i class="bi bi-list"></i> Menu</button>
+							<button class="btn shadow-none ps-0 mobile" data-bs-toggle="offcanvas" href="#menu_page"><i class="bi bi-list"></i> Menu</button>
 						<?php } ?>
 					</div>
 				</div>

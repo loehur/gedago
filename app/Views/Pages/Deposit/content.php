@@ -1,5 +1,5 @@
 <div class="container">
-    <div style="max-width: 500px;" class="m-auto px-3">
+    <div style="max-width: 500px;" class="m-auto px-3 rounded border pt-2">
         <?php if ($data['msg'] == 1) { ?>
             <div class="alert alert-danger" role="alert">
                 Masih ada deposit yang sedang berlangsung
@@ -15,19 +15,19 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-1 mt-0">
+            <div class="row mt-0">
                 <div class="col text-danger mb-1">
                     <small id="alert_min" class="d-none">Minimal Deposit <?= number_format($_SESSION['config']['setting']['min_deposit']['value']) ?></small>
                 </div>
             </div>
-            <div class="row mt-3 border-top pt-2 mb-3">
+            <div class="row mt-2 border-top pt-2 mb-3">
                 <div class="col px-1 mb-1 text-end">
                     <button type="submit" class="w-100 border-0 py-2 shadow-sm btn-success rounded">Deposit</button>
                 </div>
             </div>
         </form>
     </div>
-    <div style="max-width: 500px;" class="m-auto px-1">
+    <div style="max-width: 500px;" class="m-auto px-1 bg-white mt-2 rounded pt-2 border">
         <div class="row">
             <div class="col">
                 <table class="table table-sm">
