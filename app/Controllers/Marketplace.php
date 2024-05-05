@@ -96,6 +96,7 @@ class Marketplace extends Controller
             if ($topup >= $cTop) {
                $level = $l['level'];
                $days = $l['days'];
+               $max_dw = $days * $l['benefit'][1]['qty'];
             }
          }
       }
@@ -109,8 +110,8 @@ class Marketplace extends Controller
       if ($newPort == true) {
          $Date = date("Y-m-d");
          $expired_date = date('Y-m-d', strtotime($Date . ' + ' . $days . ' days'));
-         $cols = "port_id, level, expired_date, user_id";
-         $vals = "'" . $port_id . "'," . $level . ", '" . $expired_date . "','" . $_SESSION['log']['user_id'] . "'";
+         $cols = "port_id, level, expired_date, user_id, max_dc, max_dw, insertTime";
+         $vals = "'" . $port_id . "'," . $level . ", '" . $expired_date . "','" . $_SESSION['log']['user_id'] . "','" . $days . "','" . $max_dw . "','" . $GLOBALS['now'] . "'";
          $in = $this->db(0)->insertCols("portfolio", $cols, $vals);
          if ($in['errno'] <> 0) {
             $this->model('Log')->write($in['error']);
@@ -124,8 +125,8 @@ class Marketplace extends Controller
          $amount_invest = $topup;
       }
 
-      $cols = "flow, balance_type, user_id, ref, amount, tr_status";
-      $vals = "2,10,'" . $_SESSION['log']['user_id'] . "','" . $port_id . "'," . $amount_invest . ",1";
+      $cols = "flow, balance_type, user_id, ref, amount, tr_status, insertTime";
+      $vals = "2,10,'" . $_SESSION['log']['user_id'] . "','" . $port_id . "'," . $amount_invest . ",1,'" . $GLOBALS['now'] . "'";
       $in = $this->db(0)->insertCols("balance", $cols, $vals);
       if ($in['errno'] <> 0) {
          $this->model('Log')->write($in['error']);
@@ -135,8 +136,8 @@ class Marketplace extends Controller
 
       $up = $this->db(0)->get_where_row("user", "user_id = '" . $_SESSION['log']['up'] . "'");
       if (isset($up['user_id'])) {
-         $cols = "flow, balance_type, user_id, ref, amount, tr_status";
-         $vals = "1,22,'" . $up['user_id'] . "','" . $port_id . "'," . $topup * ($_SESSION['config']['setting']['up1_fee']['value'] / 100) . ",1";
+         $cols = "flow, balance_type, user_id, ref, amount, tr_status, insertTime";
+         $vals = "1,22,'" . $up['user_id'] . "','" . $port_id . "'," . $topup * ($_SESSION['config']['setting']['up1_fee']['value'] / 100) . ",1,'" . $GLOBALS['now'] . "'";
          $in = $this->db(0)->insertCols("balance", $cols, $vals);
          if ($in['errno'] <> 0) {
             $this->model('Log')->write($in['error']);
@@ -146,8 +147,8 @@ class Marketplace extends Controller
 
          $up2 = $this->db(0)->get_where_row("user", "user_id = '" . $up['up'] . "'");
          if (isset($up2['user_id'])) {
-            $cols = "flow, balance_type, user_id, ref, amount, tr_status";
-            $vals = "1,23,'" . $up2['user_id'] . "','" . $port_id . "'," . $topup * ($_SESSION['config']['setting']['up2_fee']['value'] / 100) . ",1";
+            $cols = "flow, balance_type, user_id, ref, amount, tr_status,insertTime";
+            $vals = "1,23,'" . $up2['user_id'] . "','" . $port_id . "'," . $topup * ($_SESSION['config']['setting']['up2_fee']['value'] / 100) . ",1,'" . $GLOBALS['now'] . "'";
             $in2 = $this->db(0)->insertCols("balance", $cols, $vals);
             if ($in2['errno'] <> 0) {
                $this->model('Log')->write($in2['error']);

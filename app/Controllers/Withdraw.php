@@ -55,8 +55,8 @@ class Withdraw extends Controller
          exit();
       }
 
-      $cols = "flow, balance_type, user_id, amount, bank, rek_no, rek_name";
-      $vals = "2,1,'" . $log['user_id'] . "'," . $amount . ",'" . $log['bank'] . "','" . $log['no_rek'] . "','" . $log['nama'] . "'";
+      $cols = "flow, balance_type, user_id, amount, bank, rek_no, rek_name, insertTime";
+      $vals = "2,1,'" . $log['user_id'] . "'," . $amount . ",'" . $log['bank'] . "','" . $log['no_rek'] . "','" . $log['nama'] . "','" . $GLOBALS['now'] . "'";
       $in = $this->db(0)->insertCols("balance", $cols, $vals);
       if ($in['errno'] <> 0) {
          $this->model('Log')->write("Insert Withdraw Error, " . $in['error']);

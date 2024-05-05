@@ -135,8 +135,8 @@ class Register extends Controller
       }
 
       $cust_id = date("Ymdhis") . rand(0, 9);
-      $cols = "user_id, nama, hp, nik, tgl_lahir, pw, up, img_ktp, img_selfi, email";
-      $vals = "'" . $cust_id . "', '" . $nama . "', '" . $number . "','" . $nik . "','" . $tgl_lahir . "','" . $pass . "','" . $rc . "','" . $imageUploadPath . "','" .  $imageUploadPath2 . "','" . $mail . "'";
+      $cols = "user_id, nama, hp, nik, tgl_lahir, pw, up, img_ktp, img_selfi, email, registered";
+      $vals = "'" . $cust_id . "', '" . $nama . "', '" . $number . "','" . $nik . "','" . $tgl_lahir . "','" . $pass . "','" . $rc . "','" . $imageUploadPath . "','" .  $imageUploadPath2 . "','" . $mail . "', '" . $GLOBALS['now'] . "'";
       $in = $this->db(0)->insertCols("user", $cols, $vals);
       echo $in['errno'] == 0 ? 0 : $in['error'];
    }

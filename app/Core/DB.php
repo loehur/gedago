@@ -130,9 +130,7 @@ class DB extends DBC
 
     public function insert($table, $values)
     {
-        $this->mysqli->query("SET time_zone = '+07:00';");
-
-        $query = "INSERT INTO $table VALUES($values);";
+        $query = "INSERT INTO $table VALUES($values)";
         $run = $this->mysqli->query($query);
         if ($run) {
             return TRUE;
@@ -143,8 +141,7 @@ class DB extends DBC
 
     public function insertCols($table, $columns, $values)
     {
-        $this->mysqli->query("SET time_zone = '+07:00';");
-        $query = "INSERT INTO $table($columns) VALUES($values);";
+        $query = "INSERT INTO $table($columns) VALUES($values)";
         $this->mysqli->query($query);
         return array('query' => $query, 'error' => $this->mysqli->error, 'errno' => $this->mysqli->errno);
     }
@@ -158,8 +155,7 @@ class DB extends DBC
 
     public function update($table, $set, $where)
     {
-        $this->mysqli->query("SET time_zone = '+07:00';");
-        $query = "UPDATE $table SET $set WHERE $where;";
+        $query = "UPDATE $table SET $set WHERE $where";
         $this->mysqli->query($query);
         return array('query' => $query, 'error' => $this->mysqli->error, 'errno' => $this->mysqli->errno, 'db' => $this->db_name);
     }
@@ -179,7 +175,6 @@ class DB extends DBC
 
     public function query($query)
     {
-        $this->mysqli->query("SET time_zone = '+07:00';");
         $runQuery = $this->mysqli->query($query);
         if ($runQuery) {
             return TRUE;

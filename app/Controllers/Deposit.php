@@ -76,8 +76,8 @@ class Deposit extends Controller
             exit();
          }
       } else {
-         $cols = "flow, balance_type, user_id, ref, amount, dep_mode, sender_name";
-         $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "'," . PC::DEP_MODE . ",'" . $log['nama'] . "'";
+         $cols = "flow, balance_type, user_id, ref, amount, dep_mode, sender_name, insertTime";
+         $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "'," . PC::DEP_MODE . ",'" . $log['nama'] . "','" . $GLOBALS['now'] . "'";
          $in = $this->db(0)->insertCols("balance", $cols, $vals);
          header("Location: " . PC::BASE_URL . "Deposit_Confirm");
       }

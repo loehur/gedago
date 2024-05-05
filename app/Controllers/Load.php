@@ -89,7 +89,7 @@ class Load extends Controller
             if ($cek_today == 0) {
                $dc_id = "DC" . date("Ymdhis") . rand(0, 9);
                $fee_am = ($fee / 100) * $port_data['saldo'];
-               $in = $this->db(0)->insertCols("daily_checkin", "dc_id, user_id, ref, fee", "'" . $dc_id . "','" . $log['user_id'] . "','" . $data['port_id'] . "'," . $fee_am);
+               $in = $this->db(0)->insertCols("daily_checkin", "dc_id, user_id, ref, fee, insertTime", "'" . $dc_id . "','" . $log['user_id'] . "','" . $data['port_id'] . "'," . $fee_am) . ", '" . $GLOBALS['now'] . "'";
                if ($in['errno'] <> 0) {
                   $this->model('Log')->write($in['error']);
                   echo "Error, hubungi CS";
@@ -121,17 +121,25 @@ class Load extends Controller
          if ($pl['level'] == $data['level']) {
             $fee = $pl['benefit'][1]['fee'];
             $qty = $pl['benefit'][1]['qty'];
+            $days = $pl['days'];
          }
       }
 
       $today = date("Y-m-d");
 
       if (isset($data['port_id'])) {
+
+         $count = $this->db(0)->count_where("daily_watch", "ref = '" . $data['port_id'] . "'");
+         if ($count >= ($qty * $days)) {
+            echo "Anda telah melebihi batas Menonton";
+            exit();
+         }
+
          $count = $this->db(0)->count_where("daily_watch", "ref = '" . $data['port_id'] . "' AND insertTime LIKE '%" . $today . "%'");
          if ($count < $qty) {
             $dw_id = "DW" . date("Ymdhis") . rand(0, 9);
             $fee_am = ($fee / 100) * $port_data['saldo'];
-            $in = $this->db(0)->insertCols("daily_watch", "dw_id, user_id, ref, video_id, fee", "'" . $dw_id . "','" . $log['user_id'] . "','" . $data['port_id'] . "'," . $video_id . "," . $fee_am);
+            $in = $this->db(0)->insertCols("daily_watch", "dw_id, user_id, ref, video_id, fee, insertTime", "'" . $dw_id . "','" . $log['user_id'] . "','" . $data['port_id'] . "'," . $video_id . "," . $fee_am . ",'" . $GLOBALS['now'] . "'");
             if ($in['errno'] <> 0) {
                $this->model('Log')->write($in['error']);
                echo "Error, hubungi CS";
