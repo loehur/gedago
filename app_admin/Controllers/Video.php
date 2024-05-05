@@ -37,8 +37,8 @@ class Video extends Controller
       $vid_id = $_POST['video_id'];
       $comm = $_POST['comment'];
 
-      $cols = "yt, comment";
-      $vals = "'" . $vid_id . "','" . $comm . "'";
+      $cols = "yt, comment, insertTime";
+      $vals = "'" . $vid_id . "','" . $comm . "','" . $GLOBALS['now'] . "'";
       $in = $this->db(0)->insertCols("video", $cols, $vals);
       if ($in['errno'] <> 0) {
          echo $in['error'];
