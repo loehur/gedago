@@ -46,10 +46,4 @@ class Login extends Controller
          echo "Login Failed!";
       }
    }
-
-   function logout()
-   {
-      session_destroy();
-      header("Location: " . PC::BASE_URL . "Login");
-   }
 }

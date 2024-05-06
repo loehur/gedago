@@ -47,7 +47,7 @@ $t = $data['title'];
 									<i class="bi bi-person-circle"></i> <b class=""><?= ucfirst(strtok($_SESSION['log_admin']['nama'], " ")); ?></b>
 								</a>
 								<div class="dropdown-menu p-1 dropdown-menu-end">
-									<a class="dropdown-item text-center" href="<?= PC::BASE_URL_ADMIN ?>Login/logout">Logout</a>
+									<a class="dropdown-item text-center" href="<?= PC::BASE_URL_ADMIN ?>C_Sess/logout">Logout</a>
 								</div>
 							</div>
 

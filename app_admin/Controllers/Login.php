@@ -58,12 +58,6 @@ class Login extends Controller
       echo "Phone number is not registered yet";
    }
 
-   function logout()
-   {
-      session_destroy();
-      header("Location: " . PC::BASE_URL_ADMIN . "Login");
-   }
-
    function req_otp()
    {
       $number = $_POST['hp'];
