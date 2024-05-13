@@ -2,14 +2,18 @@
 
 class Register extends Controller
 {
-   public function index()
-   {
 
+   public function __construct()
+   {
       $cek = $this->func("Session")->cek();
       if ($cek == 1) {
          header("Location: " . PC::BASE_URL . "Home");
          exit();
       }
+   }
+
+   public function index()
+   {
 
       $rc = isset($_GET['rc']) ? $_GET['rc'] : '';
       $data = [
