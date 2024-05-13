@@ -3,7 +3,7 @@
 include_once "menu.php";
 
 if (isset($_SESSION['log_admin'])) { ?>
-	<div class="offcanvas offcanvas-start" tabindex="-1" id="menu_page" style="width: 300px;">
+	<div class="offcanvas offcanvas-start" tabindex="-1" id="menu_page" style="width: 280px;">
 		<div class="bg-white pt-3 border-end" style="height: 100%;">
 			<div class="offcanvas-header w-100">
 				<div class="w-100">
