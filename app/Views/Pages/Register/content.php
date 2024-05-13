@@ -101,6 +101,9 @@
     });
 
     $("#otp").click(function() {
+        $(this).attr('disabled', 'disabled');
+        $(this).prop("disabled", true);
+
         no = $("input[name=hp]").val();
         if (no == "") {
             alert("Nomor HP kosong");
@@ -110,6 +113,7 @@
             number: no
         }, ).done(function(res) {
             alert(res);
+            $("#otp").removeAttr('disabled');
         })
     })
 </script>
