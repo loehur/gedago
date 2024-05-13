@@ -2,18 +2,14 @@
 
 class Login extends Controller
 {
-
-   public function __construct()
+   public function index()
    {
       $cek = $this->func("Session")->cek();
       if ($cek == 1) {
          header("Location: " . PC::BASE_URL . "Home");
          exit();
       }
-   }
 
-   public function index()
-   {
       $data = [
          'title' => "Login",
          'content' => __CLASS__

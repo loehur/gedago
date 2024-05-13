@@ -92,7 +92,6 @@
     </div>
 </form>
 
-<script src="<?= PC::ASSETS_URL ?>js/jquery-3.7.0.min.js"></script>
 <script>
     $(document).ready(function() {
         spinner(0);
