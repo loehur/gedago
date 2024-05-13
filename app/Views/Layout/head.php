@@ -12,5 +12,4 @@
 
 	<script src="<?= PC::ASSETS_URL ?>js/jquery-3.7.0.min.js"></script>
 	<script src="<?= PC::ASSETS_URL ?>plugins/bootstrap-5.1/bootstrap.bundle.min.js"></script>
-	<script src="<?= PC::ASSETS_URL ?>js/feather.min.js"></script>
 </head>

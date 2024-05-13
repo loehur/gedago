@@ -1,4 +1,4 @@
-<form action="<?= PC::BASE_URL ?>Register/daftar" class="upload" method="POST">
+<form action="<?= PC::BASE_URL ?>Register/daftar" class="ajax" method="POST">
     <div class="container">
         <div style="max-width: 500px;" class="m-auto px-3">
             <h5 class="fw-bold mb-2">Register New Account</h5>
@@ -82,12 +82,13 @@
         spinner(0);
     });
 
-    $("form.upload").on("submit", function(e) {
+    $("form.ajax").on("submit", function(e) {
         e.preventDefault();
         $.ajax({
             url: $(this).attr('action'),
             data: $(this).serialize(),
             type: $(this).attr('method'),
+            dataType: "html",
             success: function(res) {
                 if (res == 0) {
                     alert("Register Sukses!");
