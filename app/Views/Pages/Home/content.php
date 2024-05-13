@@ -3,7 +3,7 @@ $level = 0;
 $ada_port = false;
 if (!isset($_SESSION['log'])) { ?>
     <div class="container">
-        <section class="my-2 mt-4 text-center bg-dark rounded">
+        <section class="mb-2 py-2 text-center bg-dark rounded">
             <video controls autoplay muted width="100%" style="max-width: 500px;" id="video_play">
                 <source src="<?= PC::ASSETS_URL ?>video/gedago.mp4" type="video/mp4">
                 <source src="movie.ogg" type="video/ogg">
@@ -44,8 +44,36 @@ if (!isset($_SESSION['log'])) { ?>
             </div>
         </section>
     </div>
-
-    </div>
+    <footer class="desktop bg-white w-100 fixed-bottom">
+        <section class="pt-1 bg-white" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+            <div class="container text-center text-md-start">
+                <div class="row mt-3">
+                    <div class="col">
+                        <h6 class="text-uppercase fw-bold mb-2">
+                            <?= PC::APP_NAME ?>
+                        </h6>
+                        <p>Successful investing enhances your lifestyle, affording you opportunities for travel, leisure, and personal fulfillment.</p>
+                    </div>
+                    <div class="col">
+                        <h6 class="text-uppercase fw-bold mb-2">
+                            Growth
+                        </h6>
+                        <p>The potential to increase the value of your investment over time</p>
+                    </div>
+                    <div class="col">
+                        <h6 class="text-uppercase fw-bold mb-2">
+                            Wealth accumulation
+                        </h6>
+                        <p>Accumulate long-term wealth through wise investments.</p>
+                    </div>
+                    <div class="col">
+                        <h6 class="text-uppercase fw-bold mb-2">Financial security</h6>
+                        <p>Financial security for your and your family's future.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
 <?php } else {
     if (count($data['port_balance']) > 0) {
         $porto_bal = $data['port_balance'];
@@ -64,80 +92,78 @@ if (!isset($_SESSION['log'])) { ?>
         $w_qty = 0;
     }
 ?>
-    <div class="container-fluid border-0">
-        <div class="container">
-            <section>
-                <div class="row">
-                    <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
-                        <div class="row">
-                            <div class="col">
-                                <i class="bi bi-wallet"></i> Main Wallet <br>
-                                <h5 class="fw-bold text-dark">Rp<span class="balance_amount">0</span></h5>
-                            </div>
-                        </div>
-                        <div class="row px-2">
-                            <div class="col-auto p-1">
-                                <a href="<?= PC::BASE_URL ?>Deposit"><button class="btn btn-sm btn-success">Deposit</button></a>
-                            </div>
-                            <div class="col-auto p-1">
-                                <a href="<?= PC::BASE_URL ?>Withdraw"><button class="btn btn-sm btn-warning">Withdraw</button></a>
-                            </div>
-                            <div class="col-auto p-1">
-                                <a href="<?= PC::BASE_URL ?>History"><button class="btn btn-sm btn-info">History</button></a>
-                            </div>
+    <div class="container">
+        <section>
+            <div class="row">
+                <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
+                    <div class="row">
+                        <div class="col">
+                            <i class="bi bi-wallet"></i> Main Wallet <br>
+                            <h5 class="fw-bold text-dark">Rp<span class="balance_amount">0</span></h5>
                         </div>
                     </div>
-                    <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
-                        <div class="row">
-                            <div class="col">
-                                <i class="bi bi-wallet2"></i> Total Portfolio <br>
-                                <h6 class="fw-bold text-dark">Rp<span class="port_amount">
-                                        <?= $ada_port == true ? number_format($porto_bal['saldo'] + $porto_bal['fee_dc'] + $porto_bal['fee_dw']) : 0 ?></span>
-                                </h6>
-                            </div>
-                            <div class="col">
-                                <span class="text-dark"><b><span class="level_name text-success"></span></b><br>
-                                </span><small><span><?= isset($porto_bal['data']['expired_date']) ? "Expired: " . $porto_bal['data']['expired_date'] : '' ?></span></small>
-                            </div>
+                    <div class="row px-2">
+                        <div class="col-auto p-1">
+                            <a href="<?= PC::BASE_URL ?>Deposit"><button class="btn btn-sm btn-success">Deposit</button></a>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col">
-                                <i class="bi bi-list-task text-warning"></i> Daily Task (<?= count($data['watch']) ?>/<span class="daily_task"></span>)<br>
-                                <div class="progress">
-                                    <?php
-                                    if (count($data['watch']) == 0) {
-                                        $persen = 0;
-                                    } else {
-                                        $persen = (count($data['watch']) / $w_qty) * 100;
-                                    }
-                                    ?>
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: <?= $persen ?>%"></div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <i class="bi bi-calendar-check text-info"></i></i> Daily Check-in <br>
-                                <h6 class="text-dark">
-                                    <?php
-                                    if (isset($data['checkin']['insertTime'])) { ?>
-                                        <i class="bi bi-check-circle-fill text-info"></i></i> <?= substr($data['checkin']['insertTime'], -8)  ?>
-                                        <?php
-                                    } else {
-                                        if (isset($porto_bal['data']['user_id'])) { ?>
-                                            <span id="checkin" class="btn btn-outline-info my-2">Check-in Harian</span>
-                                        <?php } else { ?>
-                                            <br>
-                                            <small><span>Anda belum memiliki produk investasi aktif</span></small>
-                                    <?php }
-                                    }
-                                    ?>
-                                </h6>
-                            </div>
+                        <div class="col-auto p-1">
+                            <a href="<?= PC::BASE_URL ?>Withdraw"><button class="btn btn-sm btn-warning">Withdraw</button></a>
+                        </div>
+                        <div class="col-auto p-1">
+                            <a href="<?= PC::BASE_URL ?>History"><button class="btn btn-sm btn-info">History</button></a>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+                <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
+                    <div class="row">
+                        <div class="col">
+                            <i class="bi bi-wallet2"></i> Total Portfolio <br>
+                            <h6 class="fw-bold text-dark">Rp<span class="port_amount">
+                                    <?= $ada_port == true ? number_format($porto_bal['saldo'] + $porto_bal['fee_dc'] + $porto_bal['fee_dw']) : 0 ?></span>
+                            </h6>
+                        </div>
+                        <div class="col">
+                            <span class="text-dark"><b><span class="level_name text-success"></span></b><br>
+                            </span><small><span><?= isset($porto_bal['data']['expired_date']) ? "Expired: " . $porto_bal['data']['expired_date'] : '' ?></span></small>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
+                            <i class="bi bi-list-task text-warning"></i> Daily Task (<?= count($data['watch']) ?>/<span class="daily_task"></span>)<br>
+                            <div class="progress">
+                                <?php
+                                if (count($data['watch']) == 0) {
+                                    $persen = 0;
+                                } else {
+                                    $persen = (count($data['watch']) / $w_qty) * 100;
+                                }
+                                ?>
+                                <div class="progress-bar bg-warning" role="progressbar" style="width: <?= $persen ?>%"></div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <i class="bi bi-calendar-check text-info"></i></i> Daily Check-in <br>
+                            <h6 class="text-dark">
+                                <?php
+                                if (isset($data['checkin']['insertTime'])) { ?>
+                                    <i class="bi bi-check-circle-fill text-info"></i></i> <?= substr($data['checkin']['insertTime'], -8)  ?>
+                                    <?php
+                                } else {
+                                    if (isset($porto_bal['data']['user_id'])) { ?>
+                                        <span id="checkin" class="btn btn-outline-info my-2">Check-in Harian</span>
+                                    <?php } else { ?>
+                                        <br>
+                                        <small><span>Anda belum memiliki produk investasi aktif</span></small>
+                                <?php }
+                                }
+                                ?>
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 <?php } ?>
 

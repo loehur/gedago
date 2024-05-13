@@ -4,7 +4,7 @@
  </div>
  <!-- Spinner End -->
 
- <div class="fix_menu mobile bg-white py-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+ <div class="fixed-bottom fix_menu mobile bg-white py-2" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
  	<div class="row px-2">
  		<div class="col text-center">
  			<a href="<?= PC::BASE_URL ?>Home">

@@ -12,4 +12,5 @@
 
 	<!-- Icon -->
 	<script src="<?= PC::ASSETS_URL ?>js/feather.min.js"></script>
+	<script src="<?= PC::ASSETS_URL ?>js/jquery-3.7.0.min.js"></script>
 </head>

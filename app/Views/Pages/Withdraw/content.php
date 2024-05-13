@@ -3,7 +3,7 @@
         <div style="max-width: 500px;" class="m-auto px-3 rounded border pt-2">
             <div class="row">
                 <div class="col">
-                    <span>Withdraw</span>
+                    <h5 class="fw-bold mb-2">Withdraw</h5>
                 </div>
             </div>
             <?php if ($_SESSION['config']['setting']['wd_fee']['value'] > 0) { ?>
@@ -14,8 +14,8 @@
                 </div>
             <?php } ?>
             <div class="row mb-2">
-                <div class="col text-center">
-                    <span class="">Saldo tersedia <span class="text-success">Rp<?= number_format($data['saldo']) ?></span></span>
+                <div class="col text-end">
+                    <span class="">Saldo tersedia: <span class="text-success">Rp<?= number_format($data['saldo']) ?></span></span>
                 </div>
             </div>
             <div class="row">

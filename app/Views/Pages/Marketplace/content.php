@@ -1,74 +1,72 @@
-<div class="container-fluid border-0">
-    <div class="container">
-        <section>
-            <div class="row">
-                <?php if (isset($data['data']['user_id'])) { ?>
-                    <div class="col p-0" style="min-width:300px">
-                        <div class="border rounded bg-white m-2">
-                            <div class="row bg-light mx-1">
-                                <div class="col text-center pt-3 pb-1">
-                                    <h6 class="fw-bold text-dark">
-                                        <span class="w-100 fw-bold">Active Investment</span><br>
-                                        <span class="text-success"><?= isset($data['name']) ? $data['name'] : "" ?></span>
-                                    </h6>
-                                </div>
+<div class="container">
+    <section>
+        <div class="row">
+            <?php if (isset($data['data']['user_id'])) { ?>
+                <div class="col p-0" style="min-width:300px">
+                    <div class="border rounded bg-white m-2">
+                        <div class="row">
+                            <div class="col text-center pb-1">
+                                <h6 class="fw-bold text-dark bg-light py-3 rounded">
+                                    <span class="w-100 fw-bold">Active Investment</span><br>
+                                    <span class="text-success"><?= isset($data['name']) ? $data['name'] : "" ?></span>
+                                </h6>
                             </div>
-                            <div class="row py-2">
-                                <div class="col text-center px-3">
-                                    Total Investasi Anda<br>
-                                    <span class="text-dark">Rp<?= number_format($data['saldo'])  ?></span>
-                                    <br>
-                                    <small>Untuk melakukan Upgrade, cukup tambahkan nominal investasi sesuai batas minimal Investasi yang dipilih.</small>
-                                </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col text-center px-3">
+                                Total Investasi Anda<br>
+                                <span class="text-dark">Rp<?= number_format($data['saldo'])  ?></span>
+                                <br>
+                                <small>Untuk melakukan Upgrade, cukup tambahkan nominal investasi sesuai batas minimal Investasi yang dipilih.</small>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
+                </div>
+            <?php } ?>
 
-                <?php foreach ($_SESSION['config']['level'] as $d) {
+            <?php foreach ($_SESSION['config']['level'] as $d) {
 
-                    if (isset($data['data']['user_id'])) {
-                        if ($data['data']['level'] > $d['level']) {
-                            continue;
-                        }
-                    } ?>
+                if (isset($data['data']['user_id'])) {
+                    if ($data['data']['level'] > $d['level']) {
+                        continue;
+                    }
+                } ?>
 
-                    <div class="col p-0" style="min-width:300px">
-                        <div class="border <?= (isset($data['data']['user_id']) && $data['data']['level'] == $d['level']) ? "border-success" : "border-warning" ?> rounded bg-white m-2">
-                            <div class="row bg-light mx-1">
-                                <div class="col text-center pt-3 pb-1">
-                                    <h5 class="fw-bold text-dark">
-                                        <span class="w-100 fw-bold"><?= $d["name"] ?></span>
-                                    </h5>
-                                </div>
+                <div class="col p-0" style="min-width:300px">
+                    <div class="border <?= (isset($data['data']['user_id']) && $data['data']['level'] == $d['level']) ? "border-success" : "border-warning" ?> rounded bg-white m-2">
+                        <div class="row">
+                            <div class="col text-center pb-1">
+                                <h5 class="fw-bold text-dark bg-light py-3 rounded">
+                                    <span class="w-100 fw-bold"><?= $d["name"] ?></span>
+                                </h5>
                             </div>
-                            <div class="row mt-2">
-                                <div class="col text-dark text-center">
-                                    <b>Min. Topup Rp<?= number_format($d['topup']) ?></b>
-                                </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col text-dark text-center">
+                                <b>Min. Topup Rp<?= number_format($d['topup']) ?></b>
                             </div>
-                            <div class="row pt-2">
-                                <div class="col px-4">
-                                    <span class="">Benefit:</span>
-                                    <ul class="text-dark">
-                                        <li><?= $d['days'] ?> Days Investment</li>
-                                        <?php foreach ($d['benefit'] as $b) { ?>
-                                            <li><?= $b['qty'] ?>x <?= $b['name'] ?> Fee <?= $b['fee'] ?>%</li>
-                                        <?php } ?>
-                                    </ul>
-                                </div>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col px-4">
+                                <span class="">Benefit:</span>
+                                <ul class="text-dark">
+                                    <li><?= $d['days'] ?> Days Investment</li>
+                                    <?php foreach ($d['benefit'] as $b) { ?>
+                                        <li><?= $b['qty'] ?>x <?= $b['name'] ?> Fee <?= $b['fee'] ?>%</li>
+                                    <?php } ?>
+                                </ul>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <button class="btn rounded-0 w-100 shadow-sm <?= (isset($data['data']['user_id']) && $data['data']['level'] == $d['level']) ? "btn-success" : "btn-warning" ?> topup" data-topup="<?= $d['topup'] ?>" data-bs-toggle="modal" data-bs-target="#exampleModal"><?= (isset($data['data']['user_id'])) ? "Upgrade" : "Invest" ?> <b><?= $d['name'] ?></b></button>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn rounded-0 w-100 shadow-sm <?= (isset($data['data']['user_id']) && $data['data']['level'] == $d['level']) ? "btn-success" : "btn-warning" ?> topup" data-topup="<?= $d['topup'] ?>" data-bs-toggle="modal" data-bs-target="#exampleModal"><?= (isset($data['data']['user_id'])) ? "Upgrade" : "Invest" ?> <b><?= $d['name'] ?></b></button>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
-            </div>
-        </section>
-    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </section>
 </div>
 
 <!-- Modal -->

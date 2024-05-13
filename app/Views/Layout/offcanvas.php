@@ -4,7 +4,7 @@ if (isset($_SESSION['log'])) {
 	$d = $this->db(0)->get_where_row("portfolio", "user_id = '" . $_SESSION['log']['user_id'] . "' AND port_status = 0");
 	$level = $d['level'] ?? 0;
 ?>
-	<div class="offcanvas offcanvas-start" tabindex="-1" id="menu_page" style="width: 300px;">
+	<div class="offcanvas offcanvas-start" tabindex="-1" id="menu_page" style="width: 280px;">
 		<div class="bg-white pt-3 border-end" style="height: 100%;">
 			<div class="offcanvas-header w-100">
 				<div class="w-100">
@@ -55,8 +55,8 @@ if (isset($_SESSION['log'])) {
 
 <script>
 	$(document).ready(function() {
-		$("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance/<?= $level ?>");
-		$("span.level_name").load("<?= PC::BASE_URL ?>Load/level_name/<?= $level ?>");
-		spinner(0);
+		var level = <?= $level ?? 0 ?>;
+		$("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance/" + level);
+		$("span.level_name").load("<?= PC::BASE_URL ?>Load/level_name/" + level);
 	});
 </script>

@@ -5,8 +5,8 @@
             <div class="row mb-1">
                 <div class="col px-1 mb-1" style="min-width: 200px;">
                     <div class="form-floating">
-                        <input type="text" class="form-control shadow-none" name="nama" required id="floatingInput456">
-                        <label for="floatingInput456">Nama Lengkap</label>
+                        <input type="text" class="form-control shadow-none" name="nama" required id="floatingInput456dasf">
+                        <label for="floatingInput456dasf">Nama Lengkap</label>
                     </div>
                 </div>
                 <div class="col px-1 mb-1" style="min-width: 200px;">

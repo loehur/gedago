@@ -3,16 +3,6 @@ $t = $data['title'];
 ?>
 
 <style>
-	.fix_menu {
-		position: fixed;
-		left: 0;
-		bottom: 0;
-		width: 100%;
-		text-align: center;
-		background-color: white;
-		z-index: 9999;
-	}
-
 	.dropdown-menu {
 		min-width: 100px !important;
 	}
@@ -24,10 +14,10 @@ $t = $data['title'];
 </style>
 
 <!-- Navbar start -->
-<div class="fixed-top shadow-sm bg-white" style="max-height: 80px; z-index:2">
+<div class="fixed-top shadow-sm bg-white" style="z-index:2">
 	<div class="container px-0">
 		<nav class="navbar navbar-light navbar-expand-sm">
-			<div class="container-fluid pt-2">
+			<div class="container-fluid pt-1">
 				<div class="row">
 					<div class="col ps-4">
 						<?php if (!isset($_SESSION['log'])) { ?>
@@ -70,4 +60,3 @@ $t = $data['title'];
 	</div>
 </div>
 <!-- JavaScript Libraries -->
-<script src="<?= PC::ASSETS_URL ?>js/jquery-3.7.0.min.js"></script>
