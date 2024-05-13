@@ -2,7 +2,7 @@
 $level = 0;
 $ada_port = false;
 if (!isset($_SESSION['log'])) { ?>
-    <div class="container">
+    <div class="container" style="padding-bottom: 80px;">
         <section class="mb-2 py-2 text-center bg-dark rounded">
             <video controls autoplay muted width="100%" style="max-width: 500px;" id="video_play">
                 <source src="<?= PC::ASSETS_URL ?>video/gedago.mp4" type="video/mp4">
@@ -40,7 +40,6 @@ if (!isset($_SESSION['log'])) { ?>
                     <h5 class="fw-bold"><i class="bi bi-back"></i></h5>
                     <p>Investing teaches valuable financial discipline and encourages responsible wealth management practices.</p>
                 </div>
-
             </div>
         </section>
     </div>
@@ -172,6 +171,7 @@ if (!isset($_SESSION['log'])) { ?>
         $("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance");
         $("span.level_name").load("<?= PC::BASE_URL ?>Load/level_name/<?= $level ?>");
         $("span.daily_task").load("<?= PC::BASE_URL ?>Load/daily_task/<?= $level ?>");
+        device();
         spinner(0);
     });
 
