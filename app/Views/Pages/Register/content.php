@@ -38,20 +38,6 @@
             </div>
             <div class="row mb-1">
                 <div class="col px-1 mb-1" style="min-width: 200px;">
-                    <label class="text-secondary"><small>Foto KTP</small></label>
-                    <div class="">
-                        <input name="ktp" class="form-control form-control-sm" type="file" required>
-                    </div>
-                </div>
-                <div class="col px-1 mb-1" style="min-width: 200px;">
-                    <label class="text-secondary"><small>Foto Selfie dengan KTP</small></label>
-                    <div class="">
-                        <input name="selfi_ktp" class="form-control form-control-sm" type="file" required>
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-1">
-                <div class="col px-1 mb-1" style="min-width: 200px;">
                     <div class="form-floating">
                         <input type="password" class="form-control shadow-none" name="pw" required id="floatingInput456as">
                         <label for="floatingInput456as">Password</label>
@@ -79,7 +65,6 @@
             </div>
             <div class="row mt-1 border-top pt-2 mb-2">
                 <div class="col px-1 mb-1 text-end">
-                    <small class="float-end">submit process <span id="persen">0</span><b> %</b></small>
                     <button type="submit" class="w-100 border-0 py-2 shadow-sm">Register</button>
                 </div>
             </div>
@@ -99,32 +84,10 @@
 
     $("form.upload").on("submit", function(e) {
         e.preventDefault();
-        var formData = new FormData(this);
-
         $.ajax({
-            xhr: function() {
-                var xhr = new window.XMLHttpRequest();
-                xhr.upload.addEventListener("progress", function(evt) {
-                    if (evt.lengthComputable) {
-                        var percentComplete = (evt.loaded / evt.total) * 100;
-                        $('#persen').html('<b>' + Math.round(percentComplete) + '</b>');
-                    }
-                }, false);
-                return xhr;
-            },
             url: $(this).attr('action'),
+            data: $(this).serialize(),
             type: $(this).attr('method'),
-            data: formData,
-            contentType: "application/octet-stream",
-            enctype: 'multipart/form-data',
-
-            contentType: false,
-            processData: false,
-
-            beforeSend: function() {
-                $('#persen').html('<b>0</b>');
-            },
-
             success: function(res) {
                 if (res == 0) {
                     alert("Register Sukses!");
