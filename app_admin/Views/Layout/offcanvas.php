@@ -30,8 +30,7 @@ if (isset($_SESSION['log_admin'])) { ?>
 							<div id="collapse<?= $k ?>" class="accordion-collapse collapse <?= str_contains($data['title'], $m['active']) ? "show" : "" ?>" data-bs-parent="#accord_menu">
 								<div class="accordion-body">
 									<?php foreach ($m['list'] as $l) {
-										if (in_array($l['access'], $_SESSION['log_admin']['privilege']) == true) {
-									?>
+										if (in_array($l['access'], $_SESSION['log_admin']['privilege']) == true) { ?>
 											<div class="row">
 												<div class="col p-0">
 													<a href="<?= PC::BASE_URL_ADMIN ?><?= $l['link'] ?>"><button class="text-start <?= $m['active'] . $l['link'] == $data['title'] ? "fw-bold text-primary" : "" ?> btn shadow-none w-100"><?= $l['label'] ?></button></a>
