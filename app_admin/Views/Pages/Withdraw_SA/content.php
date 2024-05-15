@@ -55,7 +55,7 @@
                                         echo '<br><i class="bi bi-check-all text-success"></i> ' . $d['sv'];
                                     } else {
                                         switch ($d['wd_step']) {
-                                            case 2:
+                                            case 3:
                                                 echo '<i class="bi bi-x-lg text-danger"></i> ' . $d['cs'];
                                                 break;
                                             case 4:
