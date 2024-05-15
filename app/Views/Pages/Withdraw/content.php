@@ -37,13 +37,13 @@
                 </div>
             </div>
         </div>
-        <div style="max-width: 500px;" class="m-auto px-1 bg-white mt-2 rounded pt-2 border">
+        <div style="max-width: 500px;" class="m-auto bg-white mt-2 border">
             <div class="row">
                 <div class="col">
-                    <table class="table table-sm">
+                    <table class="table m-0">
                         <?php
                         foreach ($data['wd'] as $d) { ?>
-                            <tr class="<?= $d['tr_status'] == 2 ? 'table-light' : '' ?>">
+                            <tr class="<?= $d['tr_status'] == 2 ? 'table-secondary' : '' ?>">
                                 <td><?= substr($d['insertTime'], 0, 10) ?></td>
                                 <td class="text-end mt-auto text-success"><?= number_format($d['amount']) ?></td>
                                 <td class="text-end">

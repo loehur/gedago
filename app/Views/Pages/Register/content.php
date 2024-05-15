@@ -15,12 +15,6 @@
                         <label for="floatingInput456">Email</label>
                     </div>
                 </div>
-                <div class="col px-1 mb-1" style="min-width: 200px;">
-                    <div class="form-floating">
-                        <input type="text" class="form-control shadow-none" name="nik" required id="floatingInput1654">
-                        <label for="floatingInput1654">NIK</label>
-                    </div>
-                </div>
             </div>
             <div class="row mb-1">
                 <div class="col px-1 mb-1" style="min-width: 200px;">
@@ -57,18 +51,19 @@
                         <button class="btn btn-outline-secondary shadow-none" type="button" id="otp">Minta OTP</button>
                     </div>
                 </div>
-                <div class="col px-1 mb-1">
-                    <div class="input-group mb-2">
-                        <input type="text" class="form-control shadow-none" <?= $data['rc'] <> '' ? 'readonly' : '' ?> value="<?= $data['rc'] ?>" name="rc" placeholder="Referral Code">
+                <div class="col px-1 mb-1" style="min-width: 200px;">
+                    <div class="form-floating">
+                        <input type="text" class="form-control shadow-none" <?= $data['rc'] <> '' ? 'readonly' : '' ?> value="<?= $data['rc'] ?>" name="rc" id="floatingInput456dasfere">
+                        <label for="floatingInput456dasfere">Referral Code</label>
                     </div>
                 </div>
             </div>
             <div class="row mt-1 border-top pt-2 mb-2">
                 <div class="col px-1 mb-1 text-end">
-                    <button type="submit" class="w-100 border-0 py-2 shadow-sm">Register</button>
+                    <button type="submit" class="w-100 border-0 btn-success rounded py-2 shadow-sm">Register</button>
                 </div>
             </div>
-            <div class="row mb-1">
+            <div class="row mb-3">
                 <div class="col">
                     Sudah punya Akun? <a href="<?= PC::BASE_URL ?>Login">Login</a>
                 </div>

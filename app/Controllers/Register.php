@@ -41,7 +41,6 @@ class Register extends Controller
       }
 
       $nama = $_POST['nama'];
-      $nik = $_POST['nik'];
       $pw = $_POST['pw'];
       $repw = $_POST['repw'];
       $rc = $_POST['rc'];
@@ -68,8 +67,8 @@ class Register extends Controller
       }
 
       $cust_id = date("Ymdhis") . rand(0, 9);
-      $cols = "user_id, nama, hp, nik, tgl_lahir, pw, up, email, registered";
-      $vals = "'" . $cust_id . "', '" . $nama . "', '" . $number . "','" . $nik . "','" . $tgl_lahir . "','" . $pass . "','" . $rc . "','" . $mail . "', '" . $GLOBALS['now'] . "'";
+      $cols = "user_id, nama, hp, tgl_lahir, pw, up, email, registered";
+      $vals = "'" . $cust_id . "', '" . $nama . "', '" . $number . "','" . $tgl_lahir . "','" . $pass . "','" . $rc . "','" . $mail . "', '" . $GLOBALS['now'] . "'";
       $in = $this->db(0)->insertCols("user", $cols, $vals);
       echo $in['errno'] == 0 ? 0 : $in['error'];
    }

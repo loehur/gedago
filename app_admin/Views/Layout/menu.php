@@ -23,6 +23,18 @@ $menu = [
 		]
 	],
 	[
+		"label" => "Data",
+		"active" => "Data, ",
+		"list" =>
+		[
+			[
+				"label" => "Investor (work on)",
+				"link" => "#",
+				"access" => "dp",
+			],
+		]
+	],
+	[
 		"label" => "Setting",
 		"active" => "Setting, ",
 		"list" =>
