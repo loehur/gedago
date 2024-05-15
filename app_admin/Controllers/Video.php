@@ -20,7 +20,7 @@ class Video extends Controller
    public function index()
    {
       $data = [
-         'title' => "Setting, " . __CLASS__,
+         'title' => "Data, " . __CLASS__,
          'content' => __CLASS__
       ];
 

@@ -28,9 +28,14 @@ $menu = [
 		"list" =>
 		[
 			[
-				"label" => "Investor (work on)",
-				"link" => "#",
-				"access" => "dp",
+				"label" => "Investor",
+				"link" => "Investor",
+				"access" => "d_in",
+			],
+			[
+				"label" => "Video",
+				"link" => "Video",
+				"access" => "vd",
 			],
 		]
 	],
@@ -63,11 +68,6 @@ $menu = [
 				"label" => "Investing Level",
 				"link" => "Level",
 				"access" => "lv",
-			],
-			[
-				"label" => "Video List",
-				"link" => "Video",
-				"access" => "vd",
 			],
 		]
 	],
