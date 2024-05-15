@@ -1,6 +1,6 @@
 <div class="container">
     <div style="max-width: 500px;" class="m-auto px-1">
-        <div class="row mb-2">
+        <div class="row mb-3">
             <div class="col">
                 <h5>Requested Deposit List</h5>
                 <?php
