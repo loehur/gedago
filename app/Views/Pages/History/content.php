@@ -52,7 +52,7 @@
                             <small><?= substr($d['insertTime'], 0, 16) ?></small>
                         </div>
                         <div class="col text-end">
-                            <span class="fw-bold text-<?= $d['flow'] == 1 ? "success" : "danger"  ?>"><?= $opr ?><?= number_format($d['amount']) ?></span>
+                            <span class="text-<?= $d['flow'] == 1 ? "success" : "danger"  ?>"><?= $opr ?><?= number_format($d['amount']) ?></span>
                         </div>
                     </div>
                 </div>

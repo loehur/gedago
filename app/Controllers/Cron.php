@@ -19,6 +19,28 @@ class Cron extends Controller
       }
    }
 
+   function wow_white()
+   {
+      $cek = $this->model("Wowpay")->ipWhite();
+      echo "<pre>";
+      print_r($cek);
+      echo "</pre>";
+   }
+
+   function wow_order()
+   {
+      $refID = "D92834";
+      $amount = 10000;
+      $custName = "Joko Sopo";
+      $hp = "08523521254";
+      $email = "Joko@gmail.com";
+
+      $order = $this->model("Wowpay")->order($refID, $amount, $custName, $hp, $email);
+      echo "<pre>";
+      print_r($order);
+      echo "</pre>";
+   }
+
    function settle()
    {
       $data = $this->db(0)->get_where("portfolio", "port_status = 1");
