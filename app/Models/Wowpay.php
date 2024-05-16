@@ -29,11 +29,15 @@ class Wowpay extends PC
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-            'X-SECRET: ' . $this->XSECRET,
-            'X-SN: ' . $this->XSN,
-            'Content-Type: application/json'
-        ));
+        curl_setopt(
+            $curl,
+            CURLOPT_HTTPHEADER,
+            array(
+                'X-SECRET: ' . $this->XSECRET,
+                'X-SN: ' . $this->XSN,
+                'Content-Type: application/json'
+            )
+        );
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $encodedData);
         $result = curl_exec($curl);
@@ -45,11 +49,15 @@ class Wowpay extends PC
     {
         $curl = curl_init($this->host . "rest/");
         curl_setopt($curl, CURLOPT_URL, $this->host . "rest/");
-        curl_setopt($curl, CURLOPT_HEADER, [
-            'X-SECRET: ' . $this->XSECRET,
-            'X-SN: ' . $this->XSN,
-            'Content-Type: application/json'
-        ]);
+        curl_setopt(
+            $curl,
+            CURLOPT_HEADER,
+            array(
+                'X-SECRET: ' . $this->XSECRET,
+                'X-SN: ' . $this->XSN,
+                'Content-Type: application/json'
+            )
+        );
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $response = curl_exec($curl);
