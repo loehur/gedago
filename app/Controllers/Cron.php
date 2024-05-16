@@ -19,6 +19,13 @@ class Cron extends Controller
       }
    }
 
+   function ip()
+   {
+      echo "<pre>";
+      print_r($_SERVER);
+      echo "</pre>";
+   }
+
    function wow_white()
    {
       $cek = $this->model("Wowpay")->ipWhite();
