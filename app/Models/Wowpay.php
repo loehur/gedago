@@ -38,8 +38,7 @@ class Wowpay extends PC
         curl_setopt($curl, CURLOPT_POSTFIELDS, $encodedData);
         $result = curl_exec($curl);
         curl_close($curl);
-        $res = json_decode($result, true);
-        return $res;
+        return $result;
     }
 
     function ipWhite()
@@ -55,7 +54,6 @@ class Wowpay extends PC
 
         $response = curl_exec($curl);
         curl_close($curl);
-        $res = json_decode($response, true);
-        return $res;
+        return $response;
     }
 }
