@@ -89,13 +89,21 @@ class Load extends Controller
             if ($cek_today == 0) {
                $dc_id = "DC" . date("Ymdhis") . rand(0, 9);
                $fee_am = ($fee / 100) * $port_data['saldo'];
-               $cols = "dc_id, user_id, ref, fee, insertTime";
-               $vals = "'" . $dc_id . "','" . $log['user_id'] . "','" . $data['port_id'] . "'," . $fee_am . ", '" . $GLOBALS['now'] . "'";
+               $cols = "dc_id, user_id, ref, fee, settle, insertTime";
+               $vals = "'" . $dc_id . "','" . $log['user_id'] . "','" . $data['port_id'] . "'," . $fee_am . ",1, '" . $GLOBALS['now'] . "'";
                $in = $this->db(0)->insertCols("daily_checkin", $cols, $vals);
                if ($in['errno'] <> 0) {
                   $this->model('Log')->write($in['error']);
                   echo "Error, hubungi CS";
                   exit();
+               } else {
+                  $cols = "flow, balance_type, user_id, ref, amount, tr_status, insertTime";
+                  $vals = "1,50,'" . $log['user_id'] . "','" . $data['port_id'] . "'," . $fee_am . ",1,'" . $GLOBALS['now'] . "'";
+                  $in = $this->db(0)->insertCols("balance", $cols, $vals);
+                  if ($in['errno'] <> 0) {
+                     echo "Error, hubungi CS";
+                     $this->model('Log')->write($in['error']);
+                  }
                }
             } else {
                echo "Anda sudah checkin Hari ini, silahkan reload page";
@@ -141,13 +149,21 @@ class Load extends Controller
          if ($count < $qty) {
             $dw_id = "DW" . date("Ymdhis") . rand(0, 9);
             $fee_am = ($fee / 100) * $port_data['saldo'];
-            $cols = "dw_id, user_id, ref, video_id, fee, insertTime";
-            $vals = "'" . $dw_id . "','" . $log['user_id'] . "','" . $data['port_id'] . "'," . $video_id . "," . $fee_am . ",'" . $GLOBALS['now'] . "'";
+            $cols = "dw_id, user_id, ref, video_id, fee, settle, insertTime";
+            $vals = "'" . $dw_id . "','" . $log['user_id'] . "','" . $data['port_id'] . "'," . $video_id . "," . $fee_am . ",1,'" . $GLOBALS['now'] . "'";
             $in = $this->db(0)->insertCols("daily_watch", $cols, $vals);
             if ($in['errno'] <> 0) {
                $this->model('Log')->write($in['error']);
                echo "Error, hubungi CS";
                exit();
+            } else {
+               $cols = "flow, balance_type, user_id, ref, amount, tr_status, insertTime";
+               $vals = "1,51,'" . $log['user_id'] . "','" . $data['port_id'] . "'," . $fee_am . ",1,'" . $GLOBALS['now'] . "'";
+               $in = $this->db(0)->insertCols("balance", $cols, $vals);
+               if ($in['errno'] <> 0) {
+                  echo "Error, hubungi CS";
+                  $this->model('Log')->write($in['error']);
+               }
             }
          } else {
             echo "Anda telah melebihi batas Menonton";

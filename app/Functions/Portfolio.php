@@ -61,7 +61,7 @@ class Portfolio extends Controller
       $up = $this->db(0)->update("portfolio", "port_status = 1, done_date = '" . $GLOBALS['now'] . "'", "user_id = '" . $data['data']['user_id'] . "' AND port_id = '" . $data['data']['port_id'] . "'");
       if ($up['errno'] == 0) {
          $cols = "flow, balance_type, user_id, ref, amount, tr_status, insertTime";
-         $vals = "1,10,'" . $data['data']['user_id'] . "','" . $data['data']['port_id'] . "'," . $data['saldo'] + $data['fee_dc'] + $data['fee_dw'] . ",1,'" . $GLOBALS['now'] . "'";
+         $vals = "1,10,'" . $data['data']['user_id'] . "','" . $data['data']['port_id'] . "'," . $data['saldo'] . ",1,'" . $GLOBALS['now'] . "'";
          $in = $this->db(0)->insertCols("balance", $cols, $vals);
          if ($in['errno'] <> 0) {
             $up = $this->db(0)->update("portfolio", "port_status = 0, done_date = ''", "user_id = '" . $data['data']['user_id'] . "' AND port_id = '" . $data['data']['level'] . "'");

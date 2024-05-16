@@ -1,7 +1,7 @@
 <?php $log = $_SESSION['log']; ?>
 
 <div class="container">
-    <div style="max-width: 500px;" class="m-auto px-3">
+    <div style="max-width: 500px;" class="m-auto">
         <form action="<?= PC::BASE_URL . $con ?>/update" class="upload" method="POST">
             <h5 class="fw-bold">Bank Account</h5>
             <div class="row">

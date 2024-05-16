@@ -118,7 +118,7 @@ if (!isset($_SESSION['log'])) { ?>
                         <div class="col">
                             <i class="bi bi-wallet2"></i> Total Portfolio <br>
                             <h6 class="fw-bold text-dark">Rp<span class="port_amount">
-                                    <?= $ada_port == true ? number_format($porto_bal['saldo'] + $porto_bal['fee_dc'] + $porto_bal['fee_dw']) : 0 ?></span>
+                                    <?= $ada_port == true ? number_format($porto_bal['saldo']) : 0 ?></span>
                             </h6>
                         </div>
                         <div class="col">
@@ -150,7 +150,7 @@ if (!isset($_SESSION['log'])) { ?>
                                     <?php
                                 } else {
                                     if (isset($porto_bal['data']['user_id'])) { ?>
-                                        <span id="checkin" class="btn btn-outline-info my-2">Check-in Harian</span>
+                                        <span id="checkin" class="btn btn-outline-info my-2">Check-in</span>
                                     <?php } else { ?>
                                         <br>
                                         <small><span>Anda belum memiliki produk investasi aktif</span></small>

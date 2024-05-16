@@ -27,23 +27,12 @@ if (isset($_SESSION['log'])) {
                         <div class="col">
                             <i class="bi bi-wallet2"></i> Total Portfolio <br>
                             <h6 class="fw-bold text-dark">Rp<span class="port_amount">
-                                    <?= $ada_port == true ? number_format($porto_bal['saldo'] + $porto_bal['fee_dc'] + $porto_bal['fee_dw']) : 0 ?></span>
+                                    <?= $ada_port == true ? number_format($porto_bal['saldo']) : 0 ?></span>
                             </h6>
                         </div>
                         <div class="col">
                             <span class="text-dark"><b><span class="level_name text-success"></span></b><br>
-                            </span><small><span><?= isset($porto_bal['data']['expired_date']) ? "Expired: " . $porto_bal['data']['expired_date'] : '' ?></span></small>
-                        </div>
-                    </div>
-                    <hr>
-                    <h6>Daily Checkin Fee</h6>
-                    <div class="row">
-                        <div class="col">
-                            <?php $df = $data['checkin'];
-                            if (isset($df['insertTime'])) {
-                                echo substr($df['insertTime'], 0, 10)  . " <span class='text-success float-end'>+Rp" . number_format($df['fee']) . "</span><br>";
-                            }
-                            ?>
+                            </span><small><span><?= isset($porto_bal['data']['expired_date']) ? "Exp: " . $porto_bal['data']['expired_date'] : '' ?></span></small>
                         </div>
                     </div>
                 </div>
@@ -88,10 +77,21 @@ if (isset($_SESSION['log'])) {
                         if (isset($data['checkin']['insertTime'])) {
                         ?>
                             <i class="bi bi-check-circle-fill text-info"></i></i> <?= $data['checkin']['insertTime'] ?>
+                            <hr>
+                            <h6>Checkin Today</h6>
+                            <div class="row">
+                                <div class="col">
+                                    <?php $df = $data['checkin'];
+                                    if (isset($df['insertTime'])) {
+                                        echo substr($df['insertTime'], 0, 10)  . " <span class='text-success float-end'>+Rp" . number_format($df['fee']) . "</span><br>";
+                                    }
+                                    ?>
+                                </div>
+                            </div>
                             <?php
                         } else {
                             if (isset($porto_bal['data']['user_id'])) { ?>
-                                <span id="checkin" class="btn btn-outline-info my-2">Check-in Harian</span>
+                                <span id="checkin" class="btn btn-outline-info my-2">Check-in</span>
                             <?php } else { ?>
                                 <br>
                                 <small><span>Anda belum memiliki produk investasi aktif</span></small>

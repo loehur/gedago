@@ -1,6 +1,6 @@
 <form action="<?= PC::BASE_URL . $con ?>/req_dep" method="POST">
     <div class="container">
-        <div style="max-width: 500px;" class="m-auto px-3 rounded border pt-2">
+        <div style="max-width: 500px;" class="m-auto">
             <div class="row">
                 <div class="col">
                     <h5 class="fw-bold mb-2">Withdraw</h5>
@@ -36,11 +36,10 @@
                     <button type="submit" class="w-100 border-0 py-2 shadow-sm btn-success rounded">Withdraw</button>
                 </div>
             </div>
-        </div>
-        <div style="max-width: 500px;" class="m-auto bg-white mt-2 border">
+
             <div class="row">
-                <div class="col">
-                    <table class="table m-0">
+                <div class="col px-1">
+                    <table class="table m-0 bg-white">
                         <?php
                         foreach ($data['wd'] as $d) { ?>
                             <tr class="<?= $d['tr_status'] == 2 ? 'table-secondary' : '' ?>">

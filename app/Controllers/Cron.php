@@ -19,6 +19,56 @@ class Cron extends Controller
       }
    }
 
+   function settle()
+   {
+      $data = $this->db(0)->get_where("portfolio", "port_status = 1");
+      foreach ($data as $d) {
+         $up = $this->db(0)->update("daily_checkin", "settle = 1", "ref = '" . $d['port_id'] . "'");
+         $up2 = $this->db(0)->update("daily_watch", "settle = 1", "ref = '" . $d['port_id'] . "'");
+         echo "<pre>";
+         print_r($up);
+         echo "<br>";
+         print_r($up2);
+         echo "<br>";
+         echo "</pre>";
+      }
+
+      echo "<hr>";
+
+      $data = $this->db(0)->get_where("portfolio", "port_status = 0");
+      foreach ($data as $d) {
+         $fee_dc = 0;
+         $fee_dc = $this->db(0)->get_cols_where("daily_checkin", "SUM(fee) as amount", "settle = 0 AND ref = '" . $d['port_id'] . "'", 0)['amount'];
+
+         $fee_dw = 0;
+         $fee_dw = $this->db(0)->get_cols_where("daily_watch", "SUM(fee) as amount", "settle = 0 AND ref = '" . $d['port_id'] . "'", 0)['amount'];
+
+         if ($fee_dc <> 0) {
+            $cols = "flow, balance_type, user_id, ref, amount, tr_status, insertTime";
+            $vals = "1,50,'" . $d['user_id'] . "','" . $d['port_id'] . "'," . $fee_dc . ",1,'" . $GLOBALS['now'] . "'";
+            $in = $this->db(0)->insertCols("balance", $cols, $vals);
+            if ($in['errno'] == 0) {
+               $up_dc = $this->db(0)->update("daily_checkin", "settle = 1", "ref = '" . $d['port_id'] . "'");
+               echo "<pre>";
+               print_r($up_dc);
+               echo "<pre>";
+            }
+         }
+
+         if ($fee_dw <> 0) {
+            $cols = "flow, balance_type, user_id, ref, amount, tr_status, insertTime";
+            $vals = "1,51,'" . $d['user_id'] . "','" . $d['port_id'] . "'," . $fee_dw . ",1,'" . $GLOBALS['now'] . "'";
+            $in = $this->db(0)->insertCols("balance", $cols, $vals);
+            if ($in['errno'] == 0) {
+               $up_dw = $this->db(0)->update("daily_watch", "settle = 1", "ref = '" . $d['port_id'] . "'");
+               echo "<pre>";
+               print_r($up_dw);
+               echo "<pre>";
+            }
+         }
+      }
+   }
+
    function create()
    {
 

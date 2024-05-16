@@ -1,6 +1,6 @@
 <form action="<?= PC::BASE_URL . $con ?>/login" method="POST">
     <div class="container">
-        <div style="max-width: 500px;" class="m-auto px-3">
+        <div style="max-width: 500px;" class="m-auto">
             <h5 class="fw-bold mb-2">Login</h5>
             <div class="row mb-1">
                 <div class="col px-1 mb-1" style="min-width: 200px;">
@@ -23,7 +23,7 @@
             </div>
             <div class="row mt-3 border-top pt-2 mb-3">
                 <div class="col px-1 mb-1 text-end">
-                    <button type="submit" class="w-100 border-0 py-2 shadow-sm">Login</button>
+                    <button type="submit" class="w-100 border-0 btn-success rounded py-2 shadow-sm">Login</button>
                 </div>
             </div>
             <div class="row mb-1">

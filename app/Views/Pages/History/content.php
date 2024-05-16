@@ -1,5 +1,5 @@
 <div class="container">
-    <div style="max-width: 500px;" class="m-auto px-3">
+    <div style="max-width: 500px;" class="m-auto">
         <h5>Main Wallet History</h5>
         <?php
         foreach ($data as $d) { ?>
@@ -28,18 +28,28 @@
                                 }
                             } elseif ($d['balance_type'] == 22) {
                                 if ($d['flow'] == 1) {
-                                    $bt = "Donwline Fee";
+                                    $bt = "Donwline Bonus";
                                     $opr = "+";
                                 }
                             } elseif ($d['balance_type'] == 23) {
                                 if ($d['flow'] == 1) {
-                                    $bt = "Sub_Donwline Fee";
+                                    $bt = "Sub_Donwline Bonus";
+                                    $opr = "+";
+                                }
+                            } elseif ($d['balance_type'] == 50) {
+                                if ($d['flow'] == 1) {
+                                    $bt = "Daily Check-in";
+                                    $opr = "+";
+                                }
+                            } elseif ($d['balance_type'] == 51) {
+                                if ($d['flow'] == 1) {
+                                    $bt = "Watching Ads";
                                     $opr = "+";
                                 }
                             }
                             ?>
                             <span class="text-<?= $d['flow'] == 1 ? "success" : "danger"  ?>"><?= $bt ?></span><br>
-                            <small><?= substr($d['insertTime'], 0, 10) ?></small>
+                            <small><?= substr($d['insertTime'], 0, 16) ?></small>
                         </div>
                         <div class="col text-end">
                             <span class="fw-bold text-<?= $d['flow'] == 1 ? "success" : "danger"  ?>"><?= $opr ?><?= number_format($d['amount']) ?></span>

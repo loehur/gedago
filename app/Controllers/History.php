@@ -25,7 +25,7 @@ class History extends Controller
    public function content()
    {
       $log = $_SESSION['log'];
-      $data = $this->db(0)->get_where("balance", "user_id = '" . $log['user_id'] . "' AND tr_status = 1 ORDER BY insertTime DESC LIMIT 6");
+      $data = $this->db(0)->get_where("balance", "user_id = '" . $log['user_id'] . "' AND tr_status = 1 ORDER BY insertTime DESC LIMIT 10");
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
    }
 

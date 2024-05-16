@@ -1,10 +1,11 @@
 <div class="container">
-    <div style="max-width: 500px;" class="m-auto px-3 rounded border pt-2">
+    <div style="max-width: 500px;" class="m-auto">
         <?php if ($data['msg'] == 1) { ?>
             <div class="alert alert-danger" role="alert">
                 Masih ada deposit yang sedang berlangsung
             </div>
         <?php } ?>
+
         <form action="<?= PC::BASE_URL . $con ?>/req_dep" method="POST">
             <h5 class="fw-bold mb-2">Deposit</h5>
             <div class="row mb-0">
@@ -26,11 +27,10 @@
                 </div>
             </div>
         </form>
-    </div>
-    <div style="max-width: 500px;" class="m-auto bg-white mt-2 border">
-        <div class="row">
-            <div class="col">
-                <table class="table m-0">
+
+        <div class="row mt-2">
+            <div class="col px-1">
+                <table class="table m-0 bg-white">
                     <?php
                     foreach ($data['dep'] as $d) { ?>
                         <tr class="<?= $d['tr_status'] == 2 ? 'table-secondary text-secondary' : '' ?>">
