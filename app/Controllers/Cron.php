@@ -26,6 +26,29 @@ class Cron extends Controller
       echo "</pre>";
    }
 
+   function check_balance()
+   {
+      $sign = md5("0812680983007315d7d7ef185edfbl");
+      $url = 'https://prepaid.iak.id/api/check-balance';
+      $data = [
+         "username" => "081268098300",
+         "sign" => $sign,
+      ];
+
+      $postdata = json_encode($data);
+
+      $ch = curl_init($url);
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+      $result = curl_exec($ch);
+      curl_close($ch);
+
+      $response = json_decode($result, JSON_PRESERVE_ZERO_FRACTION);
+      print_r($response);
+   }
+
    function wow_white()
    {
       $cek = $this->model("Wowpay")->ipWhite();
