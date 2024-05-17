@@ -61,8 +61,8 @@ class Deposit extends Controller
             $token = $token_midtrans['token'];
             $redirect_url = $token_midtrans['redirect_url'];
 
-            $cols = "flow, balance_type, user_id, ref, amount, token, redirect_url, dep_mode, sender_name";
-            $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "','" . $token . "','" . $redirect_url . "'," . $depMode . ",'" . $log['nama'] . "'";
+            $cols = "flow, balance_type, user_id, ref, amount, token, redirect_url, dep_mode, sender_name, insertTime";
+            $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "','" . $token . "','" . $redirect_url . "'," . $depMode . ",'" . $log['nama'] . "','" . $GLOBALS['now'] . "'";
             $in = $this->db(0)->insertCols("balance", $cols, $vals);
 
             if ($in['errno'] <> 0) {
@@ -84,8 +84,8 @@ class Deposit extends Controller
          $order = $this->model("Wowpay")->order($ref, $amount, $log['nama'], $log['hp'], $log['email']);
          if (isset($order['code']) && $order['code'] == "SUCCESS") {
             $redirect_url = $order['data']['url'];
-            $cols = "flow, balance_type, user_id, ref, amount, redirect_url, dep_mode, sender_name";
-            $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "','" . $redirect_url . "'," . $depMode . ",'" . $log['nama'] . "'";
+            $cols = "flow, balance_type, user_id, ref, amount, redirect_url, dep_mode, sender_name, insertTime";
+            $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "','" . $redirect_url . "'," . $depMode . ",'" . $log['nama'] . "','" . $GLOBALS['now'] . "'";
             $in = $this->db(0)->insertCols("balance", $cols, $vals);
 
             if ($in['errno'] <> 0) {

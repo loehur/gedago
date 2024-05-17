@@ -28,7 +28,7 @@ class WH_wowpay extends Controller
       $res = [];
       if (isset($data['referenceId'])) {
          $orders = $data['orders'];
-         $order_ref = $orders['order_id'];
+         $order_ref = $data['referenceId'];
          $status = $orders['status'];
          $tr_id = $orders['id'];
          $serviceFee = $orders['serviceFee'];
