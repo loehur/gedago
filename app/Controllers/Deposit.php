@@ -48,16 +48,44 @@ class Deposit extends Controller
          exit();
       }
 
-      $ref = date("Ymdhis") . rand(0, 9) . rand(0, 9);
+      $ref = "D" . date("Ymdhis") . rand(0, 9) . rand(0, 9);
+      $depMode = PC::DEP_MODE;
 
-      if (PC::DEP_MODE == 1) {
+      if ($log['hp'] == '081268098300') {
+         $depMode = 2;
+      }
+
+      if ($depMode == 1) {
          $token_midtrans = $this->model("Midtrans")->token($ref, $amount, $log['nama'], $log['email'], $log['hp']);
          if (isset($token_midtrans['token'])) {
             $token = $token_midtrans['token'];
             $redirect_url = $token_midtrans['redirect_url'];
 
             $cols = "flow, balance_type, user_id, ref, amount, token, redirect_url, dep_mode, sender_name";
-            $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "','" . $token . "','" . $redirect_url . "'," . PC::DEP_MODE . ",'" . $log['nama'] . "'";
+            $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "','" . $token . "','" . $redirect_url . "'," . $depMode . ",'" . $log['nama'] . "'";
+            $in = $this->db(0)->insertCols("balance", $cols, $vals);
+
+            if ($in['errno'] <> 0) {
+               $this->model('Log')->write("Insert deposit Error, " . $in['error']);
+               echo "Error Deposit, hubungi customer service";
+               header("Location: " . PC::BASE_URL . "Home");
+               exit();
+            } else {
+               header("Location: " . $redirect_url);
+               exit();
+            }
+         } else {
+            $this->model('Log')->write("Error get token payment midtrans");
+            echo "Error Deposit, hubungi customer service";
+            header("Location: " . PC::BASE_URL . "Home");
+            exit();
+         }
+      } elseif ($depMode == 2) {
+         $order = $this->model("Wowpay")->order($ref, $amount, $log['nama'], $log['hp'], $log['email']);
+         if (isset($order['code']) && $order['code'] == "SUCCESS") {
+            $redirect_url = $order['data']['url'];
+            $cols = "flow, balance_type, user_id, ref, amount, redirect_url, dep_mode, sender_name";
+            $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "','" . $redirect_url . "'," . $depMode . ",'" . $log['nama'] . "'";
             $in = $this->db(0)->insertCols("balance", $cols, $vals);
 
             if ($in['errno'] <> 0) {
@@ -77,7 +105,7 @@ class Deposit extends Controller
          }
       } else {
          $cols = "flow, balance_type, user_id, ref, amount, dep_mode, sender_name, insertTime";
-         $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "'," . PC::DEP_MODE . ",'" . $log['nama'] . "','" . $GLOBALS['now'] . "'";
+         $vals = "1,1,'" . $log['user_id'] . "','" . $ref . "','" . $amount . "'," . $depMode . ",'" . $log['nama'] . "','" . $GLOBALS['now'] . "'";
          $in = $this->db(0)->insertCols("balance", $cols, $vals);
          header("Location: " . PC::BASE_URL . "Deposit_Confirm");
       }

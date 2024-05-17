@@ -31,12 +31,12 @@ class WH_midtrans extends Controller
             case 'settlement':
                $os = 1; // paid
                break;
-            case 'deny';
-            case 'cancel';
-            case 'refund';
-            case 'partial_refund';
-            case 'expire';
-            case 'failure';
+            case 'deny':
+            case 'cancel':
+            case 'refund':
+            case 'partial_refund':
+            case 'expire':
+            case 'failure':
                $os = 2; // cancel
                break;
             default:

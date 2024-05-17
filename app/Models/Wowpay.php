@@ -22,7 +22,8 @@ class Wowpay extends PC
             "customerName" => $custName,
             "phoneNumber" => $hp,
             "email" => $email,
-            "redirectUrl" => "https://gedagoshop.com/Deposit"
+            "redirectUrl" => "https://gedagoshop.com/Deposit",
+            "notifyUrl" => "https://gedagoshop.com/WH_wowpay/notification"
         ];
 
         $encodedData = json_encode($data);
@@ -33,16 +34,17 @@ class Wowpay extends PC
             $curl,
             CURLOPT_HTTPHEADER,
             array(
-                'X-SECRET: ' . $this->XSECRET,
-                'X-SN: ' . $this->XSN,
-                'Content-Type: application/json'
+                'X-SECRET:' . $this->XSECRET,
+                'X-SN:' . $this->XSN,
+                'Content-Type:application/json'
             )
         );
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $encodedData);
         $result = curl_exec($curl);
         curl_close($curl);
-        return $result;
+        $res = json_decode($result, true);
+        return $res;
     }
 
     function ipWhite()
@@ -62,6 +64,7 @@ class Wowpay extends PC
 
         $response = curl_exec($curl);
         curl_close($curl);
-        return $response;
+        $res = json_decode($response, true);
+        return $res;
     }
 }

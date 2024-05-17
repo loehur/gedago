@@ -38,17 +38,22 @@
                             <td class="text-end mt-auto"><?= number_format($d['amount']) ?></td>
                             <td class="text-end">
                                 <?php
-                                if ($d['dep_mode'] == 1) {
+                                if ($d['dep_mode'] <> 0) {
                                     switch ($d['tr_status']) {
-                                        case 0: ?>
-                                            <a href="<?= $d['redirect_url'] ?>"><span class='btn btn-sm py-0 text-primary'><u>Bayar</u></span></a>
-                                            <a href="<?= PC::BASE_URL ?>Deposit/batal/<?= $d['balance_id'] ?>"><span class='btn py-0 pe-0 btn-sm'><u>Batal</u></span></a>
-                                            <?php break;
+                                        case 0:
+                                            if (strlen($d['transaction_status']) > 0) {
+                                                echo $d['transaction_status'] . ' <i class="bi bi-circle-fill text-warning"></i>';
+                                            } else { ?>
+                                                <a href="<?= $d['redirect_url'] ?>"><span class='btn btn-sm py-0 text-primary'><u>Bayar</u></span></a>
+                                                <a href="<?= PC::BASE_URL ?>Deposit/batal/<?= $d['balance_id'] ?>"><span class='btn py-0 pe-0 btn-sm'><u>Batal</u></span></a>
+                                            <?php
+                                            }
+                                            break;
                                         case 1:
-                                            echo 'Success <i class="bi bi-check-circle-fill text-success"></i>';
+                                            echo $d['transaction_status'] . ' <i class="bi bi-check-circle-fill text-success"></i>';
                                             break;
                                         default:
-                                            echo 'Failed <i class="bi bi-x-circle-fill text-danger"></i>';
+                                            echo $d['transaction_status'] . ' <i class="bi bi-x-circle-fill text-danger"></i>';
                                             break;
                                     }
                                 } else {
