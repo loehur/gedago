@@ -51,10 +51,6 @@ class Deposit extends Controller
       $ref = "D" . date("Ymdhis") . rand(0, 9) . rand(0, 9);
       $depMode = PC::DEP_MODE;
 
-      if ($log['hp'] == '081268098300') {
-         $depMode = 2;
-      }
-
       if ($depMode == 1) {
          $token_midtrans = $this->model("Midtrans")->token($ref, $amount, $log['nama'], $log['email'], $log['hp']);
          if (isset($token_midtrans['token'])) {
