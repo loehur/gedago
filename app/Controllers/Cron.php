@@ -121,6 +121,29 @@ class Cron extends Controller
       }
    }
 
+   function tes()
+   {
+      $arrayVar = [
+         "referenceId" => "90330396",
+         "orders" => [
+            [
+               "id" => "1782410138219843585",
+               "msn" => "22024042221042717332",
+               "va" => "500507271000012935",
+               "urlType" => "URL",
+               "method" => "BCA",
+               "status" => "SUCCEED",
+               "amount" => 10000,
+               "receivedAmount" => 10000,
+               "serviceFee" => 250,
+               "receivedTime" => 1705755484000,
+            ],
+         ],
+      ];
+
+      echo $arrayVar['orders'][0]['id'];
+   }
+
    function create()
    {
 

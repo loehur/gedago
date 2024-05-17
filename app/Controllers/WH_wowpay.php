@@ -25,9 +25,12 @@ class WH_wowpay extends Controller
       header('X-SIGN: ' . $xsign);
 
       $data = json_decode($json, true);
+      $status = "UNDEFINED";
+      $order_ref = "UNDEFINED";
+
       $res = [];
       if (isset($data['referenceId'])) {
-         $orders = $data['orders'];
+         $orders = $data['orders'][0];
          $order_ref = $data['referenceId'];
          $status = $orders['status'];
          $tr_id = $orders['id'];
@@ -52,11 +55,13 @@ class WH_wowpay extends Controller
          $set = "tr_status = " . $os . ", transaction_id = '" . $tr_id . "', transaction_status = '" . $status . "', fee = " . $serviceFee;
          $up = $this->db(0)->update("balance", $set, $where);
 
-         if ($up['errno'] <> 0) {
-            $text = "ERROR PAYMENT. update DB when trigger New Status, Order Ref: " . $order_ref . ", New Status: " . $status . " " . $up['error'];
+         if ($up['errno'] == 0) {
+            $res = ["success" => true];
+         } else {
+            $text = "id -> " . $order_ref . ", status -> " . $status;
+            $res = ["success" => false, "message" => $text];
             $this->model('Log')->write($text);
          }
-         $res = ["success" => true];
       } else {
          $res = ["success" => false];
          $text = "ERROR PAYMENT 'referenceId' not found on callback response";
