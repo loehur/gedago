@@ -19,11 +19,11 @@
             </div>
         <?php } ?>
 
-        <div class="p-4 bg-white bg-opacity-50 rounded-3">
+        <div class="p-4 bg-warning bg-opacity-50 rounded-3">
             <form action="<?= PC::BASE_URL . $con ?>/req_dep" method="POST">
                 <div class="row">
                     <div class="col mb-0" style="min-width: 200px;">
-                        <label class="text-dark mb-1">Jumlah Deposit</label>
+                        <label class="text-dark mb-1">Jumlah Deposit <?= PC::DEP_MODE ?></label>
                         <input type="text" style="font-size:17px;" class="form-control text-center rounded-3 shadow-none fw-bold text-success fr_number" name="jumlah" required id="floatingInput1654a">
                     </div>
                 </div>
@@ -40,18 +40,18 @@
             </form>
         </div>
 
-        <div class="py-2 px-3 text-dark bg-white bg-opacity-75 rounded-3 mt-3">
+        <div class="py-2 px-3 text-dark bg-warning bg-opacity-75 rounded-3 mt-3">
             <div class="row">
                 <span class="fw-bold">Last Deposit</span>
                 <?php
                 foreach ($data['dep'] as $d) { ?>
                     <div class="col-auto">
-                        <?= substr($d['insertTime'], 0, 16) ?>
+                        <?= substr($d['insertTime'], 0, 10) ?>
                     </div>
-                    <div class="col-auto text-end">
+                    <div class="col text-end mb-2">
                         <?= number_format($d['amount']) ?>
                     </div>
-                    <div class="col text-end">
+                    <div class="col-auto text-end">
                         <?php
                         if ($d['dep_mode'] <> 0) {
                             switch ($d['tr_status']) {
@@ -59,8 +59,8 @@
                                     if (strlen($d['transaction_status']) > 0) {
                                         echo $d['transaction_status'] . ' <i class="bi bi-circle-fill text-warning"></i>';
                                     } else { ?>
-                                        <a href="<?= $d['redirect_url'] ?>"><span class='btn btn-sm py-0 text-primary'><u>Bayar</u></span></a>
-                                        <a href="<?= PC::BASE_URL ?>Deposit/batal/<?= $d['balance_id'] ?>"><span class='btn py-0 pe-0 btn-sm'><u>Batal</u></span></a>
+                                        <a class="btn btn-sm btn-warning py-0 border rounded-pill" href="<?= $d['redirect_url'] ?>">Bayar</a>
+                                        <a class="btn btn-sm btn-danger py-0 border rounded-pill" href="<?= PC::BASE_URL ?>Deposit/batal/<?= $d['balance_id'] ?>">Batal</a>
                                     <?php
                                     }
                                     break;
@@ -75,7 +75,7 @@
                             switch ($d['tr_status']) {
                                 case 0:
                                     if ($d['user_confirm'] == 0) { ?>
-                                        <a href="<?= PC::BASE_URL ?>Deposit_Confirm"><span class='btn btn-sm py-0 text-primary'><u>Konfirmasi</u></span></a>
+                                        <a class="btn btn-sm btn-warning py-0 border rounded-pill" href="<?= PC::BASE_URL ?>Deposit_Confirm"><span class=''>Konfirmasi</span></a>
                                     <?php } else {
                                         echo 'Checking <i class="bi bi-circle-fill text-warning"></i>';
                                     } ?>

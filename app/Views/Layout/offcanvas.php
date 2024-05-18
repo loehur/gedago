@@ -4,14 +4,14 @@ if (isset($_SESSION['log'])) {
 	$d = $this->db(0)->get_where_row("portfolio", "user_id = '" . $_SESSION['log']['user_id'] . "' AND port_status = 0");
 	$level = $d['level'] ?? 0;
 ?>
-	<div class="offcanvas offcanvas-start" tabindex="-1" id="menu_page" style="width: 280px;">
+	<div class="offcanvas offcanvas-start" tabindex="-1" id="menu_page" style="width: 230px;">
 		<div class="bg-warning" style="height: 100%;">
 			<br>
 			<br>
 			<br>
 			<br>
 			<?php include_once("menu.php"); ?>
-			<div class="offcanvas-body">
+			<div class="offcanvas-body px-0">
 				<?php foreach ($menu as $k => $m) {
 					if (isset($m['list'])) { ?>
 						<div class="accordion" id="<?= $k ?>">

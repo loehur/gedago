@@ -49,6 +49,7 @@ class Deposit extends Controller
       }
 
       $ref = "D" . date("Ymdhis") . rand(0, 9) . rand(0, 9);
+
       $depMode = PC::DEP_MODE;
 
       if ($depMode == 1) {
@@ -94,8 +95,7 @@ class Deposit extends Controller
                exit();
             }
          } else {
-            $this->model('Log')->write("Error get token payment midtrans");
-            echo "Error Deposit, hubungi customer service";
+            $this->model('Log')->write("error curl wowpay no response");
             header("Location: " . PC::BASE_URL . "Home");
             exit();
          }

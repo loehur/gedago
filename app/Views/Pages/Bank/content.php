@@ -12,7 +12,7 @@
 
 <div class="container mt-4">
     <div style="max-width: 500px;" class="m-auto">
-        <div class="p-4 bg-white bg-opacity-25 rounded-3">
+        <div class="p-4 bg-warning bg-opacity-50 rounded-3">
             <form action="<?= PC::BASE_URL . $con ?>/update" class="upload" method="POST">
                 <div class="row mb-2">
                     <div class="col px-1" style="min-width: 200px;">

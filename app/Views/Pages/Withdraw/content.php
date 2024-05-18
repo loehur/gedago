@@ -10,9 +10,9 @@
 </div>
 
 <form action="<?= PC::BASE_URL . $con ?>/req_dep" method="POST">
-    <div class="container">
+    <div class="container pb-5 mb-5">
         <div style="max-width: 500px;" class="m-auto">
-            <div class="col rounded-3 bg-white bg-opacity-25 p-4" style="min-width: 300px;">
+            <div class="col rounded-3 bg-warning bg-opacity-50 p-4" style="min-width: 300px;">
                 <div class="row mb-2">
                     <div class="col text-end">
                         <span class="">Saldo tersedia: <span class="fw-bold">Rp<?= number_format($data['saldo']) ?></span></span>
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="col py-2 px-3 text-dark bg-white bg-opacity-75 rounded-3 mt-3">
+            <div class="col py-2 px-3 text-dark bg-warning bg-opacity-75 rounded-3 mt-3">
                 <div class="row">
                     <span class="fw-bold">Last Withdraw</span>
                     <?php
@@ -44,10 +44,10 @@
                         <div class="col-auto">
                             <?= substr($d['insertTime'], 0, 16) ?>
                         </div>
-                        <div class="col-auto text-end">
+                        <div class="col text-end">
                             <?= number_format($d['amount']) ?>
                         </div>
-                        <div class="col text-end">
+                        <div class="col-auto text-end">
                             <?php
                             switch ($d['tr_status']) {
                                 case 0:
@@ -65,7 +65,7 @@
                     <?php } ?>
                 </div>
             </div>
-            <div class="col p-2 text-dark bg-white bg-opacity-75 rounded-3 mt-3">
+            <div class="col p-2 text-dark bg-warning bg-opacity-75 rounded-3 mt-3">
                 <div class="row">
                     <div class="col pb-0">
                         <ul class="mb-0">
