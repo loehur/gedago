@@ -5,58 +5,46 @@ if (isset($_SESSION['log'])) {
 	$level = $d['level'] ?? 0;
 ?>
 	<div class="offcanvas offcanvas-start" tabindex="-1" id="menu_page" style="width: 280px;">
-		<div class="bg-white pt-3 border-end" style="height: 100%;">
-			<div class="offcanvas-header w-100">
-				<div class="w-100">
-					<div class="w-100 text-center">
-						<i class="bi bi-wallet"></i> Main Wallet <br>
-						<button class="btn shadow-none ps-0">
-							<h5 class="fw-bold">Rp<span class="balance_amount">0</span></h5>
-						</button>
-					</div>
-					<div class="border border-warning rounded px-3 py-2 bg-light w-100 text-center">
-						Invenstment Level<br>
-						<h5 class="text-success fw-bold"><span class="level_name"></span></h5>
-						<small><span><?= isset($_SESSION['portfolio']['expired_date']) ? "Expired Date: " . $_SESSION['portfolio']['expired_date'] : '' ?></span></small>
-					</div>
-				</div>
-			</div>
+		<div class="bg-warning" style="height: 100%;">
+			<br>
+			<br>
+			<br>
+			<br>
 			<?php include_once("menu.php"); ?>
-
 			<div class="offcanvas-body">
-				<div class="accordion" id="accord_menu">
-					<?php foreach ($menu as $k => $m) { ?>
-						<div class="accordion-item">
-							<h2 class="accordion-header" id="heading<?= $k ?>">
-								<button class="accordion-button <?= str_contains($data['title'], $m['active']) ? "" : "collapsed" ?>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $k ?>" aria-expanded="<?= str_contains($data['title'], $m['active']) ? "true" : "false" ?>">
-									<?= $m['label'] ?>
-								</button>
-							</h2>
-							<div id="collapse<?= $k ?>" class="accordion-collapse collapse <?= str_contains($data['title'], $m['active']) ? "show" : "" ?>" data-bs-parent="#accord_menu">
-								<div class="accordion-body">
-									<?php foreach ($m['list'] as $l) { ?>
-										<div class="row">
-											<div class="col p-0">
-												<a href="<?= PC::BASE_URL ?><?= $l['link'] ?>"><button class="text-start <?= $m['active'] . $l['link'] == $data['title'] ? "fw-bold text-primary" : "" ?> btn shadow-none w-100"><?= $l['label'] ?></button></a>
+				<?php foreach ($menu as $k => $m) {
+					if (isset($m['list'])) { ?>
+						<div class="accordion" id="<?= $k ?>">
+							<div class="accordion-item border-0">
+								<h2 class="accordion-header" id="heading<?= $k ?>">
+									<button class="accordion-button fw-bold py-2 bg-warning shadow-none <?= str_contains($data['title'], $m['active']) ? "" : "collapsed" ?>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $k ?>" aria-expanded="<?= str_contains($data['title'], $m['active']) ? "true" : "false" ?>">
+										<div class="float-start" style="width: 25px;"><?= $m['icon'] ?></div> <?= $m['label'] ?>
+									</button>
+								</h2>
+								<div id="collapse<?= $k ?>" class="accordion-collapse collapse <?= str_contains($data['title'], $m['active']) ? "show" : "" ?>" data-bs-parent="#accord_menu">
+									<div class="accordion-body py-0 bg-warning" style="padding-left: 32px;">
+										<?php foreach ($m['list'] as $l) { ?>
+											<div class="row">
+												<div class="col">
+													<a href="<?= PC::BASE_URL ?><?= $l['link'] ?>"><button class="text-start <?= $m['active'] . $l['link'] == $data['title'] ? "fw-bold text-light" : "fw-bold" ?> btn shadow-none w-100"><?= $l['label'] ?></button></a>
+												</div>
 											</div>
-										</div>
-									<?php } ?>
+										<?php } ?>
+									</div>
 								</div>
 							</div>
 						</div>
-					<?php } ?>
-				</div>
+					<?php } else { ?>
+						<div>
+							<a style="padding: 8px 19px;" class="text-start <?= str_contains($data['title'], $m['active']) ? "fw-bold text-light" : "fw-bold" ?> btn shadow-none w-100" href=" <?= PC::BASE_URL ?><?= $m['link'] ?>">
+								<div class="float-start" style="width: 25px;"><?= $m['icon'] ?></div> <?= $m['label'] ?>
+							</a>
+						</div>
+				<?php }
+				} ?>
 			</div>
 		</div>
 	</div>
 <?php
 }
 ?>
-
-<script>
-	$(document).ready(function() {
-		var level = <?= $level ?? 0 ?>;
-		$("span.balance_amount").load("<?= PC::BASE_URL ?>Load/balance/" + level);
-		$("span.level_name").load("<?= PC::BASE_URL ?>Load/level_name/" + level);
-	});
-</script>

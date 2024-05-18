@@ -1,41 +1,48 @@
 <?php $log = $_SESSION['log']; ?>
+<div class="px-5 p-3 text-white">
+    <div class="row">
+        <div class="col mb-2" style="min-width: 200px;">
+            <h3 class="p-0 m-0"><?= PC::APP_NAME ?></h3>
+        </div>
+        <div class="col-auto">
+            <h2 class="fw-bold text-dark">Bank Account <i class="bi bi-stars"></i></h2>
+        </div>
+    </div>
+</div>
 
-<div class="container">
+<div class="container mt-4">
     <div style="max-width: 500px;" class="m-auto">
-        <form action="<?= PC::BASE_URL . $con ?>/update" class="upload" method="POST">
-            <h5 class="fw-bold">Bank Account</h5>
-            <div class="row">
-                <div class="col px-1" style="min-width: 200px;">
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupSelect01">Bank</label>
-                        <select class="form-select" name="bank" id="inputGroupSelect01">
-                            <option selected>...</option>
+        <div class="p-4 bg-white bg-opacity-25 rounded-3">
+            <form action="<?= PC::BASE_URL . $con ?>/update" class="upload" method="POST">
+                <div class="row mb-2">
+                    <div class="col px-1" style="min-width: 200px;">
+                        <label class="mb-1 fw-bold">Nama Rekening</label>
+                        <input type="text" class="form-control rounded-3 py-2 shadow-none" value="<?= $log['nama'] ?>" name="nama_rek">
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col px-1" style="min-width: 200px;">
+                        <label class="mb-1 fw-bold">Bank</label>
+                        <select class="form-select rounded-3 py-2" name="bank" required>
+                            <option value="" selected>...</option>
                             <?php foreach (PC::BANK as $b) { ?>
                                 <option value="<?= $b ?>" <?= $log['bank'] == $b ? 'selected' : '' ?>><?= $b ?></option>
                             <?php } ?>
                         </select>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col px-1 mb-1" style="min-width: 200px;">
-                    <div class="form-floating">
-                        <input type="text" class="form-control shadow-none" value="<?= $log['no_rek'] ?>" name="no_rek" required id="floatingInput1654">
-                        <label for="floatingInput1654">No Rekening</label>
+                    <div class="col px-1 mb-1" style="min-width: 200px;">
+                        <label class="mb-1 fw-bold">Nomor Rekening</label>
+                        <input type="text" class="form-control rounded-3 py-2 shadow-none" value="<?= $log['no_rek'] ?>" name="no_rek" required>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col px-1 mb-1" style="min-width: 200px;">
-                    Pastikan nama pemilik Rekening adalah <span class="text-danger"><?= $log['nama'] ?></span><br>
+                <div class="row mt-1 border-top pt-2 mb-2">
+                    <div class="col px-1 mb-1 text-end">
+                        <button type="submit" class="border-0 py-2 btn-primary bg-gradient px-5 rounded-pill shadow-sm">Simpan</button>
+                    </div>
                 </div>
-            </div>
-            <div class="row mt-1 border-top pt-2 mb-2">
-                <div class="col px-1 mb-1 text-end">
-                    <button type="submit" class="w-100 border-0 py-2 btn-success rounded shadow-sm">Simpan</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 

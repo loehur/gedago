@@ -1,9 +1,9 @@
 <?php $d = $data['dep'] ?>
 
-<div class="container">
+<div class="container mt-5">
     <div style="max-width: 650px;" class="m-auto px-3">
         <div class="row">
-            <div class="col m-1 border rounded bg-white p-3" style="min-width: 300px;">
+            <div class="col m-1 rounded-3 bg-white bg-opacity-75 p-3" style="min-width: 300px;">
                 <div class="row mb-3">
                     <div class="col text-center">
                         <div class="pe-2">Deposit</div>
@@ -37,10 +37,10 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col">
-                                <a href="<?= PC::BASE_URL . $con ?>/confirm/<?= $d['balance_id'] ?>"><button class="btn btn-success">Saya sudah Transfer</button></a>
+                                <a href="<?= PC::BASE_URL . $con ?>/confirm/<?= $d['balance_id'] ?>"><button class="btn btn-primary bg-gradient rounded-pill">Saya sudah Transfer</button></a>
                             </div>
                             <div class="col-auto text-end">
-                                <a href="<?= PC::BASE_URL ?>Deposit/batal/<?= $d['balance_id'] ?>"><button class="btn btn-sm border-0 btn-outline-secondary">Batalkan</button></a>
+                                <a href="<?= PC::BASE_URL ?>Deposit/batal/<?= $d['balance_id'] ?>"><button class="btn btn-sm border-0 btn-secondary rounded-pill">Batalkan</button></a>
                             </div>
                         </div>
                     </div>
@@ -51,6 +51,10 @@
 </div>
 <script src="<?= PC::ASSETS_URL ?>plugins/clipboard/clipboard.min.js"></script>
 <script>
+    $(document).ready(function() {
+        spinner(0);
+    });
+
     var clipboard = new ClipboardJS('.btn');
     clipboard.on('success', function(e) {
         console.info('Action:', e.action);

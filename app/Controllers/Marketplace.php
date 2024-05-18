@@ -14,7 +14,7 @@ class Marketplace extends Controller
    public function index()
    {
       $data = [
-         'title' => "Invest, " . __CLASS__,
+         'title' => "Store",
          'content' => __CLASS__
       ];
 

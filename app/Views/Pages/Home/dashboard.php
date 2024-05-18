@@ -1,0 +1,88 @@
+<style>
+    .icon_circle {
+        height: 42px;
+        width: 42px;
+        background-color: white;
+        border-radius: 50%;
+        opacity: 0.7;
+    }
+</style>
+<?php
+$level = 0;
+$ada_port = false;
+if (count($data['port_balance']) > 0) {
+    $porto_bal = $data['port_balance'];
+    foreach ($_SESSION['config']['level'] as $pl) {
+        if ($pl['level'] == $porto_bal['data']['level']) {
+            $fee_d = $pl['benefit'][1]['fee'];
+            $w_qty = $pl['benefit'][1]['qty'];
+        }
+    }
+    $level = $porto_bal['data']['level'];
+    $ada_port = true;
+} else {
+    $porto_bal = [];
+    $level = 0;
+    $fee_d = 0;
+    $w_qty = 0;
+}
+?>
+<div class="px-5 border bg-white bg-opacity-75 p-3">
+    <div class="row">
+        <div class="col mb-2" style="min-width: 200px;">
+            <h3 class="text-dark fw-bold p-0 m-0"><?= PC::APP_NAME ?></h3>
+            Welcome, <?= ucfirst(strtok($_SESSION['log']['nama'], " ")); ?>!
+        </div>
+        <div class="col-auto">
+            <div class="bg-warning rounded-3 px-4 py-2">
+                <i class="bi bi-wallet me-2"></i>
+                <div class="fw-bold float-end">Rp<span class="balance_amount">0</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="row">
+        <?php for ($x = 0; $x < 5; $x++) { ?>
+            <div class="col my-3">
+                <div class="text-white gedago_card rounded p-3" style="min-width: 300px;">
+                    <div class="row">
+                        <div class="w-100" style="height: 0;">
+                            <div class="col p-0 text-center" style="position: relative; top:-30px">
+                                <h1 class="text-dark"><i class="bi bi-shop-window"></i></h1>
+                            </div>
+                        </div>
+                        <div class="col m-0">
+                            <h3 class="float-start">Store</h3>
+                        </div>
+                        <div class="col">
+                            <div class="float-end icon_circle ps-2 pt-1">
+                                <div class="text-dark">
+                                    <h3><i class="bi bi-cart2"></i></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <small>All Doors are Closed</small>
+                            <h3>Store</h3>
+                        </div>
+                        <div class="col-auto text-end">
+                            Secured<br>
+                            <div class="form-switch float-end">
+                                <input class="form-check-input bg-success border-success shadow-none" type="checkbox" checked>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        spinner(0);
+    });
+</script>

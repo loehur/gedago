@@ -9,7 +9,7 @@ class Home extends Controller
    public function index()
    {
       $data = [
-         'title' => "Invest, " . __CLASS__,
+         'title' => __CLASS__,
          'content' => __CLASS__
       ];
 

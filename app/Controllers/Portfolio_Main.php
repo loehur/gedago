@@ -14,7 +14,7 @@ class Portfolio_Main extends Controller
    public function index()
    {
       $data = [
-         'title' => "Invest, " . __CLASS__,
+         'title' => "Portfolio",
          'content' => __CLASS__
       ];
 

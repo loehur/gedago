@@ -7,10 +7,10 @@ if (isset($data['parse'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
 <?php include_once("head.php"); ?>
 
-<body class="bg-light">
+<body style="background-image: url('<?= PC::ASSETS_URL ?>img/bg/bg2.jpg'); background-size: auto 100%">
 	<?php include_once("fix.php"); ?>
 	<?php include_once("navbar.php"); ?>
 	<div class="row p-0 m-0">
@@ -18,8 +18,7 @@ if (isset($data['parse'])) {
 			<?php include_once("offcanvas.php"); ?>
 		</div>
 		<div class="col px-0">
-			<div style="height: 80px;"></div>
-			<div style="padding-bottom:80px; z-index:1" id="content"></div>
+			<div style="z-index:1;" id="content"></div>
 			<div>
 				<?php include_once("footer.php"); ?>
 			</div>
@@ -71,6 +70,7 @@ if (isset($data['parse'])) {
 				'z-index': '3',
 				'height': '100vh',
 			});
+			$("body").css("background-size", "100% auto");
 		}
 	}
 </script>

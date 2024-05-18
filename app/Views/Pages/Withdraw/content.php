@@ -1,70 +1,80 @@
+<div class="px-5 p-3 text-white">
+    <div class="row">
+        <div class="col mb-2" style="min-width: 200px;">
+            <h3 class="p-0 m-0"><?= PC::APP_NAME ?></h3>
+        </div>
+        <div class="col-auto">
+            <h2 class="fw-bold text-dark">Withdraw <i class="bi bi-stars"></i></h2>
+        </div>
+    </div>
+</div>
+
 <form action="<?= PC::BASE_URL . $con ?>/req_dep" method="POST">
     <div class="container">
         <div style="max-width: 500px;" class="m-auto">
-            <div class="row">
-                <div class="col">
-                    <h5 class="fw-bold mb-2">Withdraw</h5>
-                </div>
-            </div>
-            <?php if ($_SESSION['config']['setting']['wd_fee']['value'] > 0) { ?>
-                <div class="row mb-4">
-                    <div class="col">
-                        <small><span>Biaya penarikan sebesar <?= $_SESSION['config']['setting']['wd_fee']['value'] ?>% dipotong langsung dari Total Penarikan</span></small>
+            <div class="col rounded-3 bg-white bg-opacity-25 p-4" style="min-width: 300px;">
+                <div class="row mb-2">
+                    <div class="col text-end">
+                        <span class="">Saldo tersedia: <span class="fw-bold">Rp<?= number_format($data['saldo']) ?></span></span>
                     </div>
                 </div>
-            <?php } ?>
-            <div class="row mb-2">
-                <div class="col text-end">
-                    <span class="">Saldo tersedia: <span class="text-success">Rp<?= number_format($data['saldo']) ?></span></span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col px-1 mb-0" style="min-width: 200px;">
-                    <div class="form-floating">
-                        <input type="text" style="font-size:17px;" class="form-control shadow-none fw-bold text-success fr_number" name="jumlah" required id="floatingInput1654a">
-                        <label for="floatingInput1654a">Jumlah Penarikan</label>
+                <div class="row">
+                    <div class="col px-1 mb-0" style="min-width: 200px;">
+                        <label class="mb-1 text-dark">Jumlah Penarikan</label>
+                        <input type="text" style="font-size:17px;" class="form-control rounded-3 shadow-none fw-bold text-success fr_number" name="jumlah" required id="floatingInput1654a">
                     </div>
                 </div>
-            </div>
-            <div class="row mb-1 mt-0">
-                <div class="col text-danger mb-1">
-                    <small id="alert_min" class="d-none">Minimal Penarikan <?= number_format($_SESSION['config']['setting']['min_wd']['value']) ?></small>
+                <div class="row mb-1 mt-0">
+                    <div class="col text-danger mb-1">
+                        <small id="alert_min" class="d-none">Minimal Penarikan <?= number_format($_SESSION['config']['setting']['min_wd']['value']) ?></small>
+                    </div>
                 </div>
-            </div>
-            <div class="row mt-2 border-top pt-2 mb-3">
-                <div class="col px-1 mb-1 text-end">
-                    <button type="submit" class="w-100 border-0 py-2 shadow-sm btn-success rounded">Withdraw</button>
+                <div class="row mt-2 pt-2 mb-3">
+                    <div class="col px-1 mb-1 text-end">
+                        <button type="submit" class="px-5 py-2 shadow-sm btn-primary border-0 rounded-pill bg-gradient rounded">Withdraw</button>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col px-1">
-                    <table class="table m-0 bg-white">
-                        <?php
-                        foreach ($data['wd'] as $d) { ?>
-                            <tr class="<?= $d['tr_status'] == 2 ? 'table-secondary' : '' ?>">
-                                <td><?= substr($d['insertTime'], 0, 10) ?></td>
-                                <td class="text-end mt-auto text-success"><?= number_format($d['amount']) ?></td>
-                                <td class="text-end">
-                                    <?php
-                                    switch ($d['tr_status']) {
-                                        case 0:
-                                            echo 'Checking <i class="bi bi-circle-fill text-warning"></i>';
-                                            break;
-                                        case 1:
-                                            echo 'Success <i class="bi bi-check-circle-fill text-success"></i>';
-                                            break;
-                                        default:
-                                            echo 'Failed <i class="bi bi-x-circle-fill text-danger"></i>';
-                                            break;
-                                    }
-                                    ?>
-                                </td>
-                                </td>
-                            </tr>
-                        <?php }
-                        ?>
-                    </table>
+            <div class="col py-2 px-3 text-dark bg-white bg-opacity-75 rounded-3 mt-3">
+                <div class="row">
+                    <span class="fw-bold">Last Withdraw</span>
+                    <?php
+                    foreach ($data['wd'] as $d) { ?>
+                        <div class="col-auto">
+                            <?= substr($d['insertTime'], 0, 16) ?>
+                        </div>
+                        <div class="col text-end">
+                            <?= number_format($d['amount']) ?>
+                        </div>
+                        <div class="col text-end">
+                            <?php
+                            switch ($d['tr_status']) {
+                                case 0:
+                                    echo 'Checking <i class="bi bi-circle-fill text-warning"></i>';
+                                    break;
+                                case 1:
+                                    echo 'Success <i class="bi bi-check-circle-fill text-success"></i>';
+                                    break;
+                                default:
+                                    echo 'Failed <i class="bi bi-x-circle-fill text-danger"></i>';
+                                    break;
+                            }
+                            ?>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+            <div class="col p-2 text-dark bg-white bg-opacity-75 rounded-3 mt-3">
+                <div class="row">
+                    <div class="col pb-0">
+                        <ul class="mb-0">
+                            <li>Jumlah minimal penarikan = Rp. <?= number_format($_SESSION['config']['setting']['min_deposit']['value']) ?></li>
+                            <li>Penarikan dana akan hanya dilakukan ke rekening yang di daftarkan</li>
+                            <li>Penarikan akan diproses langsung setelah pengisian form withdraw</li>
+                            <li>Hubungi customer service atau live admin untuk konfirmasi penarikan</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,22 +1,29 @@
-<div class="container">
+<div class="px-5 p-3 text-white">
+    <div class="row">
+        <div class="col mb-2" style="min-width: 200px;">
+            <h3 class="p-0 m-0"><?= PC::APP_NAME ?></h3>
+        </div>
+        <div class="col-auto">
+            <h2 class="fw-bold ">Store <i class="bi bi-stars"></i></h2>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3 pb-5">
     <section>
-        <div class="row">
+        <div class="row text-white">
             <?php if (isset($data['data']['user_id'])) { ?>
                 <div class="col p-0" style="min-width:300px">
-                    <div class="border rounded bg-white m-2">
-                        <div class="row">
-                            <div class="col text-center pb-1">
-                                <h6 class="fw-bold text-dark bg-light py-3 rounded">
-                                    <span class="w-100 fw-bold">Active Investment</span><br>
-                                    <span class="text-success"><?= isset($data['name']) ? $data['name'] : "" ?></span>
+                    <div class="rounded-3 gedago_card m-2">
+                        <div class="row py-4">
+                            <div class="col text-center px-4">
+                                <h3>My Portfolio</h3>
+                                <h6>
+                                    <span class="fw-bold">
+                                        Rp<?= number_format($data['saldo'])  ?>
+                                    </span>
                                 </h6>
-                            </div>
-                        </div>
-                        <div class="row py-2">
-                            <div class="col text-center px-3">
-                                Total Investasi Anda<br>
-                                <span class="text-dark">Rp<?= number_format($data['saldo'])  ?></span>
-                                <br>
+                                <hr>
                                 <small>Untuk melakukan Upgrade, cukup tambahkan nominal investasi sesuai batas minimal Investasi yang dipilih.</small>
                             </div>
                         </div>
@@ -33,23 +40,19 @@
                 } ?>
 
                 <div class="col p-0" style="min-width:300px">
-                    <div class="border <?= (isset($data['data']['user_id']) && $data['data']['level'] == $d['level']) ? "border-success" : "border-warning" ?> rounded bg-white m-2">
+                    <div class="gedago_card border <?= (isset($data['data']['user_id']) && $data['data']['level'] == $d['level']) ? "border-warning" : "border-0" ?> rounded-3 m-2">
                         <div class="row">
                             <div class="col text-center pb-1">
-                                <h5 class="fw-bold text-dark bg-light py-3 rounded">
+                                <h4 class="fw-bold pt-3">
                                     <span class="w-100 fw-bold"><?= $d["name"] ?></span>
-                                </h5>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col text-dark text-center">
-                                <b>Min. Topup Rp<?= number_format($d['topup']) ?></b>
+                                </h4>
+                                <h6 class="fw-bold">Rp <?= number_format($d['topup']) ?></h6>
                             </div>
                         </div>
                         <div class="row pt-2">
                             <div class="col px-4">
-                                <span class="">Benefit:</span>
-                                <ul class="text-dark">
+                                <span class="px-2">Benefit:</span>
+                                <ul class="">
                                     <li><?= $d['days'] ?> Days Investment</li>
                                     <?php foreach ($d['benefit'] as $b) { ?>
                                         <li><?= $b['qty'] ?>x <?= $b['name'] ?> Fee <?= $b['fee'] ?>%</li>
@@ -59,7 +62,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <button class="btn rounded-0 w-100 shadow-sm <?= (isset($data['data']['user_id']) && $data['data']['level'] == $d['level']) ? "btn-success" : "btn-warning" ?> topup" data-topup="<?= $d['topup'] ?>" data-bs-toggle="modal" data-bs-target="#exampleModal"><?= (isset($data['data']['user_id'])) ? "Upgrade" : "Invest" ?> <b><?= $d['name'] ?></b></button>
+                                <button class="btn py-3 rounded-3 w-100 shadow-sm <?= (isset($data['data']['user_id']) && $data['data']['level'] == $d['level']) ? "btn-dark" : "btn-warning" ?> topup" data-topup="<?= $d['topup'] ?>" data-bs-toggle="modal" data-bs-target="#exampleModal"><?= (isset($data['data']['user_id'])) ? "Upgrade" : "Invest" ?> <b><?= $d['name'] ?></b></button>
                             </div>
                         </div>
                     </div>

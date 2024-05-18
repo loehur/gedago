@@ -1,27 +1,21 @@
 <?php
 $menu = [
 	[
-		"label" => "Investment",
-		"active" => "Invest, ",
-		"list" =>
-		[
-			[
-				"label" => "Dashboard",
-				"link" => "Home"
-			],
-			[
-				"label" => "Portfolio",
-				"link" => "Portfolio_Main"
-			],
-			[
-				"label" => "Marketplace",
-				"link" => "Marketplace"
-			],
-		]
+		"label" => "Dashboard",
+		"active" => "Home",
+		"link" => "Home",
+		"icon" => '<i class="bi bi-grid-fill"></i>'
+	],
+	[
+		"label" => "Portfolio",
+		"active" => "Portfolio",
+		"link" => "Portfolio_Main",
+		"icon" => '<i class="bi bi-floppy-fill"></i>'
 	],
 	[
 		"label" => "Wallet",
 		"active" => "Wallet, ",
+		"icon" => '<i class="bi bi-wallet-fill"></i>',
 		"list" =>
 		[
 			[
@@ -39,8 +33,15 @@ $menu = [
 		]
 	],
 	[
+		"label" => "Store",
+		"active" => "Store",
+		"link" => "Marketplace",
+		"icon" => '<i class="bi bi-shop"></i>'
+	],
+	[
 		"label" => "Account",
 		"active" => "Account, ",
+		"icon" => '<i class="bi bi-person-fill"></i>',
 		"list" =>
 		[
 			[
@@ -56,5 +57,12 @@ $menu = [
 				"link" => "Members"
 			]
 		]
-	]
+	],
+	[
+		"label" => "Logout",
+		"active" => "Logout",
+		"link" => "C_sess/logout",
+		"icon" => '<i class="bi bi-box-arrow-right"></i>'
+	],
+
 ];
