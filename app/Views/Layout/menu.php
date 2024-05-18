@@ -61,7 +61,7 @@ $menu = [
 	[
 		"label" => "Logout",
 		"active" => "Logout",
-		"link" => "C_sess/logout",
+		"link" => "C_Sess/logout",
 		"icon" => '<i class="bi bi-box-arrow-right"></i>'
 	],
 
