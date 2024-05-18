@@ -42,3 +42,10 @@
         </div>
     </section>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#btn_menu').addClass('d-none');
+        spinner(0);
+    });
+</script>
