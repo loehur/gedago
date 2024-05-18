@@ -5,7 +5,7 @@ if (isset($_SESSION['log'])) {
 	$level = $d['level'] ?? 0;
 ?>
 	<div class="offcanvas offcanvas-start" tabindex="-1" id="menu_page" style="width: 230px;">
-		<div class="bg-warning" style="height: 100%;">
+		<div class="bg-warning bg-opacity-75" style="height: 100%;">
 			<br>
 			<br>
 			<br>
@@ -15,14 +15,14 @@ if (isset($_SESSION['log'])) {
 				<?php foreach ($menu as $k => $m) {
 					if (isset($m['list'])) { ?>
 						<div class="accordion" id="<?= $k ?>">
-							<div class="accordion-item border-0">
+							<div class="accordion-item border-0 bg-transparent">
 								<h2 class="accordion-header" id="heading<?= $k ?>">
-									<button class="accordion-button fw-bold py-2 bg-warning shadow-none <?= str_contains($data['title'], $m['active']) ? "" : "collapsed" ?>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $k ?>" aria-expanded="<?= str_contains($data['title'], $m['active']) ? "true" : "false" ?>">
+									<button class="accordion-button fw-bold py-2 bg-transparent shadow-none <?= str_contains($data['title'], $m['active']) ? "" : "collapsed" ?>" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $k ?>" aria-expanded="<?= str_contains($data['title'], $m['active']) ? "true" : "false" ?>">
 										<div class="float-start" style="width: 25px;"><?= $m['icon'] ?></div> <?= $m['label'] ?>
 									</button>
 								</h2>
 								<div id="collapse<?= $k ?>" class="accordion-collapse collapse <?= str_contains($data['title'], $m['active']) ? "show" : "" ?>" data-bs-parent="#accord_menu">
-									<div class="accordion-body py-0 bg-warning" style="padding-left: 32px;">
+									<div class="accordion-body py-0 bg-transparent" style="padding-left: 32px;">
 										<?php foreach ($m['list'] as $l) { ?>
 											<div class="row">
 												<div class="col">
