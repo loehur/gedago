@@ -1,4 +1,4 @@
-<div class="px-5 p-3 text-white">
+<div class="px-4 p-3 text-white">
     <div class="row">
         <div class="col mb-2" style="min-width: 200px;">
             <h3 class="p-0 m-0"><?= PC::APP_NAME ?></h3>
@@ -24,7 +24,7 @@
                                     </span>
                                 </h6>
                                 <hr>
-                                <small>Untuk melakukan Upgrade, cukup tambahkan nominal investasi sesuai batas minimal Investasi yang dipilih.</small>
+                                <small>Just add according to the minimum top up limit, to upgrade your investment.</small>
                             </div>
                         </div>
                     </div>
@@ -74,23 +74,25 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog">
         <form action="<?= PC::BASE_URL ?>Marketplace/Invest" method="POST">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Nominal Invest</h5>
+            <div class="modal-content bg-warning bg-gradient">
+                <div class="modal-header border-0">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <label>Min. Invest <span class="text-danger">Rp</span><span class="text-danger" id="topup"></span></label>
-                    <input type="text" style="font-size:17px;" class="form-control shadow-none fw-bold text-success fr_number" name="topup" required>
+                <div class="modal-body border-0 text-center">
+                    <div class="px-2">
+                        <label class="mb-1 fw-bold float-start">Amount</label>
+                        <label class="mb-1 fw-bold float-end">Minimum <span class="text-danger">Rp</span><span class="text-danger" id="topup"></span></label>
+                    </div>
+                    <input type="text" style="font-size:17px;" class="form-control rounded-3 text-center shadow-none fw-bold text-success fr_number" name="topup" required>
                     <?php if (isset($data['data']['user_id'])) { ?>
-                        <br>Investasi Anda: Rp<span class="text-success"><?= number_format($data['saldo']) ?></span><br>
-                        <small>Cukup tambahkan sesuai batas minimal topup, untuk upgrade Investasi Anda.</small>
+                        <br>My Portfolio Now <span class="text-success fw-bold">Rp<?= number_format($data['saldo']) ?></span><br>
+                        <small>Just add according to the minimum top up limit, to upgrade your investment.</small>
                     <?php } ?>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning">Invest</button>
+                <div class="modal-footer border-0">
+                    <button type="submit" class="btn btn-primary bg-gradient rounded-pill px-3">Invest</button>
                 </div>
             </div>
         </form>

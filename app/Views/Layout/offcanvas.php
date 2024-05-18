@@ -5,7 +5,7 @@ if (isset($_SESSION['log'])) {
 	$level = $d['level'] ?? 0;
 ?>
 	<div class="offcanvas offcanvas-start" tabindex="-1" id="menu_page" style="width: 230px;">
-		<div class="bg-warning bg-opacity-75" style="height: 100%;">
+		<div class="bg-warning bg-gradient bg-opacity-75" style="height: 100%;">
 			<br>
 			<br>
 			<br>

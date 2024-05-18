@@ -1,6 +1,6 @@
 <?php $d = $data['dep'] ?>
 
-<div class="container mt-3 mb-5 pb-5">
+<div class="container mt-5 mb-5 pb-5">
     <div style="max-width: 650px;" class="m-auto px-3">
         <div class="row">
             <div class="col rounded-3 bg-white bg-opacity-75 p-3" style="min-width: 300px;">

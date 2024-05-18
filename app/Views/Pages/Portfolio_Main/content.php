@@ -19,7 +19,7 @@ if (isset($data['port_balance']['data']['user_id'])) {
 }
 ?>
 
-<div class="px-5 p-3 text-white">
+<div class="px-4 p-3 text-white">
     <div class="row">
         <div class="col mb-2" style="min-width: 200px;">
             <h3 class="p-0 m-0"><?= PC::APP_NAME ?></h3>
