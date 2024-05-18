@@ -27,7 +27,7 @@ if (count($data['port_balance']) > 0) {
     $w_qty = 0;
 }
 ?>
-<div class="px-5 border bg-white bg-opacity-75 p-3">
+<div class="px-5 p-3">
     <div class="row">
         <div class="col mb-2" style="min-width: 200px;">
             <h3 class="text-dark fw-bold p-0 m-0"><?= PC::APP_NAME ?></h3>
@@ -41,7 +41,7 @@ if (count($data['port_balance']) > 0) {
         </div>
     </div>
 </div>
-<div class="container mt-5">
+<div class="container mt-2 pb-5 mb-5">
     <div class="row">
         <?php for ($x = 0; $x < 5; $x++) { ?>
             <div class="col my-3">

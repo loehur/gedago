@@ -2,7 +2,7 @@
     <div class="w-100" style="background-image: url('<?= PC::ASSETS_URL ?>img/bg/login.jpg'); background-size: auto 100%; height: 100vh; position:absolute"></div>
 
     <div style="position: sticky;top: 0;z-index: 3;height: 100vh; max-width:400px" class="col">
-        <div class="bg-warning pt-5 px-5" style="height: 100%;">
+        <div class="bg-warning bg-gradient pt-5 px-5" style="height: 100%;">
             <div class="w-100 mb-5 text-center">
                 <a href="<?= PC::BASE_URL ?>">
                     <h2 class="fw-bold text-white mb-0"><?= PC::APP_NAME ?></h2>
@@ -75,7 +75,7 @@
     }, false);
 
     $(document).ready(function() {
-        $('.navbar').addClass('d-none');
+        $('#btn_menu').addClass('d-none');
         spinner(0);
     });
 

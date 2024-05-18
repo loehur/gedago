@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<div class="container mt-3 pb-5">
+<div class="container mt-3 pb-5 mb-5">
     <section>
         <div class="row text-white">
             <?php if (isset($data['data']['user_id'])) { ?>

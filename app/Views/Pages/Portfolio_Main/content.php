@@ -30,7 +30,7 @@ if (isset($data['port_balance']['data']['user_id'])) {
     </div>
 </div>
 
-<div class="container">
+<div class="container pb-5 mb-5">
     <section>
         <div class="row">
             <div class="col m-2 text-white rounded p-3 gedago_card" style="min-width: 300px;">
