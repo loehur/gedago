@@ -15,7 +15,7 @@
                 <h5 class="text-white pb-0 mb-0">Hi, <?= PC::APP_NAME ?></h5>
             </a>
         </div>
-        <div class="col px-1 text-end">
+        <div class="col-auto px-1 text-end">
             <a href="<?= PC::BASE_URL ?>Login" class="btn btn-sm rounded-pill px-3 bg-white shadow-sm border-bottom">
                 <i class="bi bi-person"></i> Sign In
             </a>
