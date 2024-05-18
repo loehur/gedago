@@ -97,10 +97,5 @@ input::-webkit-inner-spin-button {
 }
 
 .gedago_card {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 1) 21%, rgba(181, 157, 45, 1) 100%); /* standar */
-  background: -moz-linear-gradient(90deg, rgba(0, 0, 0, 1) 21%, rgba(181, 157, 45, 1) 100%); /* FF 3.6+ */  
-  background: -ms-linear-gradient(90deg, rgba(0, 0, 0, 1) 21%, rgba(181, 157, 45, 1) 100%); /* IE10 */  
-  background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 1) 21%, rgba(181, 157, 45, 1) 100%); /* Safari 5.1+, Chrome 10+ */  
-  background: -o-linear-gradient(90deg, rgba(0, 0, 0, 1) 21%, rgba(181, 157, 45, 1) 100%); /* Opera 11.10 */  
-  background-blend-mode: normal;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 1),rgba(181, 157, 45, 1));
 }
