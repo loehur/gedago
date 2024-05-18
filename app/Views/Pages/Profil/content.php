@@ -15,7 +15,7 @@
         <div style="max-width: 500px;" class="m-auto">
             <h5 class="fw-bold text-dark">My Profil</h5>
             <div class="row">
-                <div class="col px-1 mb-1" style="min-width: 200px;">
+                <div class="col px-1 mb-2" style="min-width: 200px;">
                     <div class="form-floating">
                         <input type="text" class="form-control text-white border-0 gedago_card shadow-none" readonly value="<?= $log['nama'] ?>" required id="floatingInpwrer">
                         <label class="" for="floatingInpwrer">Nama</label>
@@ -23,13 +23,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col px-1 mb-1" style="min-width: 200px;">
+                <div class="col px-1 mb-2" style="min-width: 200px;">
                     <div class="form-floating">
                         <input type="text" class="form-control text-white border-0 gedago_card shadow-none" readonly value="<?= $log['hp'] ?>" required id="floatingInpwrersdf">
                         <label class="" for="floatingInpwrersdf">No. Handphone</label>
                     </div>
                 </div>
-                <div class="col px-1 mb-1" style="min-width: 200px;">
+                <div class="col px-1 mb-2" style="min-width: 200px;">
                     <div class="form-floating">
                         <input type="text" class="form-control text-white border-0 gedago_card shadow-none" readonly value="<?= $log['registered'] ?>" required id="floatingInpwr3434">
                         <label class="" for="floatingInpwr3434">Registered</label>
@@ -37,20 +37,20 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col px-1 mb-1" style="min-width: 200px;">
+                <div class="col px-1 mb-2" style="min-width: 200px;">
                     <div class="form-floating">
                         <input type="text" class="form-control text-white border-0 gedago_card shadow-none" readonly value="<?= $log['tgl_lahir'] ?>" required id="floatingInpwr343434">
                         <label class="" for="floatingInpwr343434">Tanggal Lahir</label>
                     </div>
                 </div>
-                <div class="col px-1 mb-1" style="min-width: 200px;">
+                <div class="col px-1 mb-2" style="min-width: 200px;">
                     <div class="form-floating">
                         <input type="text" class="form-control text-white border-0 gedago_card shadow-none" readonly value="<?= $log['user_id'] ?>" required id="floatingInpwr3dgfas9">
                         <label class="" for="floatingInpwr3dgfas9">Referral Code Anda</label>
                     </div>
                 </div>
             </div>
-            <div class="row mb-1 px-1">
+            <div class="row mb-2 px-1">
                 <div class="col text-center gedago_card rounded p-2" style="min-width: 200px;">
                     Referral Link: <button class="btn p-0 shadow-none float-end" data-clipboard-text="<?= PC::HOST . "/Register?rc=" . $log['user_id'] ?>"><i class="bi bi-clipboard"></i></button>
                     <br>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="row px-1">
-                <div class="col text-center gedago_card rounded p-2 mb-1" style="min-width: 200px;">
+                <div class="col text-center gedago_card rounded p-2 mb-2" style="min-width: 200px;">
                     <small><span>Setiap nasabah yang terdaftar melalui Referral Link anda, akan mendapatkan <?= $_SESSION['config']['setting']['up1_fee']['value'] ?>% setiap kali nasabah melakukan investasi, dan <?= $_SESSION['config']['setting']['up2_fee']['value'] ?>% dari downline nasabah Anda.</span></small>
                 </div>
             </div>
