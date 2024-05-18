@@ -1,9 +1,9 @@
 <?php $d = $data['dep'] ?>
 
-<div class="container mt-5">
+<div class="container mt-3 mb-5 pb-5">
     <div style="max-width: 650px;" class="m-auto px-3">
         <div class="row">
-            <div class="col m-1 rounded-3 bg-white bg-opacity-75 p-3" style="min-width: 300px;">
+            <div class="col rounded-3 bg-white bg-opacity-75 p-3" style="min-width: 300px;">
                 <div class="row mb-3">
                     <div class="col text-center">
                         <div class="pe-2">Deposit</div>
@@ -11,13 +11,13 @@
                     </div>
                 </div>
                 <div class="row mb-2">
-                    <div class="col text-center mb-3" style="min-width: 300px;">
+                    <div class="col text-center mb-3" style="min-width: 250px;">
                         <span class="text-warning fw-bold">Via QRIS:</span><br>
                         <img src="<?= PC::BASE_URL ?>files/qr_bank/<?= $_SESSION['config']['dep_rek']['qris'] ?>" class="img-fluid" alt="...">
                     </div>
                     <div class="col" style="min-width: 300px;">
                         <div class="text-center">
-                            <span class="text-warning fw-bold">Via Bank Transfer:</span><br>
+                            <span class="text-dark fw-bold">Via Bank Transfer:</span><br>
                             <strong><?= $_SESSION['config']['dep_rek']['bank'] ?></strong><br>
                             <strong><?= $_SESSION['config']['dep_rek']['name'] ?></strong><br>
                             <div id="val_rek" class="fw-bold text-success">
@@ -35,7 +35,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <div class="col">
                                 <a href="<?= PC::BASE_URL . $con ?>/confirm/<?= $d['balance_id'] ?>"><button class="btn btn-primary bg-gradient rounded-pill">Saya sudah Transfer</button></a>
                             </div>

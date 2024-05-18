@@ -44,7 +44,7 @@
                         <div class="col-auto">
                             <?= substr($d['insertTime'], 0, 16) ?>
                         </div>
-                        <div class="col text-end">
+                        <div class="col-auto text-end">
                             <?= number_format($d['amount']) ?>
                         </div>
                         <div class="col text-end">
