@@ -90,7 +90,7 @@ if (isset($data['port_balance']['data']['user_id'])) {
                     foreach ($data['watch'] as $dw) { ?>
                         <div class="row">
                             <div class="col">
-                                <span><small><?= $dw['dw_id'] ?></small></span><span class="float-end text-success">+Rp<?= number_format($dw['fee']) ?></span><br>
+                                <span><small><?= $dw['dw_id'] ?></small></span><span class="float-end text-white">+Rp<?= number_format($dw['fee']) ?></span><br>
                             </div>
                         </div>
                     <?php } ?>
@@ -110,7 +110,7 @@ if (isset($data['port_balance']['data']['user_id'])) {
                             <div class="col">
                                 <?php $df = $data['checkin'];
                                 if (isset($df['insertTime'])) {
-                                    echo substr($df['insertTime'], 0, 10)  . " <span class='text-success float-end'>+Rp" . number_format($df['fee']) . "</span><br>";
+                                    echo substr($df['insertTime'], 0, 10)  . " <span class='text-white float-end'>+Rp" . number_format($df['fee']) . "</span><br>";
                                 }
                                 ?>
                             </div>
@@ -146,9 +146,9 @@ if (isset($data['port_balance']['data']['user_id'])) {
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade px-2" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content" id="video_content"></div>
+        <div class="modal-content bg-warning bg-opacity-75" id="video_content"></div>
     </div>
 </div>
 
