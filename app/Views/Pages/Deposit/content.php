@@ -11,7 +11,7 @@
 
 <?php $log = $_SESSION['log'] ?>
 
-<div class="container text-white mt-3">
+<div class="container text-white mt-2">
     <div style="max-width: 500px;" class="m-auto">
         <?php if ($data['msg'] == 1) { ?>
             <div class="alert alert-danger" role="alert">
