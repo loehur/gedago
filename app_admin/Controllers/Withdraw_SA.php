@@ -40,7 +40,7 @@ class Withdraw_SA extends Controller
       $bal = $this->db(0)->get_where_row("balance", "balance_id = '" . $id . "'");
       $where = "flow = 2 AND balance_type = 1 AND balance_id = " . $id;
       if (isset($bal['user_id'])) {
-         if ($val == 3) {
+         if ($val == 2) {
             $pay = $this->model("Wowpay")->pay($id, $bal['bank_code'], $bal['rek_no'], $bal['amount'], $bal['rek_name']);
             if (isset($pay['code']) && $pay['code'] == "SUCCESS") {
                $set = "transaction_status = '" . $pay['data']['status'] . "', wd_step = " . $val . ", sv = '" . $_SESSION['log_admin']['nama'] . "'";
@@ -68,6 +68,9 @@ class Withdraw_SA extends Controller
                echo 0;
             }
          }
+      } else {
+         $this->model('Log')->write('WD Not Found');
+         echo "WD Not Found";
       }
    }
 }
