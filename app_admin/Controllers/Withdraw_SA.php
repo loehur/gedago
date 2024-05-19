@@ -42,7 +42,6 @@ class Withdraw_SA extends Controller
       if (isset($bal['ref'])) {
          if ($val == 2) {
             $pay = $this->model("Wowpay")->pay($bal['ref'], $bal['bank_code'], $bal['rek_no'], $bal['amount'], $bal['rek_name']);
-            $this->model('Log')->write(json_encode($pay));
             if (isset($pay['code']) && $pay['code'] == "SUCCESS") {
                $set = "transaction_status = '" . $pay['data']['status'] . "', wd_step = " . $val . ", sv = '" . $_SESSION['log_admin']['nama'] . "'";
                $up = $this->db(0)->update("balance", $set, $where);
