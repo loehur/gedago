@@ -45,7 +45,7 @@
                         <div class="col text-end fw-bold"><?= $log['bank'] ?></div>
                     </div>
                     <div class="row">
-                        <div class="col-auto">Nomor Rekening</div>
+                        <div class="col-auto">No. Rekening</div>
                         <div class="col text-end fw-bold"><?= $log['no_rek'] ?></div>
                     </div>
                     <div class="row">
