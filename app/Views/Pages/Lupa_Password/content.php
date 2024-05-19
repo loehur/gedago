@@ -35,10 +35,10 @@
                 </div>
                 <div class="row">
                     <div class="col text-end">
-                        <button type="submit" class="bg-primary bg-gradient px-4 text-white rounded-3 border-0 py-2">Update</button>
+                        <button type="submit" class="bg-primary bg-gradient px-4 text-white rounded-pill border-0 py-2">Update</button>
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div class="row mt-4 mb-3">
                     <div class="col text-white">
                         Sudah punya Akun? <a class="btn btn-warning px-3 mx-2 rounded-pill bg-gradient" href="<?= PC::BASE_URL ?>Login">Login</a>
                     </div>

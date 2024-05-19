@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-3 border-top pt-3 mb-2">
+            <div class="row mt-2 mb-4">
                 <div class="col px-1 mb-1 text-end">
                     <button type="submit" class="float-end px-5 border-0 btn-primary rounded-pill bg-gradient py-2 shadow-sm">Register</button>
                 </div>
