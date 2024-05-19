@@ -86,7 +86,7 @@ class Wowpay extends PC
 
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HEADER, array(
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
             'X-SECRET:' . $this->XSECRET,
             'X-SN:' . $this->XSN,
             'Content-Type:application/json'
@@ -104,7 +104,7 @@ class Wowpay extends PC
 
         $curl = curl_init($url);
         curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HEADER, array(
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
             'X-SECRET:' . $this->XSECRET,
             'X-SN:' . $this->XSN,
             'Content-Type:application/json'
