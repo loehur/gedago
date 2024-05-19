@@ -2,7 +2,7 @@
     <div style="max-width: 500px;" class="m-auto px-1">
         <div class="row mb-3">
             <div class="col">
-                <h5>Withdraw - <span class="text-primary">CS Approval</span></h5>
+                <h6>Withdraw - <span class="text-primary">CS Approval</span></h6>
                 <?php
                 foreach ($data[0] as $d) { ?>
                     <div class="row px-2 my-1">
@@ -35,7 +35,7 @@
         </div>
         <div class="row mb-2">
             <div class="col">
-                <h5>Confirmed Withdraw</h5>
+                <h6>Confirmed Withdraw</h6>
                 <?php
                 foreach ($data[1] as $d) { ?>
                     <div class="row px-2 my-1">
