@@ -1,8 +1,9 @@
 <?php
 
 $ada_port = false;
+$level = 0;
+$porto_bal = $data['port_balance'];
 if (isset($data['port_balance']['data']['user_id'])) {
-    $porto_bal = $data['port_balance'];
     foreach ($_SESSION['config']['level'] as $pl) {
         if ($pl['level'] == $porto_bal['data']['level']) {
             $fee_d = $pl['benefit'][1]['fee'];
@@ -11,11 +12,6 @@ if (isset($data['port_balance']['data']['user_id'])) {
     }
     $level = $porto_bal['data']['level'];
     $ada_port = true;
-} else {
-    $porto_bal = [];
-    $level = 0;
-    $fee_d = 0;
-    $w_qty = 0;
 }
 ?>
 
@@ -48,17 +44,17 @@ if (isset($data['port_balance']['data']['user_id'])) {
                 <div class="row">
                     <?php
                     $ac_pr = $porto_bal['fee_dc'] + $porto_bal['fee_dw'];
-                    $persen = ($ac_pr / $porto_bal['saldo']) * 100;
+                    if ($ac_pr > 0) {
+                        $persen = ($ac_pr / $porto_bal['saldo']) * 100;
+                    } else {
+                        $persen = 0;
+                    }
                     ?>
-
                     <div class="col">
                         Accumulated Profits<br><span class="fw-bold">+Rp<?= number_format($ac_pr) ?></span>
                     </div>
                     <div class="col-auto text-end">
-                        <?php
-                        $ac_pr = $porto_bal['fee_dc'] + $porto_bal['fee_dw'];
-                        $persen = ($ac_pr / $porto_bal['saldo']) * 100;
-                        ?>
+
                         Profit Gain<br><span class="fw-bold">+Rp<?= number_format($persen) ?>%</span>
                     </div>
                 </div>

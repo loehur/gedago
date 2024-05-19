@@ -62,7 +62,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <button class="btn py-3 rounded-3 w-100 shadow-sm <?= (isset($data['data']['user_id']) && $data['data']['level'] == $d['level']) ? "btn-dark" : "btn-warning" ?> topup" data-topup="<?= $d['topup'] ?>" data-bs-toggle="modal" data-bs-target="#exampleModal"><?= (isset($data['data']['user_id'])) ? "Upgrade" : "Invest" ?> <b><?= $d['name'] ?></b></button>
+                                <button class="btn py-2 rounded-3 w-100 shadow-sm <?= (isset($data['data']['user_id']) && $data['data']['level'] == $d['level']) ? "btn-dark" : "btn-warning" ?> topup" data-topup="<?= $d['topup'] ?>" data-bs-toggle="modal" data-bs-target="#exampleModal"><?= (isset($data['data']['user_id'])) ? "Upgrade" : "Invest" ?> <b><?= $d['name'] ?></b></button>
                             </div>
                         </div>
                     </div>

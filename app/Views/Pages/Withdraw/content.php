@@ -86,14 +86,16 @@
                     <?php } ?>
                 </div>
             </div>
-            <div class="col p-2 text-dark bg-warning bg-opacity-75 rounded-3 mt-3">
+            <div class="col p-2 ps-0 pe-2 text-dark bg-warning bg-opacity-75 rounded-3 mt-3">
                 <div class="row">
                     <div class="col pb-0">
                         <ul class="mb-0">
-                            <li>Jumlah minimal penarikan = Rp. <?= number_format($_SESSION['config']['setting']['min_deposit']['value']) ?></li>
-                            <li>Penarikan dana akan hanya dilakukan ke rekening yang di daftarkan</li>
-                            <li>Penarikan akan diproses langsung setelah pengisian form withdraw</li>
-                            <li>Hubungi customer service atau live admin untuk konfirmasi penarikan</li>
+                            <small>
+                                <li>Jumlah minimal penarikan = Rp. <?= number_format($_SESSION['config']['setting']['min_wd']['value']) ?></li>
+                                <li>Penarikan dana akan hanya dilakukan ke rekening yang di daftarkan</li>
+                                <li>Penarikan akan diproses langsung setelah pengisian form withdraw</li>
+                                <li>Hubungi customer service atau live admin untuk konfirmasi penarikan</li>
+                            </small>
                         </ul>
                     </div>
                 </div>
