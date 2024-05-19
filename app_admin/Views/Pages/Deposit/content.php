@@ -19,7 +19,7 @@
                                             Option
                                         </button>
                                         <ul class="dropdown-menu p-0">
-                                            <a href="<?= PC::BASE_URL_ADMIN . $con ?>/confirm/<?= $d['balance_id'] ?>/2" class="dropdown-item text-center a_confirm"><span class="btn btn-sm"></span>Reject</a>
+                                            <a href="<?= PC::BASE_URL_ADMIN . $con ?>/confirm/<?= $d['balance_id'] ?>/2" class="dropdown-item text-center a_confirm"><span class="btn btn-sm">Reject</span></a>
                                         </ul>
                                     </div>
                                 </div>
