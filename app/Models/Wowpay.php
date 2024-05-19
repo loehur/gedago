@@ -49,7 +49,7 @@ class Wowpay extends PC
 
     function pay($ref_id, $bankCode, $cardNo, $amount, $custName,)
     {
-        $url = $this->host . 'rest/cash-in/payment-checkout';
+        $url = $this->host . 'rest/cash-out/disbursement';
         $data = [
             "referenceId" => $ref_id,
             "bankCode" => $bankCode,
