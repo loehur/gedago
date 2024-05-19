@@ -30,8 +30,6 @@ class Withdraw_CS extends Controller
 
    public function content()
    {
-      $data[2] = [];
-
       $data[0] = $this->db(0)->get_where("balance", "balance_type = 1 AND flow = 2 AND wd_step = 0 AND tr_status = 0 ORDER BY insertTime DESC LIMIT 5");
       $data[1] = $this->db(0)->get_where("balance", "balance_type = 1 AND flow = 2 AND wd_step <> 0 ORDER BY insertTime DESC LIMIT 5");
       $this->view(__CLASS__, __CLASS__ . "/content", $data);
