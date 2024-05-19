@@ -12,7 +12,7 @@
 
 <div class="container mt-2 mb-5 pb-5">
     <div style="max-width: 500px;" class="m-auto">
-        <div class="p-4 bg-warning bg-opacity-75 rounded-3">
+        <div class="px-4 py-3 bg-warning bg-opacity-75 rounded-3">
             <form action="<?= PC::BASE_URL . $con ?>/update" class="upload" method="POST">
                 <div class="row mb-2">
                     <div class="col px-1" style="min-width: 200px;">
@@ -36,25 +36,25 @@
                         <input type="text" class="form-control rounded-3 py-2 shadow-none" value="<?= $log['no_rek'] ?>" name="no_rek" required>
                     </div>
                 </div>
-                <div class="row mt-1 pt-2 mb-2">
-                    <div class="col px-1 mb-1 text-end">
+                <div class="row mt-1">
+                    <div class="col text-end">
                         <button type="submit" class="border-0 py-2 btn-primary bg-gradient px-5 rounded-pill shadow-sm">Simpan</button>
                     </div>
                 </div>
             </form>
         </div>
-        <div class="py-4 px-5 mt-3 bg-warning bg-opacity-75 rounded-3">
+        <div class="py-2 px-3 mt-3 bg-warning bg-opacity-75 rounded-3">
             <label class="w-100 fw-bold mb-2 text-center">Registered Bank</label><br>
             <div class="row">
-                <div class="col">Bank</div>
+                <div class="col-auto">Bank</div>
                 <div class="col text-end fw-bold"><?= $log['bank'] ?></div>
             </div>
             <div class="row">
-                <div class="col">Nomor Rekening</div>
+                <div class="col-auto">Nomor Rekening</div>
                 <div class="col text-end fw-bold"><?= $log['no_rek'] ?></div>
             </div>
             <div class="row">
-                <div class="col">Nama Pemlik</div>
+                <div class="col-auto">Nama Pemilik</div>
                 <div class="col text-end fw-bold"><?= $log['nama'] ?></div>
             </div>
         </div>

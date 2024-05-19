@@ -38,18 +38,18 @@
                     </div>
                 </div>
 
-                <div class="px-2">
+                <div class="px-0">
                     <label class="w-100 fw-bold">Bank Penerima</label><br>
                     <div class="row">
-                        <div class="col">Bank</div>
+                        <div class="col-auto">Bank</div>
                         <div class="col text-end fw-bold"><?= $log['bank'] ?></div>
                     </div>
                     <div class="row">
-                        <div class="col">Nomor Rekening</div>
+                        <div class="col-auto">Nomor Rekening</div>
                         <div class="col text-end fw-bold"><?= $log['no_rek'] ?></div>
                     </div>
                     <div class="row">
-                        <div class="col">Nama Pemlik</div>
+                        <div class="col-auto">Nama Pemilik</div>
                         <div class="col text-end fw-bold"><?= $log['nama'] ?></div>
                     </div>
                 </div>
