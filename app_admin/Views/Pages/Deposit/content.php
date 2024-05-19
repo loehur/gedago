@@ -2,7 +2,7 @@
     <div style="max-width: 500px;" class="m-auto px-1">
         <div class="row mb-3">
             <div class="col">
-                <h5>Requested Deposit List</h5>
+                <h6>Requested Deposit List</h6>
                 <?php
                 foreach ($data[0] as $d) { ?>
                     <div class="row px-2 my-1">
@@ -32,7 +32,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <h5>Confirmed Deposit</h5>
+                <h6>Confirmed Deposit</h6>
                 <?php
                 foreach ($data[1] as $d) { ?>
                     <div class="row px-2 my-1">
