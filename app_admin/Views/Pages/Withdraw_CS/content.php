@@ -50,7 +50,11 @@
                                             } elseif ($d['tr_status'] == 2) {
                                                 echo '<span class="text-danger"><small>' . $d['transaction_status'] . ' <i class="bi bi-x-circle-fill"></i></small></span>';
                                             } else {
-                                                echo '<span class="text-warning"><small>Supervisor Checking <i class="bi bi-hourglass-split"></i></small></span>';
+                                                if ($d['wd_step'] == 2) {
+                                                    '<span class="text-warning"><small>' . $d['transaction_status'] . ' <i class="bi bi-hourglass-split"></i></small></span>';
+                                                } else {
+                                                    echo '<span class="text-warning"><small>Supervisor Checking <i class="bi bi-hourglass-split"></i></small></span>';
+                                                }
                                             }  ?>
                                         </b>
                                     </span>
