@@ -7,26 +7,7 @@
         opacity: 0.7;
     }
 </style>
-<?php
-$level = 0;
-$ada_port = false;
-if (count($data['port_balance']) > 0) {
-    $porto_bal = $data['port_balance'];
-    foreach ($_SESSION['config']['level'] as $pl) {
-        if ($pl['level'] == $porto_bal['data']['level']) {
-            $fee_d = $pl['benefit'][1]['fee'];
-            $w_qty = $pl['benefit'][1]['qty'];
-        }
-    }
-    $level = $porto_bal['data']['level'];
-    $ada_port = true;
-} else {
-    $porto_bal = [];
-    $level = 0;
-    $fee_d = 0;
-    $w_qty = 0;
-}
-?>
+
 <div class="px-4 p-3">
     <div class="row">
         <div class="col mb-2" style="min-width: 200px;">
