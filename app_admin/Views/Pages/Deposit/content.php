@@ -13,8 +13,8 @@
                                     <?= strtoupper($d['sender_name']) ?><br>
                                     <span class="fw-bold text-success"><?= number_format($d['amount']) ?></span>
                                     <hr class="my-1">
-                                    <a class="a_confirm mt-2" href="<?= PC::BASE_URL_ADMIN . $con ?>/confirm/<?= $d['balance_id'] ?>/1"><button class="btn shadow-none btn-sm btn-outline-success mb-2">Confirm</button></a><br>
-                                    <div class="btn-group">
+                                    <a class="a_confirm float-end mt-2" href="<?= PC::BASE_URL_ADMIN . $con ?>/confirm/<?= $d['balance_id'] ?>/1"><button class="btn shadow-none btn-sm btn-outline-success mb-2">Confirm</button></a><br>
+                                    <div class="btn-group float-start">
                                         <button class="btn btn-sm dropdown-toggle shadow-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             Option
                                         </button>
