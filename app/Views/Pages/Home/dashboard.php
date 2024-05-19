@@ -34,7 +34,7 @@ if (count($data['port_balance']) > 0) {
             Welcome, <?= ucfirst(strtok($_SESSION['log']['nama'], " ")); ?>!
         </div>
         <div class="col-auto">
-            <div class="bg-warning rounded-3 px-4 py-2">
+            <div class="bg-warning bg-gradient rounded-3 px-3 py-2">
                 <i class="bi bi-wallet me-2"></i>
                 <div class="fw-bold float-end">Rp<span class="balance_amount">0</span></div>
             </div>

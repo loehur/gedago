@@ -15,7 +15,7 @@
     <div class="container pb-5 mb-5">
         <div style="max-width: 500px;" class="m-auto">
             <div class="alert d-none res_info"></div>
-            <div class="col rounded-3 bg-warning bg-opacity-50 p-4" style="min-width: 300px;">
+            <div class="col rounded-3 bg-warning bg-opacity-75 p-4" style="min-width: 300px;">
                 <div class="row mb-2">
                     <div class="col text-end">
                         <span class="">Saldo tersedia: <span class="fw-bold">Rp<?= number_format($data['saldo']) ?></span></span>
@@ -57,26 +57,24 @@
 
             <div class="col py-2 px-3 text-dark bg-warning bg-opacity-75 rounded-3 mt-3">
                 <div class="row">
-                    <span class="fw-bold">Last Withdraw</span>
                     <?php
                     foreach ($data['wd'] as $d) { ?>
                         <div class="col-auto">
+                            Last Withdraw<br>
                             <?= substr($d['insertTime'], 0, 16) ?>
                         </div>
                         <div class="col text-end">
-                            <?= number_format($d['amount']) ?>
-                        </div>
-                        <div class="col-auto text-end">
+                            <?= number_format($d['amount']) ?><br>
                             <?php
                             switch ($d['tr_status']) {
                                 case 0:
-                                    echo 'Checking <i class="bi bi-circle-fill text-warning"></i>';
+                                    echo 'Checking <i class="bi bi-hourglass-split"></i>';
                                     break;
                                 case 1:
-                                    echo 'Success <i class="bi bi-check-circle-fill text-success"></i>';
+                                    echo $d['transaction_status'] . ' <i class="bi bi-check-circle-fill text-success"></i>';
                                     break;
                                 default:
-                                    echo 'Failed <i class="bi bi-x-circle-fill text-danger"></i>';
+                                    echo $d['transaction_status'] . ' <i class="bi bi-x-circle-fill text-danger"></i>';
                                     break;
                             }
                             ?>

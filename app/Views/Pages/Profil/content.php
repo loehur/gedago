@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="container mt-3 pb-5 mb-5 text-white">
+<div class="container mt-2 pb-5 mb-5 text-white">
     <div style="max-width: 500px;" class="m-auto">
         <div style="max-width: 500px;" class="m-auto">
             <h5 class="fw-bold text-dark">My Profil</h5>

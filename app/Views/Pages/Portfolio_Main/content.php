@@ -148,7 +148,7 @@ if (isset($data['port_balance']['data']['user_id'])) {
 <!-- Modal -->
 <div class="modal fade px-2" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content bg-warning bg-opacity-75" id="video_content"></div>
+        <div class="modal-content bg-warning bg-opacity-75 rounded-3 border-0" id="video_content"></div>
     </div>
 </div>
 

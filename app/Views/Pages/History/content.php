@@ -9,9 +9,9 @@
     </div>
 </div>
 
-<div class="container mt-4 pb-5 mb-5">
+<div class="container mt-2 pb-5 mb-5">
     <div style="max-width: 500px;" class="m-auto">
-        <span class="fw-bold mb-2">Main Wallet History</span>
+        <h5><span class="fw-bold mb-2">Main Wallet History</span></h5>
         <?php
         foreach ($data as $d) { ?>
             <div class="row px-2 my-2">

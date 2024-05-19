@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div class="container mt-4">
+<div class="container mt-2 mb-5 pb-5">
     <div class="m-auto" style="max-width: 500px;">
         <div class="row">
             <div class="col m-1 rounded bg-warning bg-gradient bg-opacity-75 p-3" style="min-width: 300px;">
