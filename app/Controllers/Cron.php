@@ -57,6 +57,14 @@ class Cron extends Controller
       echo "</pre>";
    }
 
+   function wow_balance()
+   {
+      $cek = $this->model("Wowpay")->balance();
+      echo "<pre>";
+      print_r($cek);
+      echo "</pre>";
+   }
+
    function wow_order()
    {
       $refID = "D92834";
@@ -146,8 +154,6 @@ class Cron extends Controller
 
    function create()
    {
-
-
       $data = [
          [
             "no" => "081268098300",
@@ -177,7 +183,7 @@ class Cron extends Controller
       ];
 
       $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
-      file_put_contents('app/config/JSON/user_admin.json', $jsonfile);
+      file_put_contents('app/config/JSON/tes.json', $jsonfile);
    }
 
    function sess_clear()

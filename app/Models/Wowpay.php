@@ -82,22 +82,53 @@ class Wowpay extends PC
 
     function ipWhite()
     {
-        $curl = curl_init($this->host . "rest/");
-        curl_setopt($curl, CURLOPT_URL, $this->host . "rest/");
+        $url = $this->host . 'rest';
+        $data = [];
+
+        $encodedData = json_encode($data);
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt(
             $curl,
-            CURLOPT_HEADER,
+            CURLOPT_HTTPHEADER,
             array(
-                'X-SECRET: ' . $this->XSECRET,
-                'X-SN: ' . $this->XSN,
-                'Content-Type: application/json'
+                'X-SECRET:' . $this->XSECRET,
+                'X-SN:' . $this->XSN,
+                'Content-Type:application/json'
             )
         );
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-        $response = curl_exec($curl);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $encodedData);
+        $result = curl_exec($curl);
         curl_close($curl);
-        $res = json_decode($response, true);
+        $res = json_decode($result, true);
+        return $res;
+    }
+
+    function balance()
+    {
+        $url = $this->host . 'rest/account/balance-inquiry';
+        $data = [];
+
+        $encodedData = json_encode($data);
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt(
+            $curl,
+            CURLOPT_HTTPHEADER,
+            array(
+                'X-SECRET:' . $this->XSECRET,
+                'X-SN:' . $this->XSN,
+                'Content-Type:application/json'
+            )
+        );
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $encodedData);
+        $result = curl_exec($curl);
+        curl_close($curl);
+        $res = json_decode($result, true);
         return $res;
     }
 }
