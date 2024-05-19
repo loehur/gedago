@@ -68,7 +68,11 @@
                             <?php
                             switch ($d['tr_status']) {
                                 case 0:
-                                    echo 'Checking <i class="bi bi-hourglass-split"></i>';
+                                    if (strlen($d['transaction_status']) == 0) {
+                                        echo 'Checking <i class="bi bi-hourglass-split"></i>';
+                                    } else {
+                                        echo $d['transaction_status'] . ' <i class="bi bi-hourglass-split"></i>';
+                                    }
                                     break;
                                 case 1:
                                     echo $d['transaction_status'] . ' <i class="bi bi-check-circle-fill text-success"></i>';
