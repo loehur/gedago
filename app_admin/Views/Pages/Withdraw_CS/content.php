@@ -42,32 +42,46 @@
                         <div class="col bg-white border rounded py-2">
                             <div class="row py-1">
                                 <div class="col">
-                                    <small><?= substr($d['insertTime'], 0, 16) ?></small><br>
+                                    <small><?= substr($d['insertTime'], 0, 16) ?></small>
+                                    <span class="float-end">
+                                        <b>
+                                            <?php if ($d['tr_status'] == 1) {
+                                                echo '<span class="text-success"><small>' . $d['transaction_status'] . ' <i class="bi bi-check"></i></small></span>';
+                                            } elseif ($d['tr_status'] == 2) {
+                                                echo '<span class="text-danger"><small>' . $d['transaction_status'] . ' <i class="bi bi-x-circle-fill"></i></small></span>';
+                                            } else {
+                                                echo '<span class="text-warning"><small>Supervisor Checking <i class="bi bi-hourglass-split"></i></small></span>';
+                                            }  ?>
+                                        </b>
+                                    </span>
+                                    <br>
                                     <?= strtoupper($d['rek_name']) ?><br>
                                     <?= strtoupper($d['bank']) ?><br>
                                     <span class=""><?= strtoupper($d['rek_no']) ?></span><br>
                                     <span class="fw-bold"><?= number_format($d['amount']) ?></span>
-                                </div>
-                                <div class="col text-end">
-                                    <b><?= $d['tr_status'] == 1 ? '<span class="text-success"><small>Accepted</small></span>' : '<span class="text-danger"><small>Rejected</small></span>' ?></b><br>
-                                    <?php if ($d['tr_status'] == 1) {
-                                        echo '<i class="bi bi-check-all text-success"></i> ' . $d['cs'];
-                                        echo '<br><i class="bi bi-check-all text-success"></i> ' . $d['sv'];
-                                    } else {
-                                        switch ($d['wd_step']) {
-                                            case 3:
-                                                echo '<i class="bi bi-x-lg text-danger"></i> ' . $d['cs'];
-                                                break;
-                                            case 4:
-                                                echo '<i class="bi bi-check-all text-success"></i> ' . $d['cs'];
-                                                echo '<br><i class="bi bi-x-lg text-danger"></i> ' . $d['sv'];
-                                                break;
-                                            default:
-                                                # code...
-                                                break;
-                                        }
-                                    }
-                                    ?>
+                                    <hr class="my-1">
+                                    <div class="text-end">
+                                        <?php if ($d['tr_status'] == 1) {
+                                            echo '<i class="bi bi-check-all text-success"></i> ' . $d['cs'];
+                                            echo '<br><i class="bi bi-check-all text-success"></i> ' . $d['sv'];
+                                        } else {
+                                            switch ($d['wd_step']) {
+                                                case 1:
+                                                    echo '<i class="bi bi-check-all text-success"></i> ' . $d['cs'];
+                                                    break;
+                                                case 3:
+                                                    echo '<i class="bi bi-x-lg text-danger"></i> ' . $d['cs'];
+                                                    break;
+                                                case 4:
+                                                    echo '<i class="bi bi-check-all text-success"></i> ' . $d['cs'];
+                                                    echo '<br><i class="bi bi-x-lg text-danger"></i> ' . $d['sv'];
+                                                    break;
+                                                default:
+                                                    # code...
+                                                    break;
+                                            }
+                                        } ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>

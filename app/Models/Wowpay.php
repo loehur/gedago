@@ -47,6 +47,39 @@ class Wowpay extends PC
         return $res;
     }
 
+    function pay($ref_id, $bankCode, $cardNo, $amount, $custName,)
+    {
+        $url = $this->host . 'rest/cash-in/payment-checkout';
+        $data = [
+            "referenceId" => $ref_id,
+            "bankCode" => $bankCode,
+            "cardNo" => $cardNo,
+            "customerName" => $custName,
+            "amount" => $amount,
+            "notifyUrl" => "https://gedagoshop.com/WH_wowpay/notificationPay"
+        ];
+
+        $encodedData = json_encode($data);
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt(
+            $curl,
+            CURLOPT_HTTPHEADER,
+            array(
+                'X-SECRET:' . $this->XSECRET,
+                'X-SN:' . $this->XSN,
+                'Content-Type:application/json'
+            )
+        );
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $encodedData);
+        $result = curl_exec($curl);
+        curl_close($curl);
+        $res = json_decode($result, true);
+        return $res;
+    }
+
     function ipWhite()
     {
         $curl = curl_init($this->host . "rest/");

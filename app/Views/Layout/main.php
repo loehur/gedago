@@ -20,7 +20,22 @@ if (isset($data['parse'])) {
 		<div class="col px-0">
 			<div style="z-index:1;" id="content"></div>
 			<div>
+				<span id="btnMSG" data-bs-toggle="modal" data-bs-target="#exampleModal_msg"></span>
 				<?php include_once("footer.php"); ?>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal_msg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-sm">
+			<div class="modal-content bg-white rounded-3 border-0">
+				<div class="modal-body pb-0 text-center border-0" id="modalMSG"></div>
+				<div class="modal-footer border-0">
+					<div class="col text-center">
+						<button type="button" class="btn btn-primary bg-gradient rounded-pill px-4" data-bs-dismiss="modal">Ok</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -71,6 +86,23 @@ if (isset($data['parse'])) {
 				'height': '100vh',
 			});
 			$("body").css("background-size", "100% auto");
+		}
+	}
+
+	function resInfo(msg) {
+		const jRes = JSON.parse(msg);
+		$(".res_info").removeClass('d-none');
+		var alert = "warning";
+		if (jRes.code == 1) {
+			content();
+			$('#btnMSG').click();
+			$('#modalMSG').html(jRes.msg);
+		} else {
+			if (jRes.code == 2) {
+				alert = "danger";
+			}
+			$(".res_info").addClass('alert-' + alert);
+			$(".res_info").html(jRes.msg);
 		}
 	}
 </script>

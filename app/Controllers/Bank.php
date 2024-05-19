@@ -31,7 +31,14 @@ class Bank extends Controller
    {
       $log = $_SESSION['log'];
 
-      $set = "bank = '" . $_POST['bank'] . "', no_rek = '" . $_POST['no_rek'] . "'";
+      $bankName = 'Error';
+      foreach ($_SESSION['config']['bank'] as $b) {
+         if ($_POST['bank'] == $b['bankCode']) {
+            $bankName = $b['bankFullName'];
+         }
+      }
+
+      $set = "bank = '" . $bankName . "', bank_code = '" . $_POST['bank'] . "', no_rek = '" . $_POST['no_rek'] . "'";
       $where = "user_id = '" . $log['user_id'] . "'";
       $up = $this->db(0)->update("user", $set, $where);
       if ($up['errno'] == 0) {

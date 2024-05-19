@@ -32,11 +32,22 @@ class Withdraw extends Controller
 
    function req_dep()
    {
+      $res = [];
       $log = $_SESSION['log'];
 
       //cek dulu profil bank
       if ($log['no_rek'] == '') {
-         echo "Atur rekening Penarikan terlebih dahulu, di menu Account - Bank Account";
+         $res['msg'] = "Atur rekening Penarikan terlebih dahulu, di menu Account - Bank Account";
+         $res['code'] = 0;
+         print_r(json_encode($res));
+         exit();
+      }
+
+      $cek = $this->db(0)->count_where("balance", "user_id = '" . $log['user_id'] . "' AND flow = 2 AND balance_type = 1 AND tr_status = 0");
+      if ($cek <> 0) {
+         $res['msg'] = "Sedang ada Withdraw yang masih berlangsung!";
+         $res['code'] = 0;
+         print_r(json_encode($res));
          exit();
       }
 
@@ -46,27 +57,35 @@ class Withdraw extends Controller
       //cek dlu saldo
       $saldo = $this->func("Balance")->saldo();
       if ($saldo < $amount) {
-         echo "Saldo tidak cukup";
+         $res['msg'] = "Saldo tidak cukup";
+         $res['code'] = 0;
+         print_r(json_encode($res));
          exit();
       }
 
       if ($amount < $_SESSION['config']['setting']['min_wd']['value']) {
-         echo "Withdraw Minimal " . number_format($_SESSION['config']['setting']['min_wd']['value']);
+         $res['msg'] = "Withdraw Minimal " . number_format($_SESSION['config']['setting']['min_wd']['value']);
+         $res['code'] = 2;
+         print_r(json_encode($res));
          exit();
       }
 
-      $cols = "flow, balance_type, user_id, amount, bank, rek_no, rek_name, insertTime";
-      $vals = "2,1,'" . $log['user_id'] . "'," . $amount . ",'" . $log['bank'] . "','" . $log['no_rek'] . "','" . $log['nama'] . "','" . $GLOBALS['now'] . "'";
+      $cols = "flow, balance_type, user_id, amount, bank_code, bank, rek_no, rek_name, insertTime";
+      $vals = "2,1,'" . $log['user_id'] . "'," . $amount . ",'" . $log['bank_code'] . "','" . $log['bank'] . "','" . $log['no_rek'] . "','" . $log['nama'] . "','" . $GLOBALS['now'] . "'";
       $in = $this->db(0)->insertCols("balance", $cols, $vals);
       if ($in['errno'] <> 0) {
          $this->model('Log')->write("Insert Withdraw Error, " . $in['error']);
          $this->model('WA')->send($_SESSION['config']['notif']['finance'][PC::APP_MODE], "WD Request Error\n" . $in['error']);
-         echo "Error Withdraw, hubungi customer service";
+         $res['msg'] = "Error Withdraw, hubungi customer service";
+         $res['code'] = 2;
+         print_r(json_encode($res));
          exit();
       } else {
          $text = "Withdraw Requested\n" . $log['nama'];
          $this->model('WA')->send($_SESSION['config']['notif']['finance'][PC::APP_MODE], $text);
-         echo 0;
+         $res['msg'] = "Pengajuan Withdraw Success!";
+         $res['code'] = 1;
+         print_r(json_encode($res));
       }
    }
 }
