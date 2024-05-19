@@ -45,11 +45,11 @@
                         <div class="col text-end fw-bold"><?= $log['bank'] ?></div>
                     </div>
                     <div class="row">
-                        <div class="col-auto">No. Rekening</div>
+                        <div class="col-auto">Nomor</div>
                         <div class="col text-end fw-bold"><?= $log['no_rek'] ?></div>
                     </div>
                     <div class="row">
-                        <div class="col-auto">Nama Pemilik</div>
+                        <div class="col-auto">Nama</div>
                         <div class="col text-end fw-bold"><?= $log['nama'] ?></div>
                     </div>
                 </div>
