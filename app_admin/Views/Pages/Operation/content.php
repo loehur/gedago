@@ -47,7 +47,7 @@
         }
 
         el.parent().css("width", width);
-        el.html("<input required type=" + tipe + " style='outline:none;border:none;width:" + width + ";text-align:" + align + "' id='value_' value='" + value + "'>");
+        el.html("<input required type=" + tipe + " style='outline:none;border:none;width:" + width + "px;text-align:" + align + "' id='value_' value='" + value + "'>");
 
         $("#value_").focus();
         $("#value_").focusout(function() {
