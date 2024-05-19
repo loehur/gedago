@@ -12,15 +12,14 @@
                                     <small><?= substr($d['insertTime'], 0, 16) ?></small><br>
                                     <?= strtoupper($d['sender_name']) ?><br>
                                     <span class="fw-bold text-success"><?= number_format($d['amount']) ?></span>
-                                </div>
-                                <div class="col text-end">
-                                    <a class="a_confirm" href="<?= PC::BASE_URL_ADMIN . $con ?>/confirm/<?= $d['balance_id'] ?>/1"><button class="btn shadow-none btn-sm btn-outline-success mb-2">Confirm</button></a><br>
+                                    <hr class="my-1">
+                                    <a class="a_confirm mt-2" href="<?= PC::BASE_URL_ADMIN . $con ?>/confirm/<?= $d['balance_id'] ?>/1"><button class="btn shadow-none btn-sm btn-outline-success mb-2">Confirm</button></a><br>
                                     <div class="btn-group">
                                         <button class="btn btn-sm dropdown-toggle shadow-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             Option
                                         </button>
-                                        <ul class="dropdown-menu">
-                                            <a href="<?= PC::BASE_URL_ADMIN . $con ?>/confirm/<?= $d['balance_id'] ?>/2" class="dropdown-item text-center a_confirm">Reject</a>
+                                        <ul class="dropdown-menu p-0">
+                                            <a href="<?= PC::BASE_URL_ADMIN . $con ?>/confirm/<?= $d['balance_id'] ?>/2" class="dropdown-item text-center a_confirm"><span class="btn btn-sm"></span>Reject</a>
                                         </ul>
                                     </div>
                                 </div>
@@ -42,10 +41,10 @@
                                 <div class="col">
                                     <small><?= substr($d['insertTime'], 0, 16) ?></small><br>
                                     <?= strtoupper($d['sender_name']) ?><br><span class="fw-bold"><?= number_format($d['amount']) ?></span>
-                                </div>
-                                <div class="col text-end">
-                                    <?= $d['tr_status'] == 1 ? '<i class="bi bi-check-all text-success"></i> <small>Accepted</small>' : '<i class="bi bi-x-lg text-danger"></i> <small>Rejected</small>' ?><br>
-                                    <?= $d['cs'] ?>
+                                    <div class="text-end">
+                                        <hr class="my-1">
+                                        <?= $d['tr_status'] == 1 ? '<i class="bi bi-check-all text-success"></i> <small>Accepted</small>' : '<i class="bi bi-x-lg text-danger"></i> <small>Rejected</small>' ?> by <span class="text-secondary"><?= $d['cs'] ?></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>

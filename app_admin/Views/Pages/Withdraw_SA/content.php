@@ -14,15 +14,14 @@
                                     <?= strtoupper($d['bank']) ?><br>
                                     <span class=""><?= strtoupper($d['rek_no']) ?></span> <button class="btn p-0 shadow-none" data-clipboard-text="<?= $d['rek_no'] ?>"><i class="bi bi-clipboard"></i></button><br>
                                     <span class="fw-bold text-success"><?= number_format($d['amount']) ?></span> <button class="btn p-0 shadow-none" data-clipboard-text="<?= $d['amount'] ?>"><i class="bi bi-clipboard"></i></button>
-                                </div>
-                                <div class="col text-end">
-                                    <a class="a_confirm" href="<?= PC::BASE_URL_ADMIN . $con ?>/confirm/<?= $d['balance_id'] ?>/2"><button class="btn shadow-none btn-sm btn-outline-success mb-2">Confirm</button></a><br>
-                                    <div class="btn-group">
+                                    <hr class="my-1 p-0">
+                                    <a class="a_confirm float-end mt-2" href="<?= PC::BASE_URL_ADMIN . $con ?>/confirm/<?= $d['balance_id'] ?>/2"><button class="btn shadow-none btn-sm btn-outline-success mb-2">Confirm</button></a>
+                                    <div class="btn-group float-start">
                                         <button class="btn btn-sm dropdown-toggle shadow-none" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             Option
                                         </button>
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                            <a href="<?= PC::BASE_URL_ADMIN . $con ?>/confirm/<?= $d['balance_id'] ?>/4" class="dropdown-item text-center a_confirm">Reject</a>
+                                        <ul class="dropdown-menu p-0">
+                                            <a href="<?= PC::BASE_URL_ADMIN . $con ?>/confirm/<?= $d['balance_id'] ?>/4" class="dropdown-item text-center a_confirm"><span class="btn btn-sm">Reject</span></span></a>
                                         </ul>
                                     </div>
                                 </div>
