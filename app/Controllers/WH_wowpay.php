@@ -63,7 +63,7 @@ class WH_wowpay extends Controller
             $this->model('Log')->write($text);
          }
       } else {
-         $text = "ERROR PAYMENT 'referenceId' not found on callback response";
+         $text = "id -> " . $order_ref . ", status -> " . $status;
          $res = ["success" => false, "message" => $text];
          $this->model('Log')->write($text);
       }
@@ -118,7 +118,7 @@ class WH_wowpay extends Controller
             $this->model('Log')->write($text);
          }
       } else {
-         $text = "ERROR PAYMENT 'referenceId' not found on callback response";
+         $text = "id -> " . $order_ref . ", status -> " . $status;
          $res = ["success" => false, "message" => $text];
          $this->model('Log')->write($text);
       }
