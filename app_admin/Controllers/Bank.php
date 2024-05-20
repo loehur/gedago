@@ -41,6 +41,6 @@ class Bank extends Controller
       $_SESSION['config']['dep_rek'][$id] = $val;
       $data = $_SESSION['config']['dep_rek'];
       $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
-      file_put_contents('../app/config/JSON/dep_rek.json', $jsonfile);
+      file_put_contents('../app/Config/JSON/dep_rek.json', $jsonfile);
    }
 }

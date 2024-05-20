@@ -53,6 +53,6 @@ class Level extends Controller
 
       $data = $_SESSION['config']['level'];
       $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
-      file_put_contents('../app/config/JSON/level.json', $jsonfile);
+      file_put_contents('../app/Config/JSON/level.json', $jsonfile);
    }
 }

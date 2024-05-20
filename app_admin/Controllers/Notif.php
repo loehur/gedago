@@ -43,13 +43,13 @@ class Notif extends Controller
             $_SESSION['config']['api_key']["fonnte"][1] = $val;
             $data = $_SESSION['config']['api_key'];
             $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
-            file_put_contents('../app/config/JSON/api_key.json', $jsonfile);
+            file_put_contents('../app/Config/JSON/api_key.json', $jsonfile);
             break;
          case 2:
             $_SESSION['config']['notif']["finance"][1] = $val;
             $data = $_SESSION['config']['notif'];
             $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
-            file_put_contents('../app/config/JSON/notif.json', $jsonfile);
+            file_put_contents('../app/Config/JSON/notif.json', $jsonfile);
             break;
 
          default:

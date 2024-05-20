@@ -42,6 +42,6 @@ class Operation extends Controller
       $data = $_SESSION['config']['setting'];
 
       $jsonfile = json_encode($data, JSON_PRETTY_PRINT);
-      file_put_contents('../app/config/JSON/setting.json', $jsonfile);
+      file_put_contents('../app/Config/JSON/setting.json', $jsonfile);
    }
 }
