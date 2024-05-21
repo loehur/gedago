@@ -8,16 +8,21 @@ class Controller extends PC
     public function __construct()
     {
         if (!isset($_SESSION['config'])) {
-            $_SESSION['config']['setting'] = $this->get_json("setting");
-            $_SESSION['config']['api_key'] = $this->get_json("api_key");
-            $_SESSION['config']['level'] = $this->get_json("level");
-            $_SESSION['config']['notif'] = $this->get_json("notif");
-            $_SESSION['config']['dep_rek'] = $this->get_json("dep_rek");
-            $_SESSION['config']['user_admin'] = $this->get_json("user_admin");
-            $_SESSION['config']['access'] = $this->get_json("access");
-            $_SESSION['config']['privilege'] = $this->get_json("privilege");
-            $_SESSION['config']['bank'] = $this->get_json("bank");
+            $this->load_parameters();
         }
+    }
+
+    function load_parameters()
+    {
+        $_SESSION['config']['setting'] = $this->get_json("setting");
+        $_SESSION['config']['api_key'] = $this->get_json("api_key");
+        $_SESSION['config']['level'] = $this->get_json("level");
+        $_SESSION['config']['notif'] = $this->get_json("notif");
+        $_SESSION['config']['dep_rek'] = $this->get_json("dep_rek");
+        $_SESSION['config']['user_admin'] = $this->get_json("user_admin");
+        $_SESSION['config']['access'] = $this->get_json("access");
+        $_SESSION['config']['privilege'] = $this->get_json("privilege");
+        $_SESSION['config']['bank'] = $this->get_json("bank");
     }
 
     public function view_layout($con, $data = [])

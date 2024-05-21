@@ -4,16 +4,25 @@
             <div class="col">
                 <h6>Withdraw - <span class="text-danger">SuperAdmin Approval</span></h6>
                 <?php
-                foreach ($data[0] as $d) { ?>
+                foreach ($data[0] as $d) {
+                    $fee = $d['tr_fee'];
+                    $amount = $d['amount'];
+                    $receive = $amount - $fee; ?>
                     <div class="row px-2 my-1">
                         <div class="col bg-white border border-success rounded py-2">
                             <div class="row py-1">
                                 <div class="col">
-                                    <small><?= substr($d['insertTime'], 0, 10) ?></small><br>
+                                    <small><?= substr($d['insertTime'], 0, 10) ?></small>
+                                    <span class="float-end">
+                                        <span class="text-warning"><small><i class="bi bi-check"></i> <?= $d['cs'] ?></small></span>
+                                    </span>
+                                    <br>
                                     <?= strtoupper($d['rek_name']) ?><br>
                                     <?= strtoupper($d['bank']) ?><br>
                                     <span class=""><?= strtoupper($d['rek_no']) ?></span> <button class="btn p-0 shadow-none" data-clipboard-text="<?= $d['rek_no'] ?>"><i class="bi bi-clipboard"></i></button><br>
-                                    <span class="fw-bold text-success"><?= number_format($d['amount']) ?></span> <button class="btn p-0 shadow-none" data-clipboard-text="<?= $d['amount'] ?>"><i class="bi bi-clipboard"></i></button>
+                                    <span class="text-secondary">Withdraw</span><span class="float-end"><?= number_format($amount) ?></span><br>
+                                    <span class="text-secondary">Fee</span><span class="float-end"><?= number_format($fee) ?></span><br>
+                                    <span class="text-secondary">Receive</span><span class="fw-bold text-success float-end"><button class="btn p-0 shadow-none" data-clipboard-text="<?= $receive ?>"><i class="bi bi-clipboard"></i></button> <?= number_format($receive) ?></span>
                                     <hr class="my-1 p-0">
                                     <a class="a_confirm float-end mt-2" href="<?= PC::BASE_URL_ADMIN . $con ?>/confirm/<?= $d['balance_id'] ?>/2"><button class="btn shadow-none btn-sm btn-outline-success mb-2">Confirm</button></a>
                                     <div class="btn-group float-start">
@@ -36,7 +45,10 @@
             <div class="col">
                 <h6>Confirmed Withdraw</h6>
                 <?php
-                foreach ($data[1] as $d) { ?>
+                foreach ($data[1] as $d) {
+                    $fee = $d['tr_fee'];
+                    $amount = $d['amount'];
+                    $receive = $amount - $fee; ?>
                     <div class="row px-2 my-1">
                         <div class="col bg-white border rounded py-2">
                             <div class="row py-1">
@@ -57,7 +69,9 @@
                                     <?= strtoupper($d['rek_name']) ?><br>
                                     <?= strtoupper($d['bank']) ?><br>
                                     <span class=""><?= strtoupper($d['rek_no']) ?></span><br>
-                                    <span class="fw-bold"><?= number_format($d['amount']) ?></span>
+                                    <span class="text-secondary">Withdraw</span><span class="float-end"><?= number_format($amount) ?></span><br>
+                                    <span class="text-secondary">Fee</span><span class="float-end"><?= number_format($fee) ?></span><br>
+                                    <span class="text-secondary">Receive</span><span class="fw-bold text-success float-end"><button class="btn p-0 shadow-none" data-clipboard-text="<?= $receive ?>"><i class="bi bi-clipboard"></i></button> <?= number_format($receive) ?></span>
                                     <hr class="my-1">
                                     <div class="text-end">
                                         <?php if ($d['tr_status'] == 1 || $d['wd_step'] == 2) {

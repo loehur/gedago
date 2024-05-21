@@ -41,6 +41,7 @@ class Login extends Controller
       $cust = $this->db(0)->get_where_row("user", $where);
       if (isset($cust['user_id'])) {
          $_SESSION['log'] = $cust;
+         $this->load_parameters();
          echo 1;
       } else {
          echo "Login Failed!";

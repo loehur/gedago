@@ -39,7 +39,12 @@
                 </div>
 
                 <div class="px-0">
-                    <label class="w-100 fw-bold">Bank Penerima</label><br>
+                    <div class="row">
+                        <div class="col">
+                            <label class="w-100 fw-bold">Bank Penerima</label>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-auto">Bank</div>
                         <div class="col text-end fw-bold"><?= $log['bank'] ?></div>
@@ -64,7 +69,7 @@
                             <?= substr($d['insertTime'], 0, 16) ?>
                         </div>
                         <div class="col text-end">
-                            <?= number_format($d['amount']) ?><br>
+                            <small>(<?= $d['tr_fee'] > 0 ? "Fee " . number_format($d['tr_fee']) : "" ?>)</small> <?= number_format($d['amount']) ?><br>
                             <?php
                             switch ($d['tr_status']) {
                                 case 0:
@@ -89,9 +94,11 @@
             <div class="col p-2 ps-0 pe-2 text-dark bg-warning bg-opacity-75 rounded-3 mt-3">
                 <div class="row">
                     <div class="col pb-0">
+                        <?php $wd_fee = $_SESSION['config']['setting']['wd_fee']['value']; ?>
                         <ul class="mb-0">
                             <small>
                                 <li>Jumlah minimal penarikan = Rp. <?= number_format($_SESSION['config']['setting']['min_wd']['value']) ?></li>
+                                <li>Biaya Penarikan <?= $wd_fee ?><?= $wd_fee > 0 ? "%" : "" ?></li>
                                 <li>Penarikan dana akan hanya dilakukan ke rekening yang di daftarkan</li>
                                 <li>Penarikan akan diproses langsung setelah pengisian form withdraw</li>
                                 <li>Hubungi customer service atau live admin untuk konfirmasi penarikan</li>

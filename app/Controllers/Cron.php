@@ -129,6 +129,13 @@ class Cron extends Controller
       }
    }
 
+   function wa($text = "tes")
+   {
+      echo "<pre>";
+      print_r($this->model("WA")->send("085278114125", $text));
+      echo "</pre>";
+   }
+
    function tes()
    {
       $arrayVar = [

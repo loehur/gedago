@@ -69,9 +69,16 @@ class Withdraw extends Controller
          print_r(json_encode($res));
          exit();
       }
+
+      $tr_fee = $_SESSION['config']['setting']['wd_fee']['value'];
+
+      if ($tr_fee > 0) {
+         $tr_fee = $amount * ($_SESSION['config']['setting']['wd_fee']['value'] / 100);
+      }
+
       $ref = "W" . date("Ymdhis") . rand(0, 9) . rand(0, 9);
-      $cols = "flow, balance_type, user_id, amount, bank_code, bank, rek_no, rek_name, insertTime, ref";
-      $vals = "2,1,'" . $log['user_id'] . "'," . $amount . ",'" . $log['bank_code'] . "','" . $log['bank'] . "','" . $log['no_rek'] . "','" . $log['nama'] . "','" . $GLOBALS['now'] . "', '" . $ref . "'";
+      $cols = "flow, balance_type, user_id, amount, bank_code, bank, rek_no, rek_name, insertTime, ref, tr_fee";
+      $vals = "2,1,'" . $log['user_id'] . "'," . $amount . ",'" . $log['bank_code'] . "','" . $log['bank'] . "','" . $log['no_rek'] . "','" . $log['nama'] . "','" . $GLOBALS['now'] . "', '" . $ref . "'," . $tr_fee;
       $in = $this->db(0)->insertCols("balance", $cols, $vals);
       if ($in['errno'] <> 0) {
          $this->model('Log')->write("Insert Withdraw Error, " . $in['error']);

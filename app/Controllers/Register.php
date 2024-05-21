@@ -87,9 +87,13 @@ class Register extends Controller
       } else {
          $otp = rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
          $otp_en = $this->model("Encrypt")->enc($otp);
-         setcookie($number, $otp_en, time() + (300), "/");
-         $this->model('WA')->send($number, $otp);
-         echo "OTP berhasil dikirimkan!";
+         $send = $this->model('WA')->send($number, $otp);
+         if ($send['status'] == true) {
+            setcookie($number, $otp_en, time() + (300), "/");
+            echo "OTP berhasil dikirimkan!";
+         } else {
+            echo "OTP Error hubungi Customer Service!";
+         }
       }
    }
 }
