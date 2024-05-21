@@ -61,7 +61,7 @@ class Cron extends Controller
    {
       $cek = $this->model("Wowpay")->balance();
       echo "<pre>";
-      print_r($cek);
+      print_r(json_decode($cek));
       echo "</pre>";
    }
 
