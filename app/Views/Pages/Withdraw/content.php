@@ -69,7 +69,7 @@
                             <?= substr($d['insertTime'], 0, 16) ?>
                         </div>
                         <div class="col text-end">
-                            <small>(<?= $d['tr_fee'] > 0 ? "Fee " . number_format($d['tr_fee']) : "" ?>)</small> <?= number_format($d['amount']) ?><br>
+                            <small><?= $d['tr_fee'] > 0 ? "(Fee " . number_format($d['tr_fee']) . ")" : "" ?></small> <?= number_format($d['amount']) ?><br>
                             <?php
                             switch ($d['tr_status']) {
                                 case 0:
