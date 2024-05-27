@@ -25,6 +25,11 @@ class Cron extends Controller
       foreach ($data as $d) {
          $port_bal = $this->func("Portfolio")->portfolio($d);
          $close = $this->func("Portfolio")->close($port_bal);
+         if ($close == "") {
+            echo "Portfolio Closed!";
+         } else {
+            echo $close;
+         }
       }
    }
 
