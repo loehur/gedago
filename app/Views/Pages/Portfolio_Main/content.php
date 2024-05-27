@@ -131,7 +131,7 @@ if (isset($data['port_balance']['data']['user_id'])) {
                         <div class="row border-top pt-2">
                             <div class="col">
                                 <small><span class="fw-bold"><?= $this->func("Level")->level_nm($pr['level']) ?></span></small><br>
-                                <small><span><?= substr($pr['insertTime'], 0, 10) ?></span> &#8594; <span><?= substr($pr['doneDate'], 0, 10)  ?></span></small></small>
+                                <small><span><?= substr($pr['insertTime'], 0, 10) ?></span> &#8594; <span><?= substr($pr['done_date'], 0, 10)  ?></span></small></small>
                             </div>
                         </div>
                 <?php }

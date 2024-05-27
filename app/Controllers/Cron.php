@@ -12,9 +12,6 @@ class Cron extends Controller
          if ($expired <= 0) {
             $port_bal = $this->func("Portfolio")->portfolio($d);
             $close = $this->func("Portfolio")->close($port_bal);
-            if ($close <> "") {
-               exit();
-            }
          }
       }
    }
@@ -30,6 +27,18 @@ class Cron extends Controller
          } else {
             echo $close;
          }
+      }
+   }
+
+   function cek_port($id)
+   {
+      $data = $this->db(0)->get_where("portfolio", "port_status = 0 AND user_id = '" . $id . "'");
+      foreach ($data as $d) {
+         $port_bal = $this->func("Portfolio")->portfolio($d);
+         //$close = $this->func("Portfolio")->close($port_bal);
+         echo "<pre>";
+         print_r($port_bal);
+         echo "</pre>";
       }
    }
 
