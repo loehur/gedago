@@ -62,7 +62,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <button class="btn py-2 rounded-3 w-100 shadow-sm <?= (isset($data['data']['user_id']) && $data['data']['level'] == $d['level']) ? "btn-dark" : "btn-warning" ?> topup" data-topup="<?= $d['topup'] ?>" data-bs-toggle="modal" data-bs-target="#exampleModal"><?= (isset($data['data']['user_id'])) ? "Upgrade" : "Invest" ?> <b><?= $d['name'] ?></b></button>
+                                <button data-level="<?= $d['level'] ?>" class="btn py-2 rounded-3 w-100 shadow-sm <?= (isset($data['data']['user_id']) && $data['data']['level'] == $d['level']) ? "btn-dark" : "btn-warning" ?> topup" data-topup="<?= $d['topup'] ?>" data-bs-toggle="modal" data-bs-target="#exampleModal"><?= (isset($data['data']['user_id'])) ? "Upgrade" : "Invest" ?> <b><?= $d['name'] ?></b></button>
                             </div>
                         </div>
                     </div>
@@ -85,6 +85,7 @@
                         <label class="mb-1 fw-bold float-start">Amount</label>
                         <label class="mb-1 fw-bold float-end">Minimum <span class="text-danger">Rp</span><span class="text-danger" id="topup"></span></label>
                     </div>
+                    <input value="" type="hidden" id="input_level" name="level" />
                     <input type="text" style="font-size:17px;" class="form-control rounded-3 text-center shadow-none fw-bold text-success fr_number" name="topup" required>
                     <?php if (isset($data['data']['user_id'])) { ?>
                         <br>My Portfolio Now <span class="text-success fw-bold">Rp<?= number_format($data['saldo']) ?></span><br>
@@ -109,7 +110,7 @@
             success: function(res) {
                 if (res == 0) {
                     alert("Penambahan investasi sukses!");
-                    window.location.href = "<?= PC::BASE_URL ?>Home";
+                    location.reload(true);
                 } else {
                     alert(res);
                 }
@@ -125,6 +126,7 @@
 
     $(".topup").click(function() {
         $("span#topup").html(formatRupiah($(this).attr("data-topup")));
+        $("input#input_level").val($(this).attr("data-level"));
         topup = $(this).attr("data-topup");
     })
 

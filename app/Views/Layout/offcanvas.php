@@ -43,6 +43,9 @@ if (isset($_SESSION['log'])) {
 				<?php }
 				} ?>
 			</div>
+			<div class="position-absolute mb-2 ms-2" style="bottom: 0;">
+				ID#<?= $_SESSION['log']['user_id'] ?>
+			</div>
 		</div>
 	</div>
 <?php

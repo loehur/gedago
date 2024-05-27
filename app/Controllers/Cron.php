@@ -19,6 +19,15 @@ class Cron extends Controller
       }
    }
 
+   function port_refund($id)
+   {
+      $data = $this->db(0)->get_where("portfolio", "port_status = 0 AND user_id = '" . $id . "'");
+      foreach ($data as $d) {
+         $port_bal = $this->func("Portfolio")->portfolio($d);
+         $close = $this->func("Portfolio")->close($port_bal);
+      }
+   }
+
    function ip()
    {
       echo "<pre>";
