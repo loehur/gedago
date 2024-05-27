@@ -7,13 +7,12 @@ class Portfolio extends Controller
       $port['saldo'] = 0;
       $port['fee_dc'] = 0;
       $port['fee_dw'] = 0;
-      if (isset($_SESSION['log'])) {
-         if (isset($data['port_id'])) {
-            $port['saldo'] = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $data['user_id'] . "' AND balance_type = 10 AND flow = 2 AND ref = '" . $data['port_id'] . "' AND tr_status <> 2", 0)['amount'];
-            $port['fee_dc'] = $this->db(0)->get_cols_where("daily_checkin", "SUM(fee) as amount", "user_id = '" . $data['user_id'] . "' AND ref = '" . $data['port_id'] . "'", 0)['amount'];
-            $port['fee_dw'] = $this->db(0)->get_cols_where("daily_watch", "SUM(fee) as amount", "user_id = '" . $data['user_id'] . "' AND ref = '" . $data['port_id'] . "'", 0)['amount'];
-         }
+      if (isset($data['port_id'])) {
+         $port['saldo'] = $this->db(0)->get_cols_where("balance", "SUM(amount) as amount", "user_id = '" . $data['user_id'] . "' AND balance_type = 10 AND flow = 2 AND ref = '" . $data['port_id'] . "' AND tr_status <> 2", 0)['amount'];
+         $port['fee_dc'] = $this->db(0)->get_cols_where("daily_checkin", "SUM(fee) as amount", "user_id = '" . $data['user_id'] . "' AND ref = '" . $data['port_id'] . "'", 0)['amount'];
+         $port['fee_dw'] = $this->db(0)->get_cols_where("daily_watch", "SUM(fee) as amount", "user_id = '" . $data['user_id'] . "' AND ref = '" . $data['port_id'] . "'", 0)['amount'];
       }
+
       $port['data'] = $data;
       return $port;
    }

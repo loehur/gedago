@@ -108,6 +108,7 @@ class WH_wowpay extends Controller
 
          $where = "ref = '" . $order_ref . "'";
          $set = "tr_status = " . $os . ", transaction_id = '" . $tr_id . "', transaction_status = '" . $status . "', fee = " . $serviceFee;
+
          $up = $this->db(0)->update("balance", $set, $where);
 
          if ($up['errno'] == 0) {
